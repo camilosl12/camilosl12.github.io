@@ -193,7 +193,8 @@
             left: 0;
             width: 40%;
             height: 100%;
-            background: linear-gradient(to right, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0) 100%);
+            /* Reflejo más tenue */
+            background: linear-gradient(to right, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.1) 50%, rgba(255, 255, 255, 0) 100%);
             transform: skewX(-25deg);
             opacity: 0; /* Empieza invisible */
         }
@@ -207,7 +208,7 @@
         /* Clase para re-activar la animación al hacer click */
         .skill-bubble.shine-on-click::after {
             opacity: 1;
-            animation: shine-effect 1.5s ease-in-out;
+            animation: shine-effect 1.5s ease-in-out !important;
         }
 
     </style>
@@ -521,8 +522,8 @@
                 if (this.isShapeParticle) {
                     const dx = this.target.x * particleCanvas.width - this.x;
                     const dy = this.target.y * particleCanvas.height - this.y;
-                    this.x += dx * 0.03;
-                    this.y += dy * 0.03;
+                    this.x += dx * 0.015; // Velocidad de formación más lenta
+                    this.y += dy * 0.015;
                 } else {
                     this.x += this.speedX;
                     this.y += this.speedY;
@@ -734,15 +735,12 @@
         // --- SCRIPT PARA RE-ACTIVAR ANIMACIÓN DE HABILIDADES ---
         document.querySelectorAll('.skill-bubble').forEach(bubble => {
             bubble.addEventListener('click', (e) => {
-                // Previene que se active si ya está animándose
-                if(bubble.classList.contains('shine-on-click')) return;
-
+                // Elimina la clase para poder re-añadirla
+                bubble.classList.remove('shine-on-click');
+                // Fuerza un "reflow" del DOM, lo que reinicia la animación
+                void bubble.offsetWidth;
+                // Vuelve a añadir la clase para activar la animación
                 bubble.classList.add('shine-on-click');
-                
-                // Limpia la clase después de que termine la animación
-                bubble.addEventListener('animationend', () => {
-                    bubble.classList.remove('shine-on-click');
-                }, { once: true });
             });
         });
         
