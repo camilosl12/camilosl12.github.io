@@ -9,8 +9,8 @@
     <meta name="keywords" content="Camilo Sanguino, productor musical, analista de datos, composición, foley, diseño sonoro, python, R, SQL, Tableau, Power BI">
     <meta name="author" content="Camilo Sanguino">
 
-    <!-- AÑADIDO: Favicon del logo SVG -->
-    <link rel="icon" href="data:image/svg+xml,%3csvg viewBox='0 0 300 150' xmlns='http://www.w3.org/2000/svg'%3e%3cdefs%3e%3clinearGradient id='gradCS' x1='0%25' y1='0%25' x2='100%25' y2='0%25'%3e%3cstop offset='0%25' style='stop-color:%2338bdf8;stop-opacity:1'/%3e%3cstop offset='100%25' style='stop-color:%23c084fc;stop-opacity:1'/%3e%3c/linearGradient%3e%3c/defs%3e%3ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' font-family='Caveat, cursive' font-size='100' fill='url(%23gradCS)'%3eCS%3c/text%3e%3c/svg%3e">
+    <!-- CORRECCIÓN: Favicon con viewBox cuadrado para mejor visualización -->
+    <link rel="icon" href="data:image/svg+xml,%3csvg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3e%3cdefs%3e%3clinearGradient id='gradCS' x1='0%25' y1='0%25' x2='100%25' y2='0%25'%3e%3cstop offset='0%25' style='stop-color:%2338bdf8;stop-opacity:1'/%3e%3cstop offset='100%25' style='stop-color:%23c084fc;stop-opacity:1'/%3e%3c/linearGradient%3e%3c/defs%3e%3ctext x='50%25' y='55%25' dominant-baseline='middle' text-anchor='middle' font-family='Caveat, cursive' font-size='90' fill='url(%23gradCS)'%3eCS%3c/text%3e%3c/svg%3e">
 
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -151,7 +151,7 @@
             height: 150px;
             pointer-events: none;
         }
-        #contacto, #proyectos {
+        #contacto, #proyectos, #mas-proyectos {
             overflow: hidden;
         }
         #contact-canvas, #projects-canvas {
@@ -164,7 +164,9 @@
         }
         .nav-link {
             position: relative;
-            display: inline-block;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
             transition: color 0.3s ease;
         }
         .nav-link::after {
@@ -258,9 +260,9 @@
                 </svg>
             </a>
             <div class="hidden md:flex items-center space-x-8">
-                <a href="#sobre-mi" class="nav-link text-zinc-300">Sobre Mí</a>
-                <a href="#proyectos" class="nav-link text-zinc-300">Proyectos</a>
-                <a href="#contacto" class="nav-link text-zinc-300">Contacto</a>
+                <a href="#sobre-mi" class="nav-link text-zinc-300"><i class="fas fa-microphone-alt fa-fw"></i><span>Sobre Mí</span></a>
+                <a href="#proyectos" class="nav-link text-zinc-300"><i class="fas fa-music fa-fw"></i><span>Proyectos</span></a>
+                <a href="#contacto" class="nav-link text-zinc-300"><i class="fas fa-envelope fa-fw"></i><span>Contacto</span></a>
             </div>
             <div class="md:hidden">
                 <button id="mobile-menu-button" class="text-white focus:outline-none">
@@ -269,9 +271,9 @@
             </div>
         </nav>
         <div id="mobile-menu" class="hidden md:hidden bg-black/80">
-            <a href="#sobre-mi" class="block py-3 px-6 text-sm text-zinc-300 hover:bg-zinc-800">Sobre Mí</a>
-            <a href="#proyectos" class="block py-3 px-6 text-sm text-zinc-300 hover:bg-zinc-800">Proyectos</a>
-            <a href="#contacto" class="block py-3 px-6 text-sm text-zinc-300 hover:bg-zinc-800">Contacto</a>
+            <a href="#sobre-mi" class="flex items-center gap-3 py-3 px-6 text-sm text-zinc-300 hover:bg-zinc-800"><i class="fas fa-microphone-alt fa-fw"></i>Sobre Mí</a>
+            <a href="#proyectos" class="flex items-center gap-3 py-3 px-6 text-sm text-zinc-300 hover:bg-zinc-800"><i class="fas fa-music fa-fw"></i>Proyectos</a>
+            <a href="#contacto" class="flex items-center gap-3 py-3 px-6 text-sm text-zinc-300 hover:bg-zinc-800"><i class="fas fa-envelope fa-fw"></i>Contacto</a>
         </div>
     </header>
 
@@ -280,7 +282,6 @@
 
         <!-- ========== 1. INICIO ========== -->
         <section id="inicio" class="hero-section h-screen w-full flex items-center justify-center text-center">
-            <!-- CAMBIO: Se añadió un margen superior para bajar el contenido -->
             <div class="relative z-10 p-8 mt-20 md:mt-0">
                 <h1 class="text-5xl sm:text-6xl md:text-8xl font-black text-white leading-tight tracking-tighter gradient-text px-2" style="text-shadow: 0 0 40px rgba(192, 132, 252, 0.4);">
                     Música & Datos
@@ -407,8 +408,40 @@
                         <div class="bg-black/50 backdrop-blur-sm border border-zinc-800 rounded-2xl p-8 reveal interactive-card flex flex-col"><h3 class="text-2xl font-bold text-white">Modelo Predictivo de Éxito Musical</h3><p class="text-zinc-400 mt-4 flex-grow">Entrené un modelo de machine learning (Regresión Logística con Scikit-learn) para predecir la probabilidad de que una canción entre en el Top 40 de Billboard, basándose en más de 15 variables acústicas y contextuales.</p><a href="https://github.com/camilosl12" target="_blank" rel="noopener noreferrer" class="inline-block text-blue-400 font-semibold mt-6 hover:text-blue-300 self-start">Analizar el Código &rarr;</a></div>
                     </div>
                 </div>
+                <!-- CAMBIO: Botón movido al final de la sección de proyectos -->
+                <div id="show-more-container" class="text-center mt-16">
+                    <button id="show-more-btn" class="inline-block bg-transparent border-2 border-purple-400 text-purple-300 font-bold text-lg rounded-full px-8 py-4 hover:bg-purple-400/10 hover:text-white transition-all duration-300 transform hover:scale-105 active:scale-95">
+                        Ver Más Proyectos
+                    </button>
+                </div>
             </div>
-            <div class="section-transition" style="background-image: linear-gradient(to bottom, transparent, var(--dark-bg));"></div>
+        </section>
+
+        <!-- CAMBIO: Sección de más proyectos ahora oculta por defecto -->
+        <section id="mas-proyectos" class="hidden py-20 md:py-32 bg-dark-bg">
+            <div class="container mx-auto px-6 text-center">
+                <div class="reveal">
+                    <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold gradient-text">Explora Más</h2>
+                    <p class="text-lg text-zinc-400 mt-4">Una colección extendida de trabajos, experimentos y exploraciones personales.</p>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-16">
+                    <div class="reveal interactive-card bg-zinc-900 rounded-2xl p-8">
+                        <h3 class="text-2xl font-bold text-white">Proyecto Adicional 1</h3>
+                        <p class="text-zinc-400 mt-4">Descripción de este proyecto, destacando las tecnologías y habilidades utilizadas.</p>
+                        <a href="#" class="inline-block text-blue-400 font-semibold mt-6 hover:text-blue-300">Ver más &rarr;</a>
+                    </div>
+                    <div class="reveal interactive-card bg-zinc-900 rounded-2xl p-8">
+                        <h3 class="text-2xl font-bold text-white">Proyecto Adicional 2</h3>
+                        <p class="text-zinc-400 mt-4">Descripción de este proyecto, destacando las tecnologías y habilidades utilizadas.</p>
+                        <a href="#" class="inline-block text-blue-400 font-semibold mt-6 hover:text-blue-300">Ver más &rarr;</a>
+                    </div>
+                    <div class="reveal interactive-card bg-zinc-900 rounded-2xl p-8">
+                        <h3 class="text-2xl font-bold text-white">Proyecto Adicional 3</h3>
+                        <p class="text-zinc-400 mt-4">Descripción de este proyecto, destacando las tecnologías y habilidades utilizadas.</p>
+                        <a href="#" class="inline-block text-blue-400 font-semibold mt-6 hover:text-blue-300">Ver más &rarr;</a>
+                    </div>
+                </div>
+            </div>
         </section>
 
         <!-- ========== 4. CONTACTO ========== -->
@@ -730,7 +763,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // --- ANIMACIÓN DE HABILIDADES - CORREGIDO PARA REPETIR ---
+    // --- ANIMACIÓN DE HABILIDADES ---
     document.querySelectorAll('.skill-bubble').forEach(bubble => {
         bubble.addEventListener('mouseenter', () => {
             if (bubble.classList.contains('is-shining')) {
@@ -743,6 +776,32 @@ document.addEventListener('DOMContentLoaded', () => {
             bubble.classList.remove('is-shining');
         });
     });
+
+    // --- LÓGICA PARA MOSTRAR MÁS PROYECTOS ---
+    const showMoreBtn = document.getElementById('show-more-btn');
+    const moreProjectsSection = document.getElementById('mas-proyectos');
+    const showMoreContainer = document.getElementById('show-more-container');
+
+    if (showMoreBtn && moreProjectsSection) {
+        showMoreBtn.addEventListener('click', (event) => {
+            event.preventDefault();
+            
+            moreProjectsSection.classList.remove('hidden');
+            
+            // Forzar una animación de entrada
+            const revealContent = moreProjectsSection.querySelector('.reveal');
+            if(revealContent) {
+                revealContent.classList.add('visible');
+            }
+
+            moreProjectsSection.scrollIntoView({ behavior: 'smooth' });
+
+            if(showMoreContainer) {
+                showMoreContainer.style.display = 'none';
+            }
+        });
+    }
+
 });
 </script>
 
