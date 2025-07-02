@@ -15,19 +15,26 @@
     
     <style>
         /* Estilos Generales */
+        html {
+            scroll-padding-top: 80px; 
+        }
         body {
             font-family: 'Inter', sans-serif;
             background-color: #0a0a0a; /* Negro suave como base */
             color: #E5E7EB; 
             overflow-x: hidden;
         }
-        main {
-            padding-top: 68px; /* Altura del header */
-        }
+        
         section {
-            padding-top: 80px;
-            margin-top: -80px;
+            padding-top: 5rem;
+            padding-bottom: 5rem;
             position: relative; 
+        }
+        @media (min-width: 768px) {
+            section {
+                padding-top: 8rem;
+                padding-bottom: 8rem;
+            }
         }
 
         /* Animación de entrada para secciones */
@@ -63,8 +70,8 @@
         .hero-section {
             position: relative;
             background-color: transparent;
-            margin-top: -68px; 
-            padding-top: 68px;
+            padding-top: 0;
+            margin-top: 0;
         }
         
         #particle-canvas {
@@ -121,12 +128,6 @@
             box-shadow: 0 0 25px rgba(255, 255, 255, 0.08);
             border-color: rgba(255, 255, 255, 0.2);
         }
-
-        /* Fondo de puntos sutiles */
-        .textured-bg {
-            background-image: radial-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px);
-            background-size: 25px 25px;
-        }
         
         /* Div para el degradado de transición */
         .section-transition {
@@ -139,10 +140,10 @@
         }
 
         /* Animación para la sección de contacto */
-        #contacto, #analisis-datos {
+        #contacto, #analisis-datos, #produccion {
             overflow: hidden;
         }
-        #contact-canvas, #data-analysis-canvas {
+        #contact-canvas, #data-analysis-canvas, #production-canvas {
             position: absolute;
             top: 0;
             left: 0;
@@ -178,7 +179,7 @@
             opacity: 0;
             position: relative;
             overflow: hidden;
-            cursor: pointer; /* Añadimos cursor de puntero para indicar que es clickeable */
+            cursor: pointer;
         }
 
         .reveal.visible .skill-bubble {
@@ -193,22 +194,14 @@
             left: 0;
             width: 40%;
             height: 100%;
-            /* Reflejo más tenue */
             background: linear-gradient(to right, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.1) 50%, rgba(255, 255, 255, 0) 100%);
             transform: skewX(-25deg);
-            opacity: 0; /* Empieza invisible */
+            opacity: 0;
         }
 
-        .reveal.visible .skill-bubble::after {
-            animation: shine-effect 1.5s ease-in-out; /* Animación más lenta */
-            animation-delay: calc(var(--delay) + 0.5s); 
+        .skill-bubble.is-shining::after {
             opacity: 1;
-        }
-
-        /* Clase para re-activar la animación al hacer click */
-        .skill-bubble.shine-on-click::after {
-            opacity: 1;
-            animation: shine-effect 1.5s ease-in-out !important;
+            animation: shine-effect 1.5s ease-in-out;
         }
 
     </style>
@@ -323,7 +316,8 @@
 
         <!-- ========== 3. PRODUCCIÓN Y DISEÑO SONORO ========== -->
         <section id="produccion" class="py-20 md:py-32 bg-zinc-900 textured-bg">
-            <div class="container mx-auto px-6">
+            <canvas id="production-canvas"></canvas>
+            <div class="container mx-auto px-6 relative z-10">
                 <div class="text-center mb-16 reveal">
                     <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold gradient-text">Producción y Diseño Sonoro</h2>
                     <p class="text-lg text-zinc-400 mt-4">Creando la identidad sonora para proyectos audiovisuales.</p>
@@ -735,80 +729,88 @@
         // --- SCRIPT PARA RE-ACTIVAR ANIMACIÓN DE HABILIDADES ---
         document.querySelectorAll('.skill-bubble').forEach(bubble => {
             bubble.addEventListener('click', (e) => {
-                // Elimina la clase para poder re-añadirla
-                bubble.classList.remove('shine-on-click');
-                // Fuerza un "reflow" del DOM, lo que reinicia la animación
-                void bubble.offsetWidth;
-                // Vuelve a añadir la clase para activar la animación
-                bubble.classList.add('shine-on-click');
+                // Previene que se active si ya está animándose
+                if(bubble.classList.contains('is-shining')) return;
+
+                bubble.classList.add('is-shining');
+                
+                // Limpia la clase después de que termine la animación
+                bubble.addEventListener('animationend', () => {
+                    bubble.classList.remove('is-shining');
+                }, { once: true });
             });
         });
         
         // --- ANIMACIÓN "STONKS" (ANÁLISIS DE DATOS) ---
-        const dataCanvas = document.getElementById('data-analysis-canvas');
-        if (dataCanvas) {
-            const dCtx = dataCanvas.getContext('2d');
-            let dataParticles = [];
+        function createStonksAnimation(canvasId, colorRgb) {
+            const canvas = document.getElementById(canvasId);
+            if (!canvas) return;
 
-            function dResizeCanvas() {
-                dataCanvas.width = dataCanvas.offsetWidth;
-                dataCanvas.height = dataCanvas.offsetHeight;
-                dInit();
+            const ctx = canvas.getContext('2d');
+            let particles = [];
+
+            function resizeCanvas() {
+                canvas.width = canvas.offsetWidth;
+                canvas.height = canvas.offsetHeight;
+                init();
             }
 
-            class DParticle {
+            class Particle {
                 constructor() {
-                    this.x = Math.random() * dataCanvas.width;
-                    this.y = Math.random() * dataCanvas.height;
+                    this.x = Math.random() * canvas.width;
+                    this.y = Math.random() * canvas.height;
                     this.size = Math.random() * 2 + 1;
-                    this.isFast = Math.random() < 0.03; // ~3% de las partículas son rápidas
-                    this.speedY = this.isFast ? -(Math.random() * 1.5 + 1) : -(Math.random() * 0.2 + 0.1); // Lentas vs Rápidas
-                    this.isArrow = this.isFast && Math.random() < 0.5; // Solo las rápidas pueden ser flechas
-                    this.color = `rgba(59, 130, 246, ${Math.random() * 0.3 + 0.05})`; // Más translúcidas
+                    this.isFast = Math.random() < 0.03;
+                    this.speedY = this.isFast ? -(Math.random() * 1.5 + 1) : -(Math.random() * 0.2 + 0.1);
+                    this.isArrow = this.isFast && Math.random() < 0.5;
+                    this.color = `rgba(${colorRgb}, ${Math.random() * 0.3 + 0.05})`;
                 }
                 update() {
                     this.y += this.speedY;
                     if (this.y < 0) {
-                        this.y = dataCanvas.height;
-                        this.x = Math.random() * dataCanvas.width;
+                        this.y = canvas.height;
+                        this.x = Math.random() * canvas.width;
                     }
                 }
                 draw() {
-                    dCtx.fillStyle = this.color;
-                    dCtx.beginPath();
+                    ctx.fillStyle = this.color;
+                    ctx.beginPath();
                     if (this.isArrow) {
-                        dCtx.moveTo(this.x, this.y);
-                        dCtx.lineTo(this.x - 3, this.y + 7);
-                        dCtx.lineTo(this.x + 3, this.y + 7);
+                        ctx.moveTo(this.x, this.y);
+                        ctx.lineTo(this.x - 3, this.y + 7);
+                        ctx.lineTo(this.x + 3, this.y + 7);
                     } else {
-                        dCtx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
                     }
-                    dCtx.closePath();
-                    dCtx.fill();
+                    ctx.closePath();
+                    ctx.fill();
                 }
             }
 
-            function dInit() {
-                dataParticles = [];
+            function init() {
+                particles = [];
                 const particleCount = 100;
                 for (let i = 0; i < particleCount; i++) {
-                    dataParticles.push(new DParticle());
+                    particles.push(new Particle());
                 }
             }
 
-            function dAnimate() {
-                dCtx.clearRect(0, 0, dataCanvas.width, dataCanvas.height);
-                dataParticles.forEach(p => {
+            function animate() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                particles.forEach(p => {
                     p.update();
                     p.draw();
                 });
-                requestAnimationFrame(dAnimate);
+                requestAnimationFrame(animate);
             }
 
-            dResizeCanvas();
-            dAnimate();
-            window.addEventListener('resize', dResizeCanvas);
+            resizeCanvas();
+            animate();
+            window.addEventListener('resize', resizeCanvas);
         }
+
+        createStonksAnimation('production-canvas', '192, 132, 252'); // Púrpura
+        createStonksAnimation('data-analysis-canvas', '59, 130, 246'); // Azul
     });
 </script>
 
