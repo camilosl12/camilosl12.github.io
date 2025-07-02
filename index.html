@@ -17,8 +17,8 @@
         /* Estilos Generales */
         body {
             font-family: 'Inter', sans-serif;
-            background-color: #000000;
-            color: #F5F5F7;
+            background-color: #0a0a0a; /* Un negro ligeramente más suave para todo el fondo */
+            color: #E5E7EB; 
             overflow-x: hidden;
         }
         main {
@@ -27,7 +27,7 @@
         section {
             padding-top: 80px;
             margin-top: -80px;
-            position: relative; /* Para los fondos con textura */
+            position: relative; 
         }
 
         /* Animación de entrada para secciones */
@@ -62,18 +62,19 @@
         /* Estilos para la sección principal */
         .hero-section {
             position: relative;
-            background-color: #0a0a0a;
-            margin-top: -68px; /* Compensar el padding de main */
+            background-color: transparent; /* El fondo lo da el canvas */
+            margin-top: -68px; 
             padding-top: 68px;
         }
         
+        /* MEJORA: Canvas fijo para la transición */
         #particle-canvas {
-            position: absolute;
+            position: fixed; /* Fijo para que se mantenga detrás de todo */
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            z-index: 1;
+            z-index: -1; /* Detrás de todo el contenido */
         }
 
         .gradient-text {
@@ -86,7 +87,7 @@
 
         /* Estilos para reproductor de audio */
         audio::-webkit-media-controls-panel {
-            background-color: #1f2937;
+            background-color: #18181b;
         }
         audio::-webkit-media-controls-play-button,
         audio::-webkit-media-controls-pause-button {
@@ -96,24 +97,42 @@
         audio::-webkit-media-controls-current-time-display,
         audio::-webkit-media-controls-time-remaining-display,
         audio::-webkit-media-controls-timeline {
-            color: #F5F5F7;
+            color: #e4e4e7;
         }
 
-        /* --- NUEVOS ESTILOS VISUALES --- */
-        .textured-bg {
-            background-image: linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
-            background-size: 30px 30px;
-        }
-
+        /* --- MEJORA: ESTILOS VISUALES --- */
         .interactive-card {
             transition: transform 0.3s ease, box-shadow 0.3s ease;
-            border: 1px solid transparent;
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         .interactive-card:hover {
             transform: translateY(-8px);
-            box-shadow: 0 0 25px rgba(192, 132, 252, 0.1);
-            border-color: rgba(192, 132, 252, 0.3);
+            box-shadow: 0 0 25px rgba(255, 255, 255, 0.08);
+            border-color: rgba(255, 255, 255, 0.2);
+        }
+
+        /* MEJORA: Animación para la sección de contacto */
+        #contacto {
+            overflow: hidden;
+        }
+        .aurora-bg {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 1400px;
+            height: 1400px;
+            background: radial-gradient(circle, rgba(99, 102, 241, 0.2), transparent 50%);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            animation: pulse-aurora 10s infinite ease-in-out;
+            z-index: -1;
+        }
+
+        @keyframes pulse-aurora {
+            0% { transform: translate(-50%, -50%) scale(1); opacity: 0.2; }
+            50% { transform: translate(-50%, -50%) scale(1.2); opacity: 0.3; }
+            100% { transform: translate(-50%, -50%) scale(1); opacity: 0.2; }
         }
 
     </style>
@@ -121,20 +140,20 @@
 <body class="antialiased">
 
     <!-- ========== HEADER DE NAVEGACIÓN ========== -->
-    <header class="fixed top-0 left-0 w-full z-50 transition-all duration-300 bg-black/60 backdrop-blur-lg border-b border-gray-800">
+    <header class="fixed top-0 left-0 w-full z-50 transition-all duration-300 bg-black/60 backdrop-blur-lg border-b border-zinc-800">
         <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
             <a href="#inicio" class="text-xl font-bold text-white">Camilo Sanguino</a>
             <div class="hidden md:flex items-center space-x-8">
-                <a href="#sobre-mi" class="text-gray-300 hover:text-white transition-colors duration-300">Sobre Mí</a>
-                <a href="#produccion" class="flex items-center gap-2 text-gray-300 hover:text-white transition-colors duration-300">
+                <a href="#sobre-mi" class="text-zinc-300 hover:text-white transition-colors duration-300">Sobre Mí</a>
+                <a href="#produccion" class="flex items-center gap-2 text-zinc-300 hover:text-white transition-colors duration-300">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path d="M18 3a1 1 0 00-1.196-.98l-10 2A1 1 0 006 5v9.114A4.369 4.369 0 005 14c-1.657 0-3 1.343-3 3s1.343 3 3 3 3-1.343 3-3V7.82l8-1.6v5.894A4.37 4.37 0 0015 12c-1.657 0-3 1.343-3 3s1.343 3 3 3 3-1.343 3-3V3z" /></svg>
                     Producción
                 </a>
-                <a href="#analisis-datos" class="flex items-center gap-2 text-gray-300 hover:text-white transition-colors duration-300">
+                <a href="#analisis-datos" class="flex items-center gap-2 text-zinc-300 hover:text-white transition-colors duration-300">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5 3a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2V5a2 2 0 00-2-2H5zm9 4a1 1 0 10-2 0v6a1 1 0 102 0V7zm-3 2a1 1 0 10-2 0v4a1 1 0 102 0V9zm-3 3a1 1 0 10-2 0v1a1 1 0 102 0v-1z" clip-rule="evenodd" /></svg>
                     Análisis de Datos
                 </a>
-                <a href="#contacto" class="text-gray-300 hover:text-white transition-colors duration-300">Contacto</a>
+                <a href="#contacto" class="text-zinc-300 hover:text-white transition-colors duration-300">Contacto</a>
             </div>
             <!-- Botón de Menú Móvil -->
             <div class="md:hidden">
@@ -145,55 +164,49 @@
         </nav>
         <!-- Menú Móvil -->
         <div id="mobile-menu" class="hidden md:hidden bg-black/80">
-            <a href="#sobre-mi" class="block py-3 px-6 text-sm text-gray-300 hover:bg-gray-800">Sobre Mí</a>
-            <a href="#produccion" class="flex items-center gap-2 py-3 px-6 text-sm text-gray-300 hover:bg-gray-800">
+            <a href="#sobre-mi" class="block py-3 px-6 text-sm text-zinc-300 hover:bg-zinc-800">Sobre Mí</a>
+            <a href="#produccion" class="flex items-center gap-2 py-3 px-6 text-sm text-zinc-300 hover:bg-zinc-800">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path d="M18 3a1 1 0 00-1.196-.98l-10 2A1 1 0 006 5v9.114A4.369 4.369 0 005 14c-1.657 0-3 1.343-3 3s1.343 3 3 3 3-1.343 3-3V7.82l8-1.6v5.894A4.37 4.37 0 0015 12c-1.657 0-3 1.343-3 3s1.343 3 3 3 3-1.343 3-3V3z" /></svg>
                 Producción
             </a>
-            <a href="#analisis-datos" class="flex items-center gap-2 py-3 px-6 text-sm text-gray-300 hover:bg-gray-800">
+            <a href="#analisis-datos" class="flex items-center gap-2 py-3 px-6 text-sm text-zinc-300 hover:bg-zinc-800">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5 3a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2V5a2 2 0 00-2-2H5zm9 4a1 1 0 10-2 0v6a1 1 0 102 0V7zm-3 2a1 1 0 10-2 0v4a1 1 0 102 0V9zm-3 3a1 1 0 10-2 0v1a1 1 0 102 0v-1z" clip-rule="evenodd" /></svg>
                 Análisis de Datos
             </a>
-            <a href="#contacto" class="block py-3 px-6 text-sm text-gray-300 hover:bg-gray-800">Contacto</a>
+            <a href="#contacto" class="block py-3 px-6 text-sm text-zinc-300 hover:bg-zinc-800">Contacto</a>
         </div>
     </header>
 
     <main>
+        <!-- Canvas para la animación de partículas -->
+        <canvas id="particle-canvas"></canvas>
+
         <!-- ========== 1. INICIO ========== -->
         <section id="inicio" class="hero-section h-screen w-full flex items-center justify-center text-center">
-            <canvas id="particle-canvas"></canvas>
             <div class="relative z-10 p-8">
                 <h1 class="text-5xl sm:text-6xl md:text-8xl font-black text-white leading-tight tracking-tighter gradient-text" style="text-shadow: 0 0 30px rgba(192, 132, 252, 0.3);">
                     Música & Datos
                 </h1>
-                <p class="text-lg sm:text-xl md:text-2xl text-gray-400 mt-6 font-light tracking-wider">
+                <p class="text-lg sm:text-xl md:text-2xl text-zinc-400 mt-6 font-light tracking-wider">
                     Sonido con Inteligencia.
                 </p>
             </div>
+            <!-- MEJORA: Div para el degradado de transición -->
+            <div class="absolute bottom-0 left-0 w-full h-48 bg-gradient-to-t from-zinc-950 to-transparent"></div>
         </section>
 
         <!-- ========== 2. SOBRE MÍ ========== -->
-        <section id="sobre-mi" class="py-20 md:py-32">
+        <section id="sobre-mi" class="py-20 md:py-32 bg-zinc-950">
             <div class="container mx-auto px-6">
                 <div class="flex flex-col lg:flex-row items-center gap-12 lg:gap-16">
                     <div class="lg:w-1/3 flex-shrink-0 reveal">
-                        <img src="2025-06-17-JUAN-CAMILO-SANGUINO-LEON.jpg" alt="Foto de perfil de Camilo Sanguino" class="rounded-full w-64 h-64 lg:w-80 lg:h-80 mx-auto object-cover border-4 border-gray-800">
+                        <img src="2025-06-17-JUAN-CAMILO-SANGUINO-LEON.jpg" alt="Foto de perfil de Camilo Sanguino" class="rounded-full w-64 h-64 lg:w-80 lg:h-80 mx-auto object-cover border-4 border-zinc-800">
                     </div>
                     <div class="lg:w-2/3 text-center lg:text-left reveal">
-                        <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold text-white">Hola, soy Camilo Sanguino</h2>
-                        <div class="text-lg text-gray-300 mt-6 space-y-4">
+                        <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold gradient-text">Hola, soy Camilo Sanguino</h2>
+                        <div class="text-lg text-zinc-300 mt-6 space-y-4">
                             <p>Como Máster en Composición para Medios Audiovisuales, mi carrera se ha centrado en el arte de contar historias a través del sonido. Desde la producción musical hasta el intrincado mundo del diseño sonoro y el foley, mi objetivo es crear experiencias inmersivas que eleven la narrativa visual y conecten emocionalmente con la audiencia.</p>
                             <p>Mi enfoque se distingue por la fusión de la creatividad artística con la precisión analítica. Utilizo mi conocimiento en análisis de datos para entender tendencias y audiencias, lo que me permite diseñar paisajes sonoros que no solo son estéticamente impactantes, sino también estratégicamente efectivos. Esta dualidad entre arte y datos es el núcleo de mi filosofía de trabajo.</p>
-                        </div>
-                        <div class="mt-8">
-                            <h3 class="text-xl font-semibold text-white mb-4">Habilidades Principales</h3>
-                            <div class="flex flex-wrap justify-center lg:justify-start gap-3">
-                                <span class="bg-gray-800 text-gray-300 text-sm font-medium px-4 py-2 rounded-full">Composición para Medios</span>
-                                <span class="bg-gray-800 text-gray-300 text-sm font-medium px-4 py-2 rounded-full">Diseño Sonoro & Foley</span>
-                                <span class="bg-gray-800 text-gray-300 text-sm font-medium px-4 py-2 rounded-full">Producción Musical</span>
-                                <span class="bg-gray-800 text-gray-300 text-sm font-medium px-4 py-2 rounded-full">Análisis de Datos</span>
-                                <span class="bg-gray-800 text-gray-300 text-sm font-medium px-4 py-2 rounded-full">Python & SQL</span>
-                            </div>
                         </div>
                     </div>
                 </div>
@@ -201,130 +214,69 @@
         </section>
 
         <!-- ========== 3. PRODUCCIÓN Y DISEÑO SONORO ========== -->
-        <section id="produccion" class="py-20 md:py-32 bg-gray-900 textured-bg">
+        <section id="produccion" class="py-20 md:py-32 bg-zinc-950">
             <div class="container mx-auto px-6">
                 <div class="text-center mb-16 reveal">
-                    <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold text-white">Producción y Diseño Sonoro</h2>
-                    <p class="text-lg text-gray-400 mt-4">Creando la identidad sonora para proyectos audiovisuales.</p>
+                    <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold gradient-text">Producción y Diseño Sonoro</h2>
+                    <p class="text-lg text-zinc-400 mt-4">Creando la identidad sonora para proyectos audiovisuales.</p>
                 </div>
-                <!-- Galería de Proyectos de Diseño Sonoro -->
                 <div class="mb-20 reveal">
                     <div class="bg-black rounded-2xl overflow-hidden interactive-card">
                         <div class="video-container rounded-t-2xl"><iframe src="https://www.youtube.com/embed/wMMhwn53HZw" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
                         <div class="p-8 md:p-12">
                             <h3 class="text-xl sm:text-2xl md:text-3xl font-bold text-white">🌌 Foley Cinemático: Reviviendo Wall·E</h3>
-                            <p class="text-gray-400 mt-3">Recreación detallada de efectos de sonido (foley) para una escena icónica de Wall·E. Un ejercicio académico que destaca mi precisión auditiva y sensibilidad narrativa.</p>
+                            <p class="text-zinc-400 mt-3">Recreación detallada de efectos de sonido (foley) para una escena icónica de Wall·E. Un ejercicio académico que destaca mi precisión auditiva y sensibilidad narrativa.</p>
                         </div>
                     </div>
                 </div>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
-                    <div class="reveal">
-                        <div class="bg-black rounded-2xl overflow-hidden p-4 interactive-card">
-                            <div class="video-container"><iframe src="https://www.youtube.com/embed/rM4_2ZNB32I" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
-                            <div class="p-6">
-                                <h3 class="text-xl sm:text-2xl font-bold text-white">🤖 Diseño Sonoro Sintético: El Viaje del Robot</h3>
-                                <p class="text-gray-400 mt-2">Exploración de diseño sonoro con sintetizadores, creando paisajes acústicos para un video de un robot en el espacio.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="reveal">
-                        <div class="bg-black rounded-2xl overflow-hidden p-4 interactive-card">
-                            <div class="video-container"><iframe src="https://www.youtube.com/embed/REx6xl-CtAg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
-                            <div class="p-6">
-                                <h3 class="text-xl sm:text-2xl font-bold text-white">🎵 El Guasón: Composición Original</h3>
-                                <p class="text-gray-400 mt-2">Composición musical original para el trailer de El Guasón, un enfoque emocional que potencia la narrativa visual.</p>
-                            </div>
-                        </div>
-                    </div>
+                    <div class="reveal"><div class="bg-black rounded-2xl overflow-hidden p-4 interactive-card"><div class="video-container"><iframe src="https://www.youtube.com/embed/rM4_2ZNB32I" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div><div class="p-6"><h3 class="text-xl sm:text-2xl font-bold text-white">🤖 Diseño Sonoro Sintético: El Viaje del Robot</h3><p class="text-zinc-400 mt-2">Exploración de diseño sonoro con sintetizadores, creando paisajes acústicos para un video de un robot en el espacio.</p></div></div></div>
+                    <div class="reveal"><div class="bg-black rounded-2xl overflow-hidden p-4 interactive-card"><div class="video-container"><iframe src="https://www.youtube.com/embed/REx6xl-CtAg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div><div class="p-6"><h3 class="text-xl sm:text-2xl font-bold text-white">🎵 El Guasón: Composición Original</h3><p class="text-zinc-400 mt-2">Composición musical original para el trailer de El Guasón, un enfoque emocional que potencia la narrativa visual.</p></div></div></div>
                 </div>
             </div>
         </section>
         
         <!-- ========== PRODUCCIONES DESTACADAS ========== -->
-        <section id="producciones-destacadas" class="py-20 md:py-32">
+        <section id="producciones-destacadas" class="py-20 md:py-32 bg-zinc-950">
              <div class="container mx-auto px-6">
                 <div class="text-center mb-16 reveal">
-                    <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold text-white">Producciones Destacadas</h2>
+                    <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold gradient-text">Producciones Destacadas</h2>
                 </div>
-                <div class="bg-gray-900 rounded-2xl p-8 md:p-12 flex flex-col lg:flex-row items-center gap-8 lg:gap-12 reveal interactive-card">
-                    <!-- Portada del Álbum -->
-                    <div class="lg:w-1/3 flex-shrink-0">
-                        <img src="Homenaje-al-Vallenato-romántico-Camilo-Sanguino-portada.jpeg" alt="Portada del álbum Homenaje al vallenato romántico" class="rounded-lg shadow-2xl w-full h-auto">
-                    </div>
-                    <!-- Información y Canciones -->
-                    <div class="lg:w-2/3">
-                        <h3 class="text-2xl md:text-3xl font-bold text-white">Homenaje al Vallenato Romántico</h3>
-                        <p class="text-gray-400 mt-2">Un álbum que tuve el placer de producir, buscando capturar la esencia y la pasión del vallenato clásico con un sonido moderno.</p>
-                        <div class="mt-6 space-y-4">
-                            <!-- Canción 1 -->
-                            <div>
-                                <p class="text-white font-semibold">Mi Primer Amor</p>
-                                <audio controls class="w-full mt-2">
-                                    <source src="mi-primer-amor.mp3" type="audio/mpeg">
-                                    Tu navegador no soporta el elemento de audio.
-                                </audio>
-                            </div>
-                            <!-- Canción 2 -->
-                            <div>
-                                <p class="text-white font-semibold">Paro de mi Corazón</p>
-                                <audio controls class="w-full mt-2">
-                                    <source src="paro-de-mi-corazon.mp3" type="audio/mpeg">
-                                    Tu navegador no soporta el elemento de audio.
-                                </audio>
-                            </div>
-                        </div>
-                    </div>
+                <div class="bg-black/50 backdrop-blur-sm border border-zinc-800 rounded-2xl p-8 md:p-12 flex flex-col lg:flex-row items-center gap-8 lg:gap-12 reveal interactive-card">
+                    <div class="lg:w-1/3 flex-shrink-0"><img src="Homenaje-al-Vallenato-romántico-Camilo-Sanguino-portada.jpeg" alt="Portada del álbum Homenaje al vallenato romántico" class="rounded-lg shadow-2xl w-full h-auto"></div>
+                    <div class="lg:w-2/3"><h3 class="text-2xl md:text-3xl font-bold text-white">Homenaje al Vallenato Romántico</h3><p class="text-zinc-400 mt-2">Un álbum que tuve el placer de producir, buscando capturar la esencia y la pasión del vallenato clásico con un sonido moderno.</p><div class="mt-6 space-y-4"><div><p class="text-white font-semibold">Mi Primer Amor</p><audio controls class="w-full mt-2"><source src="mi-primer-amor.mp3" type="audio/mpeg">Tu navegador no soporta el elemento de audio.</audio></div><div><p class="text-white font-semibold">Paro de mi Corazón</p><audio controls class="w-full mt-2"><source src="paro-de-mi-corazon.mp3" type="audio/mpeg">Tu navegador no soporta el elemento de audio.</audio></div></div></div>
                 </div>
             </div>
         </section>
 
         <!-- ========== 4. ANÁLISIS DE DATOS ========== -->
-        <section id="analisis-datos" class="py-20 md:py-32 bg-gray-900 textured-bg">
+        <section id="analisis-datos" class="py-20 md:py-32 bg-zinc-950">
             <div class="container mx-auto px-6">
                 <div class="text-center mb-16 reveal">
-                    <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold text-white">Análisis de Datos</h2>
-                    <p class="text-lg text-gray-400 mt-4">Transformando números en decisiones estratégicas.</p>
+                    <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold gradient-text">Análisis de Datos</h2>
+                    <p class="text-lg text-zinc-400 mt-4">Transformando números en decisiones estratégicas.</p>
                 </div>
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    <div class="bg-black rounded-2xl p-8 reveal interactive-card">
-                        <h3 class="text-2xl font-bold text-white">Análisis de Tendencias en Spotify</h3>
-                        <p class="text-gray-400 mt-4">Un análisis para identificar patrones en géneros musicales populares a lo largo del tiempo, usando Python y Pandas.</p>
-                        <a href="#" class="inline-block text-blue-400 font-semibold mt-6 hover:text-blue-300">Ver proyecto en GitHub &rarr;</a>
-                    </div>
-                    <div class="bg-black rounded-2xl p-8 reveal interactive-card">
-                        <h3 class="text-2xl font-bold text-white">Dashboard de Ventas de Tickets</h3>
-                        <p class="text-gray-400 mt-4">Visualización interactiva en Tableau para monitorear la venta de entradas para eventos musicales en tiempo real.</p>
-                        <a href="#" class="inline-block text-blue-400 font-semibold mt-6 hover:text-blue-300">Explorar dashboard &rarr;</a>
-                    </div>
-                    <div class="bg-black rounded-2xl p-8 reveal interactive-card">
-                        <h3 class="text-2xl font-bold text-white">Modelo Predictivo de Éxito Musical</h3>
-                        <p class="text-gray-400 mt-4">Machine learning con Scikit-learn para predecir el potencial de una canción basado en sus características sonoras.</p>
-                        <a href="#" class="inline-block text-blue-400 font-semibold mt-6 hover:text-blue-300">Ver código &rarr;</a>
-                    </div>
-                </div>
-                 <div class="mt-16 text-center reveal">
-                    <h3 class="text-xl font-semibold text-white mb-4">Habilidades Técnicas</h3>
-                    <div class="flex flex-wrap justify-center gap-3">
-                        <span class="bg-gray-800 text-gray-300 text-sm font-medium px-4 py-2 rounded-full">Python (Pandas, NumPy)</span>
-                        <span class="bg-gray-800 text-gray-300 text-sm font-medium px-4 py-2 rounded-full">SQL</span>
-                        <span class="bg-gray-800 text-gray-300 text-sm font-medium px-4 py-2 rounded-full">Tableau / Power BI</span>
-                        <span class="bg-gray-800 text-gray-300 text-sm font-medium px-4 py-2 rounded-full">Machine Learning</span>
-                        <span class="bg-gray-800 text-gray-300 text-sm font-medium px-4 py-2 rounded-full">Estadística</span>
-                    </div>
+                    <div class="bg-black/50 backdrop-blur-sm border border-zinc-800 rounded-2xl p-8 reveal interactive-card"><h3 class="text-2xl font-bold text-white">Análisis de Tendencias en Spotify</h3><p class="text-zinc-400 mt-4">Un análisis para identificar patrones en géneros musicales populares a lo largo del tiempo, usando Python y Pandas.</p><a href="#" class="inline-block text-blue-400 font-semibold mt-6 hover:text-blue-300">Ver proyecto en GitHub &rarr;</a></div>
+                    <div class="bg-black/50 backdrop-blur-sm border border-zinc-800 rounded-2xl p-8 reveal interactive-card"><h3 class="text-2xl font-bold text-white">Dashboard de Ventas de Tickets</h3><p class="text-zinc-400 mt-4">Visualización interactiva en Tableau para monitorear la venta de entradas para eventos musicales en tiempo real.</p><a href="#" class="inline-block text-blue-400 font-semibold mt-6 hover:text-blue-300">Explorar dashboard &rarr;</a></div>
+                    <div class="bg-black/50 backdrop-blur-sm border border-zinc-800 rounded-2xl p-8 reveal interactive-card"><h3 class="text-2xl font-bold text-white">Modelo Predictivo de Éxito Musical</h3><p class="text-zinc-400 mt-4">Machine learning con Scikit-learn para predecir el potencial de una canción basado en sus características sonoras.</p><a href="#" class="inline-block text-blue-400 font-semibold mt-6 hover:text-blue-300">Ver código &rarr;</a></div>
                 </div>
             </div>
         </section>
 
         <!-- ========== 5. CONTACTO Y PIE DE PÁGINA ========== -->
-        <section id="contacto" class="py-20 md:py-32">
-            <div class="container mx-auto px-6 text-center reveal">
+        <section id="contacto" class="py-20 md:py-32 bg-zinc-950">
+            <div class="aurora-bg"></div>
+            <div class="container mx-auto px-6 text-center reveal relative z-10">
                 <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold text-white">¿Tienes un proyecto en mente?</h2>
-                <p class="text-xl text-gray-400 mt-4">Ya sea una producción musical o un desafío de datos, hablemos.</p>
-                <a href="mailto:tuemail@ejemplo.com" class="inline-block bg-blue-600 text-white font-bold text-lg rounded-full px-8 py-4 mt-10 hover:bg-blue-500 transition-colors duration-300">Enviar un Correo</a>
+                <p class="text-xl text-zinc-400 mt-4">Ya sea una producción musical o un desafío de datos, hablemos.</p>
+                <a href="mailto:tuemail@ejemplo.com" class="inline-block bg-blue-600 text-white font-bold text-lg rounded-full px-8 py-4 mt-10 hover:bg-blue-500 transition-colors duration-300">
+                    Enviar un Correo
+                </a>
             </div>
         </section>
-        <footer class="border-t border-gray-800 py-8 bg-gray-900">
-            <div class="container mx-auto px-6 text-center text-gray-500">
+        <footer class="border-t border-zinc-800 py-8 bg-black">
+            <div class="container mx-auto px-6 text-center text-zinc-500">
                 <p>&copy; 2025 Camilo Sanguino. Todos los derechos reservados.</p>
                 <div class="flex justify-center space-x-6 mt-4">
                     <a href="#" class="hover:text-white">LinkedIn</a>
