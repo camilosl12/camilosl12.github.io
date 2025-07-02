@@ -9,13 +9,16 @@
     <meta name="keywords" content="Camilo Sanguino, productor musical, analista de datos, composición, foley, diseño sonoro, python, R, SQL, Tableau, Power BI">
     <meta name="author" content="Camilo Sanguino">
 
+    <!-- AÑADIDO: Favicon del logo SVG -->
+    <link rel="icon" href="data:image/svg+xml,%3csvg viewBox='0 0 300 150' xmlns='http://www.w3.org/2000/svg'%3e%3cdefs%3e%3clinearGradient id='gradCS' x1='0%25' y1='0%25' x2='100%25' y2='0%25'%3e%3cstop offset='0%25' style='stop-color:%2338bdf8;stop-opacity:1'/%3e%3cstop offset='100%25' style='stop-color:%23c084fc;stop-opacity:1'/%3e%3c/linearGradient%3e%3c/defs%3e%3ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' font-family='Caveat, cursive' font-size='100' fill='url(%23gradCS)'%3eCS%3c/text%3e%3c/svg%3e">
+
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     
-    <!-- Google Fonts: Inter -->
+    <!-- Google Fonts: Inter & Caveat (para la firma) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 
     <!-- Font Awesome para iconos -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
@@ -37,6 +40,9 @@
             background-color: var(--dark-bg);
             color: var(--light-text); 
             overflow-x: hidden;
+        }
+        .font-signature {
+            font-family: 'Caveat', cursive;
         }
         section {
             padding-top: 5rem;
@@ -235,7 +241,22 @@
     <!-- ========== HEADER DE NAVEGACIÓN ========== -->
     <header class="fixed top-0 left-0 w-full z-50 transition-all duration-300 bg-black/60 backdrop-blur-lg border-b border-zinc-800">
         <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
-            <a href="#inicio" class="text-xl font-bold text-white">Camilo Sanguino</a>
+            <a href="#inicio" class="block">
+                <svg viewBox="0 0 300 150" xmlns="http://www.w3.org/2000/svg" class="h-10 w-auto">
+                  <defs>
+                    <linearGradient id="gradCS" x1="0%" y1="0%" x2="100%" y2="0%">
+                      <stop offset="0%" style="stop-color:#38bdf8; stop-opacity:1"/>
+                      <stop offset="100%" style="stop-color:#c084fc; stop-opacity:1"/>
+                    </linearGradient>
+                  </defs>
+                  <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle"
+                        font-family="Caveat, cursive"
+                        font-size="100"
+                        fill="url(#gradCS)">
+                    CS
+                  </text>
+                </svg>
+            </a>
             <div class="hidden md:flex items-center space-x-8">
                 <a href="#sobre-mi" class="nav-link text-zinc-300">Sobre Mí</a>
                 <a href="#proyectos" class="nav-link text-zinc-300">Proyectos</a>
@@ -259,12 +280,16 @@
 
         <!-- ========== 1. INICIO ========== -->
         <section id="inicio" class="hero-section h-screen w-full flex items-center justify-center text-center">
-            <div class="relative z-10 p-8">
+            <!-- CAMBIO: Se añadió un margen superior para bajar el contenido -->
+            <div class="relative z-10 p-8 mt-20 md:mt-0">
                 <h1 class="text-5xl sm:text-6xl md:text-8xl font-black text-white leading-tight tracking-tighter gradient-text px-2" style="text-shadow: 0 0 40px rgba(192, 132, 252, 0.4);">
                     Música & Datos
                 </h1>
                 <p class="text-lg sm:text-xl md:text-2xl text-zinc-300 mt-6 font-light tracking-wider max-w-3xl mx-auto">
                     Creando experiencias sonoras inmersivas a través de la producción creativa y el análisis estratégico.
+                </p>
+                <p class="font-signature text-5xl sm:text-6xl text-zinc-200 mt-16 tracking-wider">
+                    Camilo Sanguino
                 </p>
             </div>
         </section>
@@ -274,8 +299,7 @@
             <div class="container mx-auto px-6">
                 <div class="flex flex-col lg:flex-row items-center gap-12 lg:gap-20">
                     <div class="lg:w-1/3 flex-shrink-0 reveal">
-                        <!-- CORRECCIÓN DE RUTA DE IMAGEN -->
-                        <img src="https://JuanCamiloSanguino.github.io/2025-06-17-JUAN-CAMILO-SANGUINO-LEON.jpg" 
+                        <img src="https://camilosl12.github.io/2025-06-17-JUAN-CAMILO-SANGUINO-LEON.jpg" 
                              onerror="this.onerror=null;this.src='https://placehold.co/320x320/18181b/E5E7EB?text=Camilo+Sanguino';"
                              alt="Foto de perfil de Camilo Sanguino" 
                              class="rounded-full w-64 h-64 lg:w-80 lg:h-80 mx-auto object-cover border-4 border-zinc-800 shadow-lg shadow-purple-500/10">
@@ -336,8 +360,7 @@
                 <div id="music-projects" class="project-card active">
                     <div class="grid grid-cols-1 lg:grid-cols-5 gap-8 items-center mb-16">
                         <div class="lg:col-span-2 reveal">
-                             <!-- CORRECCIÓN DE RUTA DE IMAGEN -->
-                             <img src="https://JuanCamiloSanguino.github.io/Homenaje-portada.jpeg"
+                             <img src="https://camilosl12.github.io/Homenaje-portada.jpeg"
                                  onerror="this.onerror=null;this.src='https://placehold.co/600x600/18181b/E5E7EB?text=Homenaje';"
                                  alt="Portada del álbum Homenaje al vallenato romántico" class="rounded-lg shadow-2xl w-full h-auto interactive-card">
                         </div>
@@ -354,8 +377,7 @@
                                             <span class="time-display text-xs text-zinc-400 w-20 text-center">0:00 / 0:00</span>
                                         </div>
                                     </div>
-                                    <!-- CORRECCIÓN DE RUTA DE AUDIO -->
-                                    <audio class="audio-element hidden" src="https://JuanCamiloSanguino.github.io/01-Mi-primer-amor.mp3" preload="metadata"></audio>
+                                    <audio class="audio-element hidden" src="https://camilosl12.github.io/01-Mi-primer-amor.mp3" preload="metadata"></audio>
                                 </div>
                                 <div class="custom-audio-player">
                                     <p class="text-white font-semibold mb-2">2. Paro de mi Corazón</p>
@@ -366,8 +388,7 @@
                                             <span class="time-display text-xs text-zinc-400 w-20 text-center">0:00 / 0:00</span>
                                         </div>
                                     </div>
-                                    <!-- CORRECCIÓN DE RUTA DE AUDIO -->
-                                    <audio class="audio-element hidden" src="https://JuanCamiloSanguino.github.io/02-Paro-de-mi-corazon.mp3" preload="metadata"></audio>
+                                    <audio class="audio-element hidden" src="https://camilosl12.github.io/02-Paro-de-mi-corazon.mp3" preload="metadata"></audio>
                                 </div>
                             </div>
                         </div>
@@ -381,9 +402,9 @@
 
                 <div id="data-projects" class="project-card">
                     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                        <div class="bg-black/50 backdrop-blur-sm border border-zinc-800 rounded-2xl p-8 reveal interactive-card flex flex-col"><h3 class="text-2xl font-bold text-white">Análisis de Tendencias en Spotify</h3><p class="text-zinc-400 mt-4 flex-grow">Utilizando la API de Spotify, Python (Pandas, Matplotlib) y SQL, desarrollé un análisis para identificar patrones en la popularidad de géneros musicales, correlacionando características sonoras (valencia, energía) con el éxito en las listas.</p><a href="https://github.com" target="_blank" rel="noopener noreferrer" class="inline-block text-blue-400 font-semibold mt-6 hover:text-blue-300 self-start">Explorar en GitHub &rarr;</a></div>
+                        <div class="bg-black/50 backdrop-blur-sm border border-zinc-800 rounded-2xl p-8 reveal interactive-card flex flex-col"><h3 class="text-2xl font-bold text-white">Análisis de Tendencias en Spotify</h3><p class="text-zinc-400 mt-4 flex-grow">Utilizando la API de Spotify, Python (Pandas, Matplotlib) y SQL, desarrollé un análisis para identificar patrones en la popularidad de géneros musicales, correlacionando características sonoras (valencia, energía) con el éxito en las listas.</p><a href="https://github.com/camilosl12" target="_blank" rel="noopener noreferrer" class="inline-block text-blue-400 font-semibold mt-6 hover:text-blue-300 self-start">Explorar en GitHub &rarr;</a></div>
                         <div class="bg-black/50 backdrop-blur-sm border border-zinc-800 rounded-2xl p-8 reveal interactive-card flex flex-col"><h3 class="text-2xl font-bold text-white">Dashboard de Ventas de Tickets</h3><p class="text-zinc-400 mt-4 flex-grow">Diseñé un dashboard interactivo en Tableau que visualiza datos de ventas de eventos en tiempo real. Permite a los stakeholders filtrar por artista, venue y demografía, optimizando las estrategias de marketing y pricing.</p><a href="https://public.tableau.com/app/discover" target="_blank" rel="noopener noreferrer" class="inline-block text-blue-400 font-semibold mt-6 hover:text-blue-300 self-start">Ver Dashboard Interactivo &rarr;</a></div>
-                        <div class="bg-black/50 backdrop-blur-sm border border-zinc-800 rounded-2xl p-8 reveal interactive-card flex flex-col"><h3 class="text-2xl font-bold text-white">Modelo Predictivo de Éxito Musical</h3><p class="text-zinc-400 mt-4 flex-grow">Entrené un modelo de machine learning (Regresión Logística con Scikit-learn) para predecir la probabilidad de que una canción entre en el Top 40 de Billboard, basándose en más de 15 variables acústicas y contextuales.</p><a href="https://github.com" target="_blank" rel="noopener noreferrer" class="inline-block text-blue-400 font-semibold mt-6 hover:text-blue-300 self-start">Analizar el Código &rarr;</a></div>
+                        <div class="bg-black/50 backdrop-blur-sm border border-zinc-800 rounded-2xl p-8 reveal interactive-card flex flex-col"><h3 class="text-2xl font-bold text-white">Modelo Predictivo de Éxito Musical</h3><p class="text-zinc-400 mt-4 flex-grow">Entrené un modelo de machine learning (Regresión Logística con Scikit-learn) para predecir la probabilidad de que una canción entre en el Top 40 de Billboard, basándose en más de 15 variables acústicas y contextuales.</p><a href="https://github.com/camilosl12" target="_blank" rel="noopener noreferrer" class="inline-block text-blue-400 font-semibold mt-6 hover:text-blue-300 self-start">Analizar el Código &rarr;</a></div>
                     </div>
                 </div>
             </div>
@@ -397,14 +418,14 @@
                 <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold text-white">Hablemos de tu Próximo Proyecto</h2>
                 <p class="text-xl text-zinc-400 mt-4">Estoy disponible para colaboraciones y oportunidades laborales. Si buscas un perfil que una la creatividad con la estrategia basada en datos, me encantaría conversar.</p>
                 <div class="mt-10">
-                    <a href="mailto:camilo.sanguino@email.com" class="inline-block bg-blue-600 text-white font-bold text-lg rounded-full px-8 py-4 hover:bg-blue-500 transition-all duration-300 transform hover:scale-105">
+                    <a href="mailto:camilosl2156@gmail.com" class="inline-block bg-blue-600 text-white font-bold text-lg rounded-full px-8 py-4 hover:bg-blue-500 transition-all duration-300 transform hover:scale-105">
                         <i class="fas fa-paper-plane mr-2"></i> Enviar un Correo
                     </a>
                 </div>
                 <div class="flex justify-center items-center space-x-8 mt-12 text-zinc-400">
-                    <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors text-2xl"><i class="fab fa-linkedin"></i></a>
-                    <a href="https://github.com/JuanCamiloSanguino" target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors text-2xl"><i class="fab fa-github"></i></a>
-                    <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors text-2xl"><i class="fab fa-instagram"></i></a>
+                    <a href="https://www.linkedin.com/in/camilo-sanguino-le%C3%B3n-659564269?" target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors text-2xl"><i class="fab fa-linkedin"></i></a>
+                    <a href="https://github.com/camilosl12" target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors text-2xl"><i class="fab fa-github"></i></a>
+                    <a href="https://www.instagram.com/camilosl12?igsh=MXdlMnM2bXMzYWtpYQ%3D%3D&utm_source=qr" target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors text-2xl"><i class="fab fa-instagram"></i></a>
                 </div>
             </div>
         </section>
@@ -455,15 +476,6 @@ document.addEventListener('DOMContentLoaded', () => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 entry.target.classList.add('visible');
-                if (entry.target.querySelector('.skill-bubble')) {
-                    const bubbles = entry.target.querySelectorAll('.skill-bubble');
-                    bubbles.forEach(bubble => {
-                        const delay = parseFloat(bubble.style.getPropertyValue('--delay').replace('s', '')) * 1000;
-                        setTimeout(() => {
-                            bubble.classList.add('is-shining');
-                        }, delay + 500); 
-                    });
-                }
             }
         });
     }, { threshold: 0.1 });
@@ -718,14 +730,17 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // --- ANIMACIÓN DE HABILIDADES ---
+    // --- ANIMACIÓN DE HABILIDADES - CORREGIDO PARA REPETIR ---
     document.querySelectorAll('.skill-bubble').forEach(bubble => {
         bubble.addEventListener('mouseenter', () => {
-            if(bubble.classList.contains('is-shining')) return;
+            if (bubble.classList.contains('is-shining')) {
+                return;
+            }
             bubble.classList.add('is-shining');
-            bubble.addEventListener('animationend', () => {
-                bubble.classList.remove('is-shining');
-            }, { once: true });
+        });
+
+        bubble.addEventListener('animationend', () => {
+            bubble.classList.remove('is-shining');
         });
     });
 });
