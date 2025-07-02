@@ -17,7 +17,7 @@
         /* Estilos Generales */
         body {
             font-family: 'Inter', sans-serif;
-            background-color: #0a0a0a; /* Un negro ligeramente más suave para todo el fondo */
+            background-color: #0a0a0a; /* Negro suave como base */
             color: #E5E7EB; 
             overflow-x: hidden;
         }
@@ -62,19 +62,18 @@
         /* Estilos para la sección principal */
         .hero-section {
             position: relative;
-            background-color: transparent; /* El fondo lo da el canvas */
+            background-color: transparent;
             margin-top: -68px; 
             padding-top: 68px;
         }
         
-        /* MEJORA: Canvas fijo para la transición */
         #particle-canvas {
-            position: fixed; /* Fijo para que se mantenga detrás de todo */
+            position: fixed; 
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            z-index: -1; /* Detrás de todo el contenido */
+            z-index: -1; 
         }
 
         .gradient-text {
@@ -83,24 +82,35 @@
             -webkit-text-fill-color: transparent;
             background-clip: text;
             text-fill-color: transparent;
+            padding-bottom: 0.1em;
         }
 
-        /* Estilos para reproductor de audio */
-        audio::-webkit-media-controls-panel {
-            background-color: #18181b;
+        /* --- MEJORA: ESTILOS PARA REPRODUCTOR DE AUDIO PERSONALIZADO --- */
+        .custom-audio-player .play-pause-btn svg {
+            width: 1.25rem;
+            height: 1.25rem;
         }
-        audio::-webkit-media-controls-play-button,
-        audio::-webkit-media-controls-pause-button {
-            background-color: #c084fc;
+        .custom-audio-player .progress-bar {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 100%;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.2);
+            outline: none;
+            border-radius: 2px;
+            cursor: pointer;
+        }
+        .custom-audio-player .progress-bar::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 14px;
+            height: 14px;
+            background: #c084fc;
             border-radius: 50%;
-        }
-        audio::-webkit-media-controls-current-time-display,
-        audio::-webkit-media-controls-time-remaining-display,
-        audio::-webkit-media-controls-timeline {
-            color: #e4e4e7;
+            cursor: pointer;
         }
 
-        /* --- MEJORA: ESTILOS VISUALES --- */
+        /* Estilos visuales para las tarjetas */
         .interactive-card {
             transition: transform 0.3s ease, box-shadow 0.3s ease;
             border: 1px solid rgba(255, 255, 255, 0.1);
@@ -112,7 +122,23 @@
             border-color: rgba(255, 255, 255, 0.2);
         }
 
-        /* MEJORA: Animación para la sección de contacto */
+        /* Fondo de puntos sutiles */
+        .textured-bg {
+            background-image: radial-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+            background-size: 25px 25px;
+        }
+        
+        /* Div para el degradado de transición */
+        .section-transition {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 150px;
+            pointer-events: none;
+        }
+
+        /* Animación para la sección de contacto */
         #contacto {
             overflow: hidden;
         }
@@ -122,17 +148,17 @@
             left: 50%;
             width: 1400px;
             height: 1400px;
-            background: radial-gradient(circle, rgba(99, 102, 241, 0.2), transparent 50%);
+            background: radial-gradient(circle, rgba(99, 102, 241, 0.15), transparent 60%);
             border-radius: 50%;
             transform: translate(-50%, -50%);
             animation: pulse-aurora 10s infinite ease-in-out;
-            z-index: -1;
+            z-index: 0;
         }
 
         @keyframes pulse-aurora {
-            0% { transform: translate(-50%, -50%) scale(1); opacity: 0.2; }
-            50% { transform: translate(-50%, -50%) scale(1.2); opacity: 0.3; }
-            100% { transform: translate(-50%, -50%) scale(1); opacity: 0.2; }
+            0% { transform: translate(-50%, -50%) scale(1); opacity: 0.15; }
+            50% { transform: translate(-50%, -50%) scale(1.2); opacity: 0.25; }
+            100% { transform: translate(-50%, -50%) scale(1); opacity: 0.15; }
         }
 
     </style>
@@ -191,12 +217,11 @@
                     Sonido con Inteligencia.
                 </p>
             </div>
-            <!-- MEJORA: Div para el degradado de transición -->
-            <div class="absolute bottom-0 left-0 w-full h-48 bg-gradient-to-t from-zinc-950 to-transparent"></div>
+            <div class="section-transition" style="background-image: linear-gradient(to top, #0a0a0a, transparent);"></div>
         </section>
 
         <!-- ========== 2. SOBRE MÍ ========== -->
-        <section id="sobre-mi" class="py-20 md:py-32 bg-zinc-950">
+        <section id="sobre-mi" class="py-20 md:py-32 bg-black">
             <div class="container mx-auto px-6">
                 <div class="flex flex-col lg:flex-row items-center gap-12 lg:gap-16">
                     <div class="lg:w-1/3 flex-shrink-0 reveal">
@@ -211,10 +236,11 @@
                     </div>
                 </div>
             </div>
+            <div class="section-transition" style="background-image: linear-gradient(to bottom, transparent, #18181b);"></div>
         </section>
 
         <!-- ========== 3. PRODUCCIÓN Y DISEÑO SONORO ========== -->
-        <section id="produccion" class="py-20 md:py-32 bg-zinc-950">
+        <section id="produccion" class="py-20 md:py-32 bg-zinc-900 textured-bg">
             <div class="container mx-auto px-6">
                 <div class="text-center mb-16 reveal">
                     <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold gradient-text">Producción y Diseño Sonoro</h2>
@@ -234,23 +260,58 @@
                     <div class="reveal"><div class="bg-black rounded-2xl overflow-hidden p-4 interactive-card"><div class="video-container"><iframe src="https://www.youtube.com/embed/REx6xl-CtAg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div><div class="p-6"><h3 class="text-xl sm:text-2xl font-bold text-white">🎵 El Guasón: Composición Original</h3><p class="text-zinc-400 mt-2">Composición musical original para el trailer de El Guasón, un enfoque emocional que potencia la narrativa visual.</p></div></div></div>
                 </div>
             </div>
+            <div class="section-transition" style="background-image: linear-gradient(to bottom, transparent, #0a0a0a);"></div>
         </section>
         
         <!-- ========== PRODUCCIONES DESTACADAS ========== -->
-        <section id="producciones-destacadas" class="py-20 md:py-32 bg-zinc-950">
+        <section id="producciones-destacadas" class="py-20 md:py-32 bg-black">
              <div class="container mx-auto px-6">
                 <div class="text-center mb-16 reveal">
                     <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold gradient-text">Producciones Destacadas</h2>
                 </div>
-                <div class="bg-black/50 backdrop-blur-sm border border-zinc-800 rounded-2xl p-8 md:p-12 flex flex-col lg:flex-row items-center gap-8 lg:gap-12 reveal interactive-card">
+                <div class="bg-zinc-900/50 backdrop-blur-sm border border-zinc-800 rounded-2xl p-8 md:p-12 flex flex-col lg:flex-row items-center gap-8 lg:gap-12 reveal interactive-card">
                     <div class="lg:w-1/3 flex-shrink-0"><img src="Homenaje-al-Vallenato-romántico-Camilo-Sanguino-portada.jpeg" alt="Portada del álbum Homenaje al vallenato romántico" class="rounded-lg shadow-2xl w-full h-auto"></div>
-                    <div class="lg:w-2/3"><h3 class="text-2xl md:text-3xl font-bold text-white">Homenaje al Vallenato Romántico</h3><p class="text-zinc-400 mt-2">Un álbum que tuve el placer de producir, buscando capturar la esencia y la pasión del vallenato clásico con un sonido moderno.</p><div class="mt-6 space-y-4"><div><p class="text-white font-semibold">Mi Primer Amor</p><audio controls class="w-full mt-2"><source src="mi-primer-amor.mp3" type="audio/mpeg">Tu navegador no soporta el elemento de audio.</audio></div><div><p class="text-white font-semibold">Paro de mi Corazón</p><audio controls class="w-full mt-2"><source src="paro-de-mi-corazon.mp3" type="audio/mpeg">Tu navegador no soporta el elemento de audio.</audio></div></div></div>
+                    <div class="lg:w-2/3"><h3 class="text-2xl md:text-3xl font-bold text-white">Homenaje al Vallenato Romántico</h3><p class="text-zinc-400 mt-2">Un álbum que tuve el placer de producir, buscando capturar la esencia y la pasión del vallenato clásico con un sonido moderno.</p>
+                        <div class="mt-6 space-y-6">
+                            <!-- Player 1 -->
+                            <div class="custom-audio-player" data-song-src="mi-primer-amor.mp3">
+                                <p class="text-white font-semibold mb-2">Mi Primer Amor</p>
+                                <div class="flex items-center gap-4">
+                                    <button class="play-pause-btn bg-zinc-800 p-3 rounded-full text-white hover:bg-zinc-700 transition-colors">
+                                        <svg class="play-icon" viewBox="0 0 20 20" fill="currentColor"><path d="M6.3 2.841A1.5 1.5 0 004 4.11V15.89a1.5 1.5 0 002.3 1.269l9.344-5.89a1.5 1.5 0 000-2.538L6.3 2.84z"/></svg>
+                                        <svg class="pause-icon hidden" viewBox="0 0 20 20" fill="currentColor"><path d="M5.75 4.5a.75.75 0 00-.75.75v10a.75.75 0 001.5 0V5.25a.75.75 0 00-.75-.75zm8.5 0a.75.75 0 00-.75.75v10a.75.75 0 001.5 0V5.25a.75.75 0 00-.75-.75z"/></svg>
+                                    </button>
+                                    <div class="flex-grow flex items-center gap-2">
+                                        <input type="range" class="progress-bar w-full" value="0" min="0" max="100">
+                                        <span class="time-display text-xs text-zinc-400 w-20 text-center">0:00 / 0:00</span>
+                                    </div>
+                                </div>
+                                <audio class="audio-element hidden" src="mi-primer-amor.mp3"></audio>
+                            </div>
+                            <!-- Player 2 -->
+                             <div class="custom-audio-player" data-song-src="paro-de-mi-corazon.mp3">
+                                <p class="text-white font-semibold mb-2">Paro de mi Corazón</p>
+                                <div class="flex items-center gap-4">
+                                    <button class="play-pause-btn bg-zinc-800 p-3 rounded-full text-white hover:bg-zinc-700 transition-colors">
+                                        <svg class="play-icon" viewBox="0 0 20 20" fill="currentColor"><path d="M6.3 2.841A1.5 1.5 0 004 4.11V15.89a1.5 1.5 0 002.3 1.269l9.344-5.89a1.5 1.5 0 000-2.538L6.3 2.84z"/></svg>
+                                        <svg class="pause-icon hidden" viewBox="0 0 20 20" fill="currentColor"><path d="M5.75 4.5a.75.75 0 00-.75.75v10a.75.75 0 001.5 0V5.25a.75.75 0 00-.75-.75zm8.5 0a.75.75 0 00-.75.75v10a.75.75 0 001.5 0V5.25a.75.75 0 00-.75-.75z"/></svg>
+                                    </button>
+                                    <div class="flex-grow flex items-center gap-2">
+                                        <input type="range" class="progress-bar w-full" value="0" min="0" max="100">
+                                        <span class="time-display text-xs text-zinc-400 w-20 text-center">0:00 / 0:00</span>
+                                    </div>
+                                </div>
+                                <audio class="audio-element hidden" src="paro-de-mi-corazon.mp3"></audio>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
+            <div class="section-transition" style="background-image: linear-gradient(to bottom, transparent, #18181b);"></div>
         </section>
 
         <!-- ========== 4. ANÁLISIS DE DATOS ========== -->
-        <section id="analisis-datos" class="py-20 md:py-32 bg-zinc-950">
+        <section id="analisis-datos" class="py-20 md:py-32 bg-zinc-900 textured-bg">
             <div class="container mx-auto px-6">
                 <div class="text-center mb-16 reveal">
                     <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold gradient-text">Análisis de Datos</h2>
@@ -262,10 +323,11 @@
                     <div class="bg-black/50 backdrop-blur-sm border border-zinc-800 rounded-2xl p-8 reveal interactive-card"><h3 class="text-2xl font-bold text-white">Modelo Predictivo de Éxito Musical</h3><p class="text-zinc-400 mt-4">Machine learning con Scikit-learn para predecir el potencial de una canción basado en sus características sonoras.</p><a href="#" class="inline-block text-blue-400 font-semibold mt-6 hover:text-blue-300">Ver código &rarr;</a></div>
                 </div>
             </div>
+            <div class="section-transition" style="background-image: linear-gradient(to bottom, transparent, #0a0a0a);"></div>
         </section>
 
         <!-- ========== 5. CONTACTO Y PIE DE PÁGINA ========== -->
-        <section id="contacto" class="py-20 md:py-32 bg-zinc-950">
+        <section id="contacto" class="py-20 md:py-32 bg-black">
             <div class="aurora-bg"></div>
             <div class="container mx-auto px-6 text-center reveal relative z-10">
                 <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold text-white">¿Tienes un proyecto en mente?</h2>
@@ -325,7 +387,6 @@
 
         function setShapes(isMobile) {
             if (isMobile) {
-                // Coordenadas ajustadas para móviles
                 shapes = {
                     note: [
                         ...Array.from({length: 25}, (_, i) => ({ x: 0.3 + Math.cos(i/12.5*Math.PI)*0.1, y: 0.25 + Math.sin(i/12.5*Math.PI)*0.12 })),
@@ -339,7 +400,6 @@
                     ]
                 };
             } else {
-                // Coordenadas para escritorio
                 shapes = {
                     note: [
                         ...Array.from({length: 30}, (_, i) => ({ x: 0.25 + Math.cos(i/15*Math.PI)*0.03, y: 0.6 + Math.sin(i/15*Math.PI)*0.05 })),
@@ -444,6 +504,56 @@
         init();
         animate();
         window.addEventListener('resize', init);
+        
+        // --- SCRIPT PARA REPRODUCTOR DE AUDIO PERSONALIZADO ---
+        document.querySelectorAll('.custom-audio-player').forEach(player => {
+            const audio = player.querySelector('.audio-element');
+            const playPauseBtn = player.querySelector('.play-pause-btn');
+            const playIcon = player.querySelector('.play-icon');
+            const pauseIcon = player.querySelector('.pause-icon');
+            const progressBar = player.querySelector('.progress-bar');
+            const timeDisplay = player.querySelector('.time-display');
+
+            function formatTime(seconds) {
+                const minutes = Math.floor(seconds / 60);
+                const secs = Math.floor(seconds % 60);
+                return `${minutes}:${secs < 10 ? '0' : ''}${secs}`;
+            }
+
+            playPauseBtn.addEventListener('click', () => {
+                if (audio.paused) {
+                    audio.play();
+                } else {
+                    audio.pause();
+                }
+            });
+
+            audio.addEventListener('play', () => {
+                playIcon.classList.add('hidden');
+                pauseIcon.classList.remove('hidden');
+            });
+
+            audio.addEventListener('pause', () => {
+                playIcon.classList.remove('hidden');
+                pauseIcon.classList.add('hidden');
+            });
+
+            audio.addEventListener('timeupdate', () => {
+                const progress = (audio.currentTime / audio.duration) * 100;
+                progressBar.value = progress;
+                timeDisplay.textContent = `${formatTime(audio.currentTime)} / ${formatTime(audio.duration || 0)}`;
+            });
+            
+            audio.addEventListener('loadedmetadata', () => {
+                 timeDisplay.textContent = `${formatTime(0)} / ${formatTime(audio.duration)}`;
+            });
+
+            progressBar.addEventListener('input', () => {
+                const time = (progressBar.value / 100) * audio.duration;
+                audio.currentTime = time;
+            });
+        });
+
     });
 </script>
 
