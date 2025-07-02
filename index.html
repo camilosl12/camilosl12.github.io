@@ -139,16 +139,75 @@
         }
 
         /* Animación para la sección de contacto */
-        #contacto {
+        #contacto, #analisis-datos {
             overflow: hidden;
         }
-        #contact-canvas {
+        #contact-canvas, #data-analysis-canvas {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
             z-index: 0;
+        }
+
+        /* --- MEJORA: ANIMACIÓN PARA EL MENÚ DE NAVEGACIÓN --- */
+        .nav-link {
+            display: inline-block;
+            transition: transform 0.2s ease-out, color 0.3s ease;
+        }
+        .nav-link:hover {
+            transform: scale(1.1);
+        }
+        .nav-link:active {
+            transform: scale(0.95);
+        }
+
+        /* --- MEJORA: ANIMACIÓN PARA LAS HABILIDADES CON REFLEJO --- */
+        @keyframes fade-in-up {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes shine-effect {
+            0% { transform: translateX(-150%) skewX(-25deg); }
+            100% { transform: translateX(250%) skewX(-25deg); }
+        }
+
+        .skill-bubble {
+            opacity: 0;
+            position: relative;
+            overflow: hidden;
+            cursor: pointer; /* Añadimos cursor de puntero para indicar que es clickeable */
+        }
+
+        .reveal.visible .skill-bubble {
+            animation: fade-in-up 0.5s ease-out forwards;
+            animation-delay: var(--delay);
+        }
+
+        .skill-bubble::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 40%;
+            height: 100%;
+            background: linear-gradient(to right, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0) 100%);
+            transform: skewX(-25deg);
+            opacity: 0; /* Empieza invisible */
+        }
+
+        .reveal.visible .skill-bubble::after {
+            animation: shine-effect 1.5s ease-in-out; /* Animación más lenta */
+            animation-delay: calc(var(--delay) + 0.5s); 
+            opacity: 1;
+        }
+
+        /* Clase para re-activar la animación al hacer click */
+        .skill-bubble.shine-on-click::after {
+            opacity: 1;
+            animation: shine-effect 1.5s ease-in-out;
         }
 
     </style>
@@ -160,16 +219,16 @@
         <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
             <a href="#inicio" class="text-xl font-bold text-white">Camilo Sanguino</a>
             <div class="hidden md:flex items-center space-x-8">
-                <a href="#sobre-mi" class="text-zinc-300 hover:text-white transition-colors duration-300">Sobre Mí</a>
-                <a href="#produccion" class="flex items-center gap-2 text-zinc-300 hover:text-white transition-colors duration-300">
+                <a href="#sobre-mi" class="nav-link text-zinc-300 hover:text-white">Sobre Mí</a>
+                <a href="#produccion" class="nav-link flex items-center gap-2 text-zinc-300 hover:text-white">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path d="M18 3a1 1 0 00-1.196-.98l-10 2A1 1 0 006 5v9.114A4.369 4.369 0 005 14c-1.657 0-3 1.343-3 3s1.343 3 3 3 3-1.343 3-3V7.82l8-1.6v5.894A4.37 4.37 0 0015 12c-1.657 0-3 1.343-3 3s1.343 3 3 3 3-1.343 3-3V3z" /></svg>
                     Producción
                 </a>
-                <a href="#analisis-datos" class="flex items-center gap-2 text-zinc-300 hover:text-white transition-colors duration-300">
+                <a href="#analisis-datos" class="nav-link flex items-center gap-2 text-zinc-300 hover:text-white">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5 3a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2V5a2 2 0 00-2-2H5zm9 4a1 1 0 10-2 0v6a1 1 0 102 0V7zm-3 2a1 1 0 10-2 0v4a1 1 0 102 0V9zm-3 3a1 1 0 10-2 0v1a1 1 0 102 0v-1z" clip-rule="evenodd" /></svg>
                     Análisis de Datos
                 </a>
-                <a href="#contacto" class="text-zinc-300 hover:text-white transition-colors duration-300">Contacto</a>
+                <a href="#contacto" class="nav-link text-zinc-300 hover:text-white">Contacto</a>
             </div>
             <!-- Botón de Menú Móvil -->
             <div class="md:hidden">
@@ -200,7 +259,7 @@
         <!-- ========== 1. INICIO ========== -->
         <section id="inicio" class="hero-section h-screen w-full flex items-center justify-center text-center">
             <div class="relative z-10 p-8">
-                <h1 class="text-5xl sm:text-6xl md:text-8xl font-black text-white leading-tight tracking-tighter gradient-text" style="text-shadow: 0 0 30px rgba(192, 132, 252, 0.3);">
+                <h1 class="text-5xl sm:text-6xl md:text-8xl font-black text-white leading-tight tracking-tighter gradient-text px-2" style="text-shadow: 0 0 30px rgba(192, 132, 252, 0.3);">
                     Música & Datos
                 </h1>
                 <p class="text-lg sm:text-xl md:text-2xl text-zinc-400 mt-6 font-light tracking-wider">
@@ -222,6 +281,38 @@
                         <div class="text-lg text-zinc-300 mt-6 space-y-4">
                             <p>Como Máster en Composición para Medios Audiovisuales, mi carrera se ha centrado en el arte de contar historias a través del sonido. Desde la producción musical hasta el intrincado mundo del diseño sonoro y el foley, mi objetivo es crear experiencias inmersivas que eleven la narrativa visual y conecten emocionalmente con la audiencia.</p>
                             <p>Mi enfoque se distingue por la fusión de la creatividad artística con la precisión analítica. Utilizo mi conocimiento en análisis de datos para entender tendencias y audiencias, lo que me permite diseñar paisajes sonoros que no solo son estéticamente impactantes, sino también estratégicamente efectivos. Esta dualidad entre arte y datos es el núcleo de mi filosofía de trabajo.</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- SECCIÓN DE HABILIDADES MEJORADA -->
+                <div class="mt-20 reveal">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+                        <!-- Habilidades Musicales -->
+                        <div>
+                            <h3 class="text-2xl font-bold text-white mb-4 flex items-center gap-3">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-purple-400" viewBox="0 0 20 20" fill="currentColor"><path d="M18 3a1 1 0 00-1.196-.98l-10 2A1 1 0 006 5v9.114A4.369 4.369 0 005 14c-1.657 0-3 1.343-3 3s1.343 3 3 3 3-1.343 3-3V7.82l8-1.6v5.894A4.37 4.37 0 0015 12c-1.657 0-3 1.343-3 3s1.343 3 3 3 3-1.343 3-3V3z" /></svg>
+                                Producción Musical
+                            </h3>
+                            <div class="flex flex-wrap gap-3">
+                                <span class="skill-bubble bg-zinc-800 text-zinc-300 text-sm font-medium px-4 py-2 rounded-full" style="--delay: 0.1s;">Producción integral</span>
+                                <span class="skill-bubble bg-zinc-800 text-zinc-300 text-sm font-medium px-4 py-2 rounded-full" style="--delay: 0.2s;">Foley y diseño sonoro</span>
+                                <span class="skill-bubble bg-zinc-800 text-zinc-300 text-sm font-medium px-4 py-2 rounded-full" style="--delay: 0.3s;">Composición para medios</span>
+                                <span class="skill-bubble bg-zinc-800 text-zinc-300 text-sm font-medium px-4 py-2 rounded-full" style="--delay: 0.4s;">Postproducción de audio</span>
+                            </div>
+                        </div>
+                        <!-- Habilidades de Datos -->
+                        <div>
+                            <h3 class="text-2xl font-bold text-white mb-4 flex items-center gap-3">
+                               <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-blue-400" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5 3a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2V5a2 2 0 00-2-2H5zm9 4a1 1 0 10-2 0v6a1 1 0 102 0V7zm-3 2a1 1 0 10-2 0v4a1 1 0 102 0V9zm-3 3a1 1 0 10-2 0v1a1 1 0 102 0v-1z" clip-rule="evenodd" /></svg>
+                                Análisis de Datos
+                            </h3>
+                            <div class="flex flex-wrap gap-3">
+                                <span class="skill-bubble bg-zinc-800 text-zinc-300 text-sm font-medium px-4 py-2 rounded-full" style="--delay: 0.5s;">Python, R</span>
+                                <span class="skill-bubble bg-zinc-800 text-zinc-300 text-sm font-medium px-4 py-2 rounded-full" style="--delay: 0.6s;">SQL</span>
+                                <span class="skill-bubble bg-zinc-800 text-zinc-300 text-sm font-medium px-4 py-2 rounded-full" style="--delay: 0.7s;">Visualización (Power BI, Tableau)</span>
+                                <span class="skill-bubble bg-zinc-800 text-zinc-300 text-sm font-medium px-4 py-2 rounded-full" style="--delay: 0.8s;">Excel avanzado</span>
+                                <span class="skill-bubble bg-zinc-800 text-zinc-300 text-sm font-medium px-4 py-2 rounded-full" style="--delay: 0.9s;">Estadística aplicada</span>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -302,7 +393,8 @@
 
         <!-- ========== 4. ANÁLISIS DE DATOS ========== -->
         <section id="analisis-datos" class="py-20 md:py-32 bg-zinc-900 textured-bg">
-            <div class="container mx-auto px-6">
+            <canvas id="data-analysis-canvas"></canvas>
+            <div class="container mx-auto px-6 relative z-10">
                 <div class="text-center mb-16 reveal">
                     <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold gradient-text">Análisis de Datos</h2>
                     <p class="text-lg text-zinc-400 mt-4">Transformando números en decisiones estratégicas.</p>
@@ -457,7 +549,7 @@
 
         function pInit() {
             pResizeCanvas();
-            const randomParticleCount = Math.floor(particleCanvas.width * particleCanvas.height / 20000);
+            const randomParticleCount = Math.floor(particleCanvas.width * particleCanvas.height / 12000);
             pParticles = [];
             for (let i = 0; i < randomParticleCount; i++) {
                 pParticles.push(new PParticle());
@@ -619,7 +711,7 @@
 
             function cInit() {
                 contactParticles = [];
-                const particleCount = 200;
+                const particleCount = 300;
                 for (let i = 0; i < particleCount; i++) {
                     contactParticles.push(new CParticle());
                 }
@@ -637,6 +729,87 @@
             cResizeCanvas();
             cAnimate();
             window.addEventListener('resize', cResizeCanvas);
+        }
+
+        // --- SCRIPT PARA RE-ACTIVAR ANIMACIÓN DE HABILIDADES ---
+        document.querySelectorAll('.skill-bubble').forEach(bubble => {
+            bubble.addEventListener('click', (e) => {
+                // Previene que se active si ya está animándose
+                if(bubble.classList.contains('shine-on-click')) return;
+
+                bubble.classList.add('shine-on-click');
+                
+                // Limpia la clase después de que termine la animación
+                bubble.addEventListener('animationend', () => {
+                    bubble.classList.remove('shine-on-click');
+                }, { once: true });
+            });
+        });
+        
+        // --- ANIMACIÓN "STONKS" (ANÁLISIS DE DATOS) ---
+        const dataCanvas = document.getElementById('data-analysis-canvas');
+        if (dataCanvas) {
+            const dCtx = dataCanvas.getContext('2d');
+            let dataParticles = [];
+
+            function dResizeCanvas() {
+                dataCanvas.width = dataCanvas.offsetWidth;
+                dataCanvas.height = dataCanvas.offsetHeight;
+                dInit();
+            }
+
+            class DParticle {
+                constructor() {
+                    this.x = Math.random() * dataCanvas.width;
+                    this.y = Math.random() * dataCanvas.height;
+                    this.size = Math.random() * 2 + 1;
+                    this.isFast = Math.random() < 0.03; // ~3% de las partículas son rápidas
+                    this.speedY = this.isFast ? -(Math.random() * 1.5 + 1) : -(Math.random() * 0.2 + 0.1); // Lentas vs Rápidas
+                    this.isArrow = this.isFast && Math.random() < 0.5; // Solo las rápidas pueden ser flechas
+                    this.color = `rgba(59, 130, 246, ${Math.random() * 0.3 + 0.05})`; // Más translúcidas
+                }
+                update() {
+                    this.y += this.speedY;
+                    if (this.y < 0) {
+                        this.y = dataCanvas.height;
+                        this.x = Math.random() * dataCanvas.width;
+                    }
+                }
+                draw() {
+                    dCtx.fillStyle = this.color;
+                    dCtx.beginPath();
+                    if (this.isArrow) {
+                        dCtx.moveTo(this.x, this.y);
+                        dCtx.lineTo(this.x - 3, this.y + 7);
+                        dCtx.lineTo(this.x + 3, this.y + 7);
+                    } else {
+                        dCtx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                    }
+                    dCtx.closePath();
+                    dCtx.fill();
+                }
+            }
+
+            function dInit() {
+                dataParticles = [];
+                const particleCount = 100;
+                for (let i = 0; i < particleCount; i++) {
+                    dataParticles.push(new DParticle());
+                }
+            }
+
+            function dAnimate() {
+                dCtx.clearRect(0, 0, dataCanvas.width, dataCanvas.height);
+                dataParticles.forEach(p => {
+                    p.update();
+                    p.draw();
+                });
+                requestAnimationFrame(dAnimate);
+            }
+
+            dResizeCanvas();
+            dAnimate();
+            window.addEventListener('resize', dResizeCanvas);
         }
     });
 </script>
