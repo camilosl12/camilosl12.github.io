@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Camilo Sanguino | Productor Musical & Analista de Datos</title>
+    <title>Camilo Sanguino | Composición para Medios & Análisis de Datos</title>
     
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -11,7 +11,7 @@
     <!-- Google Fonts: Inter -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     
     <style>
         /* Estilos Generales */
@@ -19,24 +19,31 @@
             font-family: 'Inter', sans-serif;
             background-color: #000000;
             color: #F5F5F7;
-            overflow-x: hidden; /* Previene el desbordamiento horizontal */
+            overflow-x: hidden;
+        }
+        main {
+            padding-top: 68px; /* Altura del header */
+        }
+        section {
+            padding-top: 80px;
+            margin-top: -80px;
         }
 
         /* Animación de entrada para secciones */
         .reveal {
             opacity: 0;
             transform: translateY(30px);
-            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+            transition: opacity 1s ease-out, transform 1s ease-out;
         }
         .reveal.visible {
             opacity: 1;
             transform: translateY(0);
         }
 
-        /* Contenedor para videos de YouTube/Vimeo */
+        /* Contenedor para videos */
         .video-container {
             position: relative;
-            padding-bottom: 56.25%; /* Proporción 16:9 */
+            padding-bottom: 56.25%;
             height: 0;
             overflow: hidden;
             max-width: 100%;
@@ -51,82 +58,198 @@
             height: 100%;
         }
         
-        /* Estilos para la animación de la sección principal */
+        /* Estilos para la sección principal */
         .hero-section {
             position: relative;
-            overflow: hidden;
+            background-color: #0a0a0a;
+            margin-top: -68px; /* Compensar el padding de main */
+            padding-top: 68px;
         }
-        .animated-bg {
+        
+        #particle-canvas {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            z-index: 0;
+            z-index: 1;
         }
-        .animated-bg .line {
-            position: absolute;
-            display: block;
-            width: 2px;
-            background: linear-gradient(to bottom, rgba(56, 189, 248, 0), rgba(56, 189, 248, 0.4), rgba(56, 189, 248, 0));
-            animation: drop 7s infinite linear;
+
+        .gradient-text {
+            background: linear-gradient(90deg, #38bdf8, #c084fc);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-fill-color: transparent;
         }
-        @keyframes drop {
-            0% { transform: translateY(-200px); }
-            100% { transform: translateY(100vh); }
+
+        /* Estilos para reproductor de audio */
+        audio::-webkit-media-controls-panel {
+            background-color: #1f2937;
         }
+        audio::-webkit-media-controls-play-button,
+        audio::-webkit-media-controls-pause-button {
+            background-color: #c084fc;
+            border-radius: 50%;
+        }
+        audio::-webkit-media-controls-current-time-display,
+        audio::-webkit-media-controls-time-remaining-display,
+        audio::-webkit-media-controls-timeline {
+            color: #F5F5F7;
+        }
+
     </style>
 </head>
 <body class="antialiased">
 
+    <!-- ========== HEADER DE NAVEGACIÓN ========== -->
+    <header class="fixed top-0 left-0 w-full z-50 transition-all duration-300 bg-black/60 backdrop-blur-lg border-b border-gray-800">
+        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="#inicio" class="text-xl font-bold text-white">Camilo Sanguino</a>
+            <div class="hidden md:flex items-center space-x-8">
+                <a href="#sobre-mi" class="text-gray-300 hover:text-white transition-colors duration-300">Sobre Mí</a>
+                <a href="#produccion" class="flex items-center gap-2 text-gray-300 hover:text-white transition-colors duration-300">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path d="M18 3a1 1 0 00-1.196-.98l-10 2A1 1 0 006 5v9.114A4.369 4.369 0 005 14c-1.657 0-3 1.343-3 3s1.343 3 3 3 3-1.343 3-3V7.82l8-1.6v5.894A4.37 4.37 0 0015 12c-1.657 0-3 1.343-3 3s1.343 3 3 3 3-1.343 3-3V3z" /></svg>
+                    Producción
+                </a>
+                <a href="#analisis-datos" class="flex items-center gap-2 text-gray-300 hover:text-white transition-colors duration-300">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5 3a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2V5a2 2 0 00-2-2H5zm9 4a1 1 0 10-2 0v6a1 1 0 102 0V7zm-3 2a1 1 0 10-2 0v4a1 1 0 102 0V9zm-3 3a1 1 0 10-2 0v1a1 1 0 102 0v-1z" clip-rule="evenodd" /></svg>
+                    Análisis de Datos
+                </a>
+                <a href="#contacto" class="text-gray-300 hover:text-white transition-colors duration-300">Contacto</a>
+            </div>
+            <!-- Botón de Menú Móvil -->
+            <div class="md:hidden">
+                <button id="mobile-menu-button" class="text-white focus:outline-none">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+                </button>
+            </div>
+        </nav>
+        <!-- Menú Móvil -->
+        <div id="mobile-menu" class="hidden md:hidden bg-black/80">
+            <a href="#sobre-mi" class="block py-3 px-6 text-sm text-gray-300 hover:bg-gray-800">Sobre Mí</a>
+            <a href="#produccion" class="block py-3 px-6 text-sm text-gray-300 hover:bg-gray-800">Producción</a>
+            <a href="#analisis-datos" class="block py-3 px-6 text-sm text-gray-300 hover:bg-gray-800">Análisis de Datos</a>
+            <a href="#contacto" class="block py-3 px-6 text-sm text-gray-300 hover:bg-gray-800">Contacto</a>
+        </div>
+    </header>
+
     <main>
-        <!-- ========== 1. SECCIÓN PRINCIPAL ========== -->
-        <section class="hero-section h-screen w-full flex items-center justify-center text-center bg-cover bg-center" style="background-image: url('https://images.pexels.com/photos/2387793/pexels-photo-2387793.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2');">
-            <div class="animated-bg" id="animated-bg"></div>
-            <div class="reveal bg-black bg-opacity-60 p-8 rounded-lg" style="z-index: 1;">
-                <h1 class="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-black text-white leading-tight tracking-tight">Música & Datos.</h1>
-                <p class="text-base sm:text-lg md:text-xl text-gray-300 mt-6 max-w-2xl mx-auto">Sonido con Inteligencia.</p>
+        <!-- ========== 1. INICIO ========== -->
+        <section id="inicio" class="hero-section h-screen w-full flex items-center justify-center text-center">
+            <canvas id="particle-canvas"></canvas>
+            <div class="relative z-10 p-8">
+                <h1 class="text-5xl sm:text-6xl md:text-8xl font-black text-white leading-tight tracking-tighter gradient-text" style="text-shadow: 0 0 30px rgba(192, 132, 252, 0.3);">
+                    Música & Datos
+                </h1>
+                <p class="text-lg sm:text-xl md:text-2xl text-gray-400 mt-6 font-light tracking-wider">
+                    Sonido con Inteligencia.
+                </p>
             </div>
         </section>
 
-        <!-- ========== 2. PORTAFOLIO MUSICAL ========== -->
-        <section class="py-20 md:py-32">
+        <!-- ========== 2. SOBRE MÍ ========== -->
+        <section id="sobre-mi" class="py-20 md:py-32">
+            <div class="container mx-auto px-6">
+                <div class="flex flex-col lg:flex-row items-center gap-12 lg:gap-16">
+                    <div class="lg:w-1/3 flex-shrink-0 reveal">
+                        <img src="https://placehold.co/600x600/1C1C1E/FFFFFF?text=Tu+Foto" alt="Foto de perfil de Camilo Sanguino" class="rounded-full w-64 h-64 lg:w-80 lg:h-80 mx-auto object-cover border-4 border-gray-800">
+                    </div>
+                    <div class="lg:w-2/3 text-center lg:text-left reveal">
+                        <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold text-white">Hola, soy Camilo Sanguino</h2>
+                        <div class="text-lg text-gray-300 mt-6 space-y-4">
+                            <p>Como Máster en Composición para Medios Audiovisuales, mi carrera se ha centrado en el arte de contar historias a través del sonido. Desde la producción musical hasta el intrincado mundo del diseño sonoro y el foley, mi objetivo es crear experiencias inmersivas que eleven la narrativa visual y conecten emocionalmente con la audiencia.</p>
+                            <p>Mi enfoque se distingue por la fusión de la creatividad artística con la precisión analítica. Utilizo mi conocimiento en análisis de datos para entender tendencias y audiencias, lo que me permite diseñar paisajes sonoros que no solo son estéticamente impactantes, sino también estratégicamente efectivos. Esta dualidad entre arte y datos es el núcleo de mi filosofía de trabajo.</p>
+                        </div>
+                        <div class="mt-8">
+                            <h3 class="text-xl font-semibold text-white mb-4">Habilidades Principales</h3>
+                            <div class="flex flex-wrap justify-center lg:justify-start gap-3">
+                                <span class="bg-gray-800 text-gray-300 text-sm font-medium px-4 py-2 rounded-full">Composición para Medios</span>
+                                <span class="bg-gray-800 text-gray-300 text-sm font-medium px-4 py-2 rounded-full">Diseño Sonoro & Foley</span>
+                                <span class="bg-gray-800 text-gray-300 text-sm font-medium px-4 py-2 rounded-full">Producción Musical</span>
+                                <span class="bg-gray-800 text-gray-300 text-sm font-medium px-4 py-2 rounded-full">Análisis de Datos</span>
+                                <span class="bg-gray-800 text-gray-300 text-sm font-medium px-4 py-2 rounded-full">Python & SQL</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========== 3. PRODUCCIÓN Y DISEÑO SONORO ========== -->
+        <section id="produccion" class="py-20 md:py-32 bg-gray-900">
             <div class="container mx-auto px-6">
                 <div class="text-center mb-16 reveal">
-                    <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold text-white">Portafolio Musical</h2>
-                    <p class="text-lg text-gray-400 mt-4">Una selección de mis producciones y trabajos sonoros.</p>
+                    <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold text-white">Producción y Diseño Sonoro</h2>
+                    <p class="text-lg text-gray-400 mt-4">Creando la identidad sonora para proyectos audiovisuales.</p>
                 </div>
+                <!-- Galería de Proyectos de Diseño Sonoro -->
                 <div class="mb-20 reveal">
-                    <div class="bg-gray-900 rounded-2xl overflow-hidden">
-                        <div class="video-container rounded-t-2xl">
-                            <iframe src="https://www.youtube.com/embed/wMMhwn53HZw" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                        </div>
+                    <div class="bg-black rounded-2xl overflow-hidden">
+                        <div class="video-container rounded-t-2xl"><iframe src="https://www.youtube.com/embed/wMMhwn53HZw" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
                         <div class="p-8 md:p-12">
-                            <h3 class="text-xl sm:text-2xl md:text-3xl font-bold text-white">Nombre de la Producción 1</h3>
-                            <p class="text-gray-400 mt-3">Producción / Mezcla / Masterización</p>
+                            <h3 class="text-xl sm:text-2xl md:text-3xl font-bold text-white">🌌 Foley Cinemático: Reviviendo Wall·E</h3>
+                            <p class="text-gray-400 mt-3">Recreación detallada de efectos de sonido (foley) para una escena icónica de Wall·E. Un ejercicio académico que destaca mi precisión auditiva y sensibilidad narrativa.</p>
                         </div>
                     </div>
                 </div>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
                     <div class="reveal">
-                        <div class="bg-gray-900 rounded-2xl overflow-hidden p-4">
-                            <div class="video-container">
-                                <iframe src="https://www.youtube.com/embed/rM4_2ZNB32I" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                            </div>
+                        <div class="bg-black rounded-2xl overflow-hidden p-4">
+                            <div class="video-container"><iframe src="https://www.youtube.com/embed/rM4_2ZNB32I" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
                             <div class="p-6">
-                                <h3 class="text-xl sm:text-2xl font-bold text-white">Nombre de la Producción 2</h3>
-                                <p class="text-gray-400 mt-2">Tipo de Trabajo</p>
+                                <h3 class="text-xl sm:text-2xl font-bold text-white">🤖 Diseño Sonoro Sintético: El Viaje del Robot</h3>
+                                <p class="text-gray-400 mt-2">Exploración de diseño sonoro con sintetizadores, creando paisajes acústicos para un video de un robot en el espacio. Una muestra de creatividad y dominio de herramientas electrónicas.</p>
                             </div>
                         </div>
                     </div>
                     <div class="reveal">
-                        <div class="bg-gray-900 rounded-2xl overflow-hidden p-4">
-                            <div class="video-container">
-                                <iframe src="https://www.youtube.com/embed/REx6xl-CtAg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                            </div>
+                        <div class="bg-black rounded-2xl overflow-hidden p-4">
+                            <div class="video-container"><iframe src="https://www.youtube.com/embed/REx6xl-CtAg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
                             <div class="p-6">
-                                <h3 class="text-xl sm:text-2xl font-bold text-white">Nombre de la Producción 3</h3>
-                                <p class="text-gray-400 mt-2">Tipo de Trabajo</p>
+                                <h3 class="text-xl sm:text-2xl font-bold text-white">🎵 El Guasón: Composición Original para Trailer</h3>
+                                <p class="text-gray-400 mt-2">Composición musical original que acompaña el trailer de El Guasón, realizada como ejercicio académico. Un enfoque emocional e inmersivo que potencia la narrativa visual.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- ========== PRODUCCIONES DESTACADAS ========== -->
+        <section id="producciones-destacadas" class="py-20 md:py-32">
+             <div class="container mx-auto px-6">
+                <div class="text-center mb-16 reveal">
+                    <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold text-white">Producciones Destacadas</h2>
+                </div>
+                <div class="bg-gray-900 rounded-2xl p-8 md:p-12 flex flex-col lg:flex-row items-center gap-8 lg:gap-12 reveal">
+                    <!-- Portada del Álbum -->
+                    <div class="lg:w-1/3 flex-shrink-0">
+                        <!-- IMPORTANTE: Reemplaza 'portada-album.jpg' con el nombre de tu archivo de imagen subido a GitHub -->
+                        <img src="portada-album.jpg" alt="Portada del álbum Homenaje al vallenato romántico" class="rounded-lg shadow-2xl w-full h-auto">
+                    </div>
+                    <!-- Información y Canciones -->
+                    <div class="lg:w-2/3">
+                        <h3 class="text-2xl md:text-3xl font-bold text-white">Homenaje al Vallenato Romántico</h3>
+                        <p class="text-gray-400 mt-2">Un álbum que tuve el placer de producir, buscando capturar la esencia y la pasión del vallenato clásico con un sonido moderno.</p>
+                        <div class="mt-6 space-y-4">
+                            <!-- Canción 1 -->
+                            <div>
+                                <p class="text-white font-semibold">Mi Primer Amor</p>
+                                <!-- IMPORTANTE: Reemplaza 'mi-primer-amor.mp3' con el nombre de tu archivo de audio subido a GitHub -->
+                                <audio controls class="w-full mt-2">
+                                    <source src="mi-primer-amor.mp3" type="audio/mpeg">
+                                    Tu navegador no soporta el elemento de audio.
+                                </audio>
+                            </div>
+                            <!-- Canción 2 -->
+                            <div>
+                                <p class="text-white font-semibold">Paro de mi Corazón</p>
+                                <!-- IMPORTANTE: Reemplaza 'paro-de-mi-corazon.mp3' con el nombre de tu archivo de audio subido a GitHub -->
+                                <audio controls class="w-full mt-2">
+                                    <source src="paro-de-mi-corazon.mp3" type="audio/mpeg">
+                                    Tu navegador no soporta el elemento de audio.
+                                </audio>
                             </div>
                         </div>
                     </div>
@@ -134,57 +257,52 @@
             </div>
         </section>
 
-        <!-- ========== 3. PORTAFOLIO DE DATOS ========== -->
-        <section class="py-20 md:py-32 bg-gray-900">
+        <!-- ========== 4. ANÁLISIS DE DATOS ========== -->
+        <section id="analisis-datos" class="py-20 md:py-32 bg-gray-900">
             <div class="container mx-auto px-6">
                 <div class="text-center mb-16 reveal">
-                    <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold text-white">Portafolio de Datos</h2>
-                    <p class="text-lg text-gray-400 mt-4">Proyectos donde aplico la analítica para extraer insights.</p>
+                    <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold text-white">Análisis de Datos</h2>
+                    <p class="text-lg text-gray-400 mt-4">Transformando números en decisiones estratégicas.</p>
                 </div>
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                     <div class="bg-black rounded-2xl p-8 reveal">
                         <h3 class="text-2xl font-bold text-white">Análisis de Tendencias en Spotify</h3>
-                        <p class="text-gray-400 mt-4">Un análisis para identificar patrones en géneros musicales populares a lo largo del tiempo.</p>
-                        <a href="#" class="inline-block text-blue-400 font-semibold mt-6 hover:text-blue-300">Ver proyecto &rarr;</a>
+                        <p class="text-gray-400 mt-4">Un análisis para identificar patrones en géneros musicales populares a lo largo del tiempo, usando Python y Pandas.</p>
+                        <a href="#" class="inline-block text-blue-400 font-semibold mt-6 hover:text-blue-300">Ver proyecto en GitHub &rarr;</a>
                     </div>
                     <div class="bg-black rounded-2xl p-8 reveal">
                         <h3 class="text-2xl font-bold text-white">Dashboard de Ventas de Tickets</h3>
-                        <p class="text-gray-400 mt-4">Visualización interactiva para monitorear la venta de entradas para eventos musicales.</p>
-                        <a href="#" class="inline-block text-blue-400 font-semibold mt-6 hover:text-blue-300">Ver dashboard &rarr;</a>
+                        <p class="text-gray-400 mt-4">Visualización interactiva en Tableau para monitorear la venta de entradas para eventos musicales en tiempo real.</p>
+                        <a href="#" class="inline-block text-blue-400 font-semibold mt-6 hover:text-blue-300">Explorar dashboard &rarr;</a>
                     </div>
                     <div class="bg-black rounded-2xl p-8 reveal">
                         <h3 class="text-2xl font-bold text-white">Modelo Predictivo de Éxito Musical</h3>
-                        <p class="text-gray-400 mt-4">Machine learning para predecir el potencial de una canción basado en sus características sonoras.</p>
-                        <a href="#" class="inline-block text-blue-400 font-semibold mt-6 hover:text-blue-300">Ver en GitHub &rarr;</a>
+                        <p class="text-gray-400 mt-4">Machine learning con Scikit-learn para predecir el potencial de una canción basado en sus características sonoras.</p>
+                        <a href="#" class="inline-block text-blue-400 font-semibold mt-6 hover:text-blue-300">Ver código &rarr;</a>
                     </div>
                 </div>
-            </div>
-        </section>
-
-        <!-- ========== 4. SOBRE MÍ ========== -->
-        <section class="py-20 md:py-32">
-            <div class="container mx-auto px-6">
-                <div class="flex flex-col md:flex-row items-center gap-12 reveal">
-                    <div class="md:w-1/3 flex-shrink-0">
-                        <img src="https://placehold.co/600x600/1C1C1E/FFFFFF?text=Tu+Foto" alt="Foto de perfil de Camilo Sanguino" class="rounded-full w-48 h-48 md:w-64 md:h-64 mx-auto object-cover">
-                    </div>
-                    <div class="md:w-2/3 text-center md:text-left">
-                        <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold text-white">Hola, soy Camilo Sanguino</h2>
-                        <p class="text-lg text-gray-300 mt-6 max-w-2xl">Mi carrera se mueve en la intersección del arte y la ciencia. Como productor musical, busco el sonido perfecto; como analista de datos, busco la verdad oculta en los números...</p>
+                 <div class="mt-16 text-center reveal">
+                    <h3 class="text-xl font-semibold text-white mb-4">Habilidades Técnicas</h3>
+                    <div class="flex flex-wrap justify-center gap-3">
+                        <span class="bg-gray-800 text-gray-300 text-sm font-medium px-4 py-2 rounded-full">Python (Pandas, NumPy)</span>
+                        <span class="bg-gray-800 text-gray-300 text-sm font-medium px-4 py-2 rounded-full">SQL</span>
+                        <span class="bg-gray-800 text-gray-300 text-sm font-medium px-4 py-2 rounded-full">Tableau / Power BI</span>
+                        <span class="bg-gray-800 text-gray-300 text-sm font-medium px-4 py-2 rounded-full">Machine Learning</span>
+                        <span class="bg-gray-800 text-gray-300 text-sm font-medium px-4 py-2 rounded-full">Estadística</span>
                     </div>
                 </div>
             </div>
         </section>
 
         <!-- ========== 5. CONTACTO Y PIE DE PÁGINA ========== -->
-        <section class="py-20 md:py-32 bg-gray-900">
+        <section id="contacto" class="py-20 md:py-32">
             <div class="container mx-auto px-6 text-center reveal">
                 <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold text-white">¿Tienes un proyecto en mente?</h2>
                 <p class="text-xl text-gray-400 mt-4">Ya sea una producción musical o un desafío de datos, hablemos.</p>
                 <a href="mailto:tuemail@ejemplo.com" class="inline-block bg-blue-600 text-white font-bold text-lg rounded-full px-8 py-4 mt-10 hover:bg-blue-500 transition-colors duration-300">Enviar un Correo</a>
             </div>
         </section>
-        <footer class="border-t border-gray-800 py-8">
+        <footer class="border-t border-gray-800 py-8 bg-gray-900">
             <div class="container mx-auto px-6 text-center text-gray-500">
                 <p>&copy; 2025 Camilo Sanguino. Todos los derechos reservados.</p>
                 <div class="flex justify-center space-x-6 mt-4">
@@ -198,7 +316,21 @@
 
 <script>
     document.addEventListener('DOMContentLoaded', () => {
-        // --- Script para animaciones de entrada al hacer scroll ---
+        // --- NAVEGACIÓN MÓVIL ---
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+        document.querySelectorAll('#mobile-menu a, nav a').forEach(link => {
+            link.addEventListener('click', () => {
+                if (!mobileMenu.classList.contains('hidden')) {
+                    mobileMenu.classList.add('hidden');
+                }
+            });
+        });
+
+        // --- ANIMACIÓN DE SCROLL ---
         const revealElements = document.querySelectorAll('.reveal');
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
@@ -211,20 +343,113 @@
             observer.observe(element);
         });
 
-        // --- Script para la animación de fondo del Hero ---
-        const animatedBg = document.getElementById('animated-bg');
-        if (animatedBg) {
-            const numberOfLines = 20;
-            for (let i = 0; i < numberOfLines; i++) {
-                const line = document.createElement('div');
-                line.className = 'line';
-                line.style.left = `${Math.random() * 100}%`;
-                line.style.animationDuration = `${Math.random() * 5 + 3}s`;
-                line.style.animationDelay = `${Math.random() * 5}s`;
-                line.style.height = `${Math.random() * 150 + 50}px`;
-                animatedBg.appendChild(line);
+        // --- ANIMACIÓN DE PARTÍCULAS ---
+        const canvas = document.getElementById('particle-canvas');
+        const ctx = canvas.getContext('2d');
+        let particles = [];
+        let shapeParticles = [];
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            createShapeParticles();
+        }
+        
+        const shapes = {
+            note: [
+                ...Array.from({length: 30}, (_, i) => ({ x: 0.25 + Math.cos(i/15*Math.PI)*0.03, y: 0.6 + Math.sin(i/15*Math.PI)*0.05 })),
+                ...Array.from({length: 20}, (_, i) => ({ x: 0.28, y: 0.6 - i*0.018 })),
+                ...Array.from({length: 15}, (_, i) => ({ x: 0.28 + Math.sin(i/15*Math.PI*0.8)*0.06, y: 0.27 + (i/15)*0.1})),
+            ],
+            barChart: [
+                ...Array.from({length: 10}, (_, i) => ({ x: 0.68, y: 0.6 - (i/9)*0.15 })),
+                ...Array.from({length: 15}, (_, i) => ({ x: 0.72, y: 0.6 - (i/14)*0.25 })),
+                ...Array.from({length: 20}, (_, i) => ({ x: 0.76, y: 0.6 - (i/19)*0.4 })),
+                ...Array.from({length: 18}, (_, i) => ({ x: 0.80, y: 0.6 - (i/17)*0.3 })),
+                ...Array.from({length: 12}, (_, i) => ({ x: 0.84, y: 0.6 - (i/11)*0.2 })),
+            ]
+        };
+
+        class Particle {
+            constructor(target = null) {
+                this.isShapeParticle = !!target;
+                this.target = target;
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.speedX = (Math.random() - 0.5) * 0.4;
+                this.speedY = (Math.random() - 0.5) * 0.4;
+                this.size = Math.random() * 1.5 + 1;
+                this.color = 'rgba(192, 132, 252, 0.5)';
+            }
+            update() {
+                if (this.isShapeParticle) {
+                    const dx = this.target.x * canvas.width - this.x;
+                    const dy = this.target.y * canvas.height - this.y;
+                    this.x += dx * 0.03;
+                    this.y += dy * 0.03;
+                } else {
+                    this.x += this.speedX;
+                    this.y += this.speedY;
+                    if (this.x > canvas.width || this.x < 0) this.speedX *= -1;
+                    if (this.y > canvas.height || this.y < 0) this.speedY *= -1;
+                }
+            }
+            draw() {
+                ctx.fillStyle = this.color;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
             }
         }
+
+        function createShapeParticles() {
+            shapeParticles = [];
+            Object.values(shapes).forEach(shapePoints => {
+                shapePoints.forEach(point => {
+                    shapeParticles.push(new Particle(point));
+                });
+            });
+        }
+
+        function init() {
+            resizeCanvas();
+            const randomParticleCount = Math.floor(canvas.width * canvas.height / 20000);
+            particles = [];
+            for (let i = 0; i < randomParticleCount; i++) {
+                particles.push(new Particle());
+            }
+        }
+        
+        function connectParticles() {
+            const allParticles = [...particles, ...shapeParticles];
+            for (let a = 0; a < allParticles.length; a++) {
+                for (let b = a; b < allParticles.length; b++) {
+                    const dx = allParticles[a].x - allParticles[b].x;
+                    const dy = allParticles[a].y - allParticles[b].y;
+                    const distance = Math.sqrt(dx * dx + dy * dy);
+                    if (distance < 120) {
+                        ctx.strokeStyle = `rgba(147, 197, 253, ${0.6 * (1 - distance / 120)})`;
+                        ctx.lineWidth = 0.5;
+                        ctx.beginPath();
+                        ctx.moveTo(allParticles[a].x, allParticles[a].y);
+                        ctx.lineTo(allParticles[b].x, allParticles[b].y);
+                        ctx.stroke();
+                    }
+                }
+            }
+        }
+
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            particles.forEach(p => { p.update(); p.draw(); });
+            shapeParticles.forEach(p => { p.update(); p.draw(); });
+            connectParticles();
+            requestAnimationFrame(animate);
+        }
+
+        init();
+        animate();
+        window.addEventListener('resize', init);
     });
 </script>
 
