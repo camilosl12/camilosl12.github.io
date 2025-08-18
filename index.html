@@ -6,10 +6,10 @@
     <!-- SEO Meta Tags -->
     <title>Camilo Sanguino | Productor Musical & Analista de Datos</title>
     <meta name="description" content="Portafolio profesional de Camilo Sanguino, especialista en la fusión de producción musical, composición para medios y análisis de datos. Descubre proyectos que combinan sonido con inteligencia.">
-    <meta name="keywords" content="Camilo Sanguino, productor musical, analista de datos, composición, foley, diseño sonoro, python, R, SQL, Tableau, Power BI">
+    <meta name="keywords" content="Camilo Sanguino, productor musical, analista de datos, ingeniería de sonido, composición, foley, diseño sonoro, python, R, SQL, Tableau, Power BI">
     <meta name="author" content="Camilo Sanguino">
 
-    <!-- CORRECCIÓN: Favicon con viewBox cuadrado para mejor visualización -->
+    <!-- Favicon con viewBox cuadrado para mejor visualización -->
     <link rel="icon" href="data:image/svg+xml,%3csvg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3e%3cdefs%3e%3clinearGradient id='gradCS' x1='0%25' y1='0%25' x2='100%25' y2='0%25'%3e%3cstop offset='0%25' style='stop-color:%2338bdf8;stop-opacity:1'/%3e%3cstop offset='100%25' style='stop-color:%23c084fc;stop-opacity:1'/%3e%3c/linearGradient%3e%3c/defs%3e%3ctext x='50%25' y='55%25' dominant-baseline='middle' text-anchor='middle' font-family='Caveat, cursive' font-size='90' fill='url(%23gradCS)'%3eCS%3c/text%3e%3c/svg%3e">
 
     <!-- Tailwind CSS -->
@@ -167,7 +167,10 @@
             display: inline-flex;
             align-items: center;
             gap: 0.5rem;
-            transition: color 0.3s ease;
+            transition: color 0.3s ease, transform 0.1s ease-out;
+        }
+        .nav-link:active {
+            transform: scale(0.95);
         }
         .nav-link::after {
             content: '';
@@ -236,6 +239,15 @@
             display: block;
             animation: fade-in-up 0.6s ease-out;
         }
+        #mas-proyectos {
+            transition: opacity 0.5s ease-out, max-height 0.5s ease-out;
+            max-height: 0;
+            opacity: 0;
+        }
+        #mas-proyectos.visible {
+            max-height: 1000px; /* Suficientemente grande para el contenido */
+            opacity: 1;
+        }
     </style>
 </head>
 <body class="antialiased">
@@ -287,7 +299,7 @@
                     Música & Datos
                 </h1>
                 <p class="text-lg sm:text-xl md:text-2xl text-zinc-300 mt-6 font-light tracking-wider max-w-3xl mx-auto">
-                    Creando experiencias sonoras inmersivas a través de la producción creativa y el análisis estratégico.
+                    Transformando ideas en sonido e información en conocimiento, producción musical y análisis avanzado en un espacio creativo...
                 </p>
                 <p class="font-signature text-5xl sm:text-6xl text-zinc-200 mt-16 tracking-wider">
                     Camilo Sanguino
@@ -307,9 +319,13 @@
                     </div>
                     <div class="lg:w-2/3 text-center lg:text-left reveal">
                         <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold gradient-text">La Fusión del Arte y la Lógica</h2>
-                        <div class="text-lg text-zinc-300 mt-6 space-y-4">
-                            <p>Soy un profesional híbrido con una pasión dual: dar vida a historias a través del sonido y descifrar los patrones que se esconden en los datos. Como Máster en Composición para Medios, he diseñado paisajes sonoros que potencian la emoción y la narrativa. Como analista, utilizo Python, R y SQL para transformar datos crudos en insights accionables.</p>
-                            <p>Mi propuesta de valor es única: aplico el rigor analítico para entender audiencias y optimizar el impacto de una producción creativa. A la vez, utilizo mi sensibilidad artística para comunicar hallazgos de datos de una manera clara y humana. Busco roles donde pueda construir puentes entre la creatividad y la estrategia, generando resultados medibles y experiencias memorables.</p>
+                        <p class="text-xl font-semibold text-zinc-300 mt-4">Productor Musical & Analista de Datos</p>
+                        <!-- CAMBIO: Se añade "Estudiante de Ingeniería de Sonido" -->
+                        <p class="text-lg font-medium text-zinc-400 mt-1">Estudiante de Ingeniería de Sonido</p>
+                        <div class="text-lg text-zinc-400 mt-6 space-y-4">
+                           <!-- CAMBIO: Descripción actualizada -->
+                           <p>Soy un profesional híbrido con dos pasiones: dar vida a historias a través del sonido y descifrar los patrones que se esconden en los datos. Como Máster en Composición para Medios, he creado paisajes sonoros que potencian la emoción y la narrativa. Como analista, domino Python, R y SQL para transformar datos complejos en insights accionables.</p>
+                           <p>Mi propuesta de valor combina el rigor analítico con la sensibilidad artística, creando soluciones que integran creatividad, estrategia y tecnología. Busco proyectos donde pueda conectar la música con la inteligencia de datos para generar experiencias memorables y resultados medibles.</p>
                         </div>
                     </div>
                 </div>
@@ -408,7 +424,6 @@
                         <div class="bg-black/50 backdrop-blur-sm border border-zinc-800 rounded-2xl p-8 reveal interactive-card flex flex-col"><h3 class="text-2xl font-bold text-white">Modelo Predictivo de Éxito Musical</h3><p class="text-zinc-400 mt-4 flex-grow">Entrené un modelo de machine learning (Regresión Logística con Scikit-learn) para predecir la probabilidad de que una canción entre en el Top 40 de Billboard, basándose en más de 15 variables acústicas y contextuales.</p><a href="https://github.com/camilosl12" target="_blank" rel="noopener noreferrer" class="inline-block text-blue-400 font-semibold mt-6 hover:text-blue-300 self-start">Analizar el Código &rarr;</a></div>
                     </div>
                 </div>
-                <!-- CAMBIO: Botón movido al final de la sección de proyectos -->
                 <div id="show-more-container" class="text-center mt-16">
                     <button id="show-more-btn" class="inline-block bg-transparent border-2 border-purple-400 text-purple-300 font-bold text-lg rounded-full px-8 py-4 hover:bg-purple-400/10 hover:text-white transition-all duration-300 transform hover:scale-105 active:scale-95">
                         Ver Más Proyectos
@@ -417,7 +432,6 @@
             </div>
         </section>
 
-        <!-- CAMBIO: Sección de más proyectos ahora oculta por defecto -->
         <section id="mas-proyectos" class="hidden py-20 md:py-32 bg-dark-bg">
             <div class="container mx-auto px-6 text-center">
                 <div class="reveal">
@@ -440,6 +454,11 @@
                         <p class="text-zinc-400 mt-4">Descripción de este proyecto, destacando las tecnologías y habilidades utilizadas.</p>
                         <a href="#" class="inline-block text-blue-400 font-semibold mt-6 hover:text-blue-300">Ver más &rarr;</a>
                     </div>
+                </div>
+                <div class="text-center mt-16">
+                    <button id="hide-projects-btn" class="inline-block bg-transparent border-2 border-zinc-500 text-zinc-400 font-bold text-lg rounded-full px-8 py-4 hover:bg-zinc-500/10 hover:text-white transition-all duration-300">
+                        Ocultar Proyectos
+                    </button>
                 </div>
             </div>
         </section>
@@ -569,14 +588,18 @@ document.addEventListener('DOMContentLoaded', () => {
                 this.speedX = (Math.random() - 0.5) * 0.4;
                 this.speedY = (Math.random() - 0.5) * 0.4;
                 this.size = Math.random() * 1.5 + 1;
-                this.color = Math.random() > 0.2 ? 'rgba(192, 132, 252, 0.5)' : 'rgba(56, 189, 248, 0.5)';
+                if (this.isShapeParticle) {
+                    this.color = Math.random() > 0.2 ? 'rgba(192, 132, 252, 0.35)' : 'rgba(56, 189, 248, 0.35)';
+                } else {
+                    this.color = Math.random() > 0.2 ? 'rgba(192, 132, 252, 0.5)' : 'rgba(56, 189, 248, 0.5)';
+                }
             }
             update() {
                 if (this.isShapeParticle) {
                     const dx = this.target.x * particleCanvas.width - this.x;
                     const dy = this.target.y * particleCanvas.height - this.y;
-                    this.x += dx * 0.02;
-                    this.y += dy * 0.02;
+                    this.x += dx * 0.015; 
+                    this.y += dy * 0.015;
                 } else {
                     this.x += this.speedX;
                     this.y += this.speedY;
@@ -777,28 +800,33 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // --- LÓGICA PARA MOSTRAR MÁS PROYECTOS ---
+    // --- LÓGICA PARA MOSTRAR/OCULTAR MÁS PROYECTOS ---
     const showMoreBtn = document.getElementById('show-more-btn');
+    const hideProjectsBtn = document.getElementById('hide-projects-btn');
     const moreProjectsSection = document.getElementById('mas-proyectos');
     const showMoreContainer = document.getElementById('show-more-container');
 
-    if (showMoreBtn && moreProjectsSection) {
+    if (showMoreBtn && moreProjectsSection && hideProjectsBtn) {
         showMoreBtn.addEventListener('click', (event) => {
             event.preventDefault();
-            
             moreProjectsSection.classList.remove('hidden');
+            setTimeout(() => {
+                moreProjectsSection.classList.add('visible');
+            }, 10); 
+            showMoreContainer.classList.add('hidden');
+        });
+
+        hideProjectsBtn.addEventListener('click', (event) => {
+            event.preventDefault();
+            moreProjectsSection.classList.remove('visible');
             
-            // Forzar una animación de entrada
-            const revealContent = moreProjectsSection.querySelector('.reveal');
-            if(revealContent) {
-                revealContent.classList.add('visible');
-            }
+            moreProjectsSection.addEventListener('transitionend', () => {
+                moreProjectsSection.classList.add('hidden');
+            }, { once: true });
 
-            moreProjectsSection.scrollIntoView({ behavior: 'smooth' });
-
-            if(showMoreContainer) {
-                showMoreContainer.style.display = 'none';
-            }
+            showMoreContainer.classList.remove('hidden');
+            // CAMBIO: Se elimina el scroll hacia arriba
+            // projectsSection.scrollIntoView({ behavior: 'smooth' });
         });
     }
 
