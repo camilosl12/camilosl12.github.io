@@ -326,7 +326,6 @@
                         <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold gradient-text">La Fusión del Arte y la Lógica</h2>
                         <p class="text-xl font-semibold text-zinc-300 mt-4">Productor Musical & Analista de Datos</p>
                         <p class="text-lg font-medium text-zinc-400 mt-1">Estudiante de Ingeniería de Sonido</p>
-                        <!-- CAMBIO: Texto de "Sobre Mí" actualizado -->
                         <div class="text-lg text-zinc-400 mt-6 space-y-4">
                            <p>Soy productor musical y compositor con máster en música para medios audiovisuales, apasionado por crear paisajes sonoros que transmitan emociones y den identidad a cada proyecto. Mi enfoque se basa en la combinación de creatividad artística y pensamiento estratégico, ofreciendo soluciones musicales que conectan con las personas y elevan la experiencia audiovisual.</p>
                            <p>Además, soy especialista en Big Data y Analítica de Datos, lo que me permite integrar la música con la tecnología para entender tendencias, optimizar recursos y aportar valor añadido a cada propuesta.</p>
@@ -547,17 +546,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
         function pSetShapes(isMobile) {
             if (isMobile) {
-                // CAMBIO: Coordenadas de la animación principal optimizadas para móviles
+                // CAMBIO: Coordenadas de la animación principal re-optimizadas para móviles para un look más centrado y balanceado.
                 pShapes = {
                     note: [
-                        ...Array.from({length: 20}, (_, i) => ({ x: 0.25 + Math.cos(i/10*Math.PI)*0.08, y: 0.35 + Math.sin(i/10*Math.PI)*0.1 })),
-                        ...Array.from({length: 12}, (_, i) => ({ x: 0.33, y: 0.35 - i*0.018 })),
-                        ...Array.from({length: 10}, (_, i) => ({ x: 0.33 + Math.sin(i/10*Math.PI*0.8)*0.1, y: 0.12 + (i/10)*0.08})),
+                        ...Array.from({length: 15}, (_, i) => ({ x: 0.28 + Math.cos(i/7.5*Math.PI)*0.07, y: 0.5 + Math.sin(i/7.5*Math.PI)*0.1 })),
+                        ...Array.from({length: 10}, (_, i) => ({ x: 0.35, y: 0.5 - i*0.022 })),
+                        ...Array.from({length: 8}, (_, i) => ({ x: 0.35 + Math.sin(i/8*Math.PI*0.8)*0.08, y: 0.28 + (i/8)*0.07})),
                     ],
                     barChart: [
-                        ...Array.from({length: 8}, (_, i) => ({ x: 0.65, y: 0.75 - (i/7)*0.12 })),
-                        ...Array.from({length: 12}, (_, i) => ({ x: 0.72, y: 0.75 - (i/11)*0.22 })),
-                        ...Array.from({length: 10}, (_, i) => ({ x: 0.79, y: 0.75 - (i/9)*0.17 })),
+                        ...Array.from({length: 7}, (_, i) => ({ x: 0.65, y: 0.6 - (i/6)*0.15 })),
+                        ...Array.from({length: 9}, (_, i) => ({ x: 0.72, y: 0.6 - (i/8)*0.25 })),
+                        ...Array.from({length: 8}, (_, i) => ({ x: 0.78, y: 0.6 - (i/7)*0.20 })),
                     ]
                 };
             } else {
@@ -602,10 +601,13 @@ document.addEventListener('DOMContentLoaded', () => {
             }
             update() {
                 if (this.isShapeParticle) {
+                    // CAMBIO: Se ajusta la velocidad de la animación para que sea más fluida en móviles.
+                    const isMobile = particleCanvas.width < 768;
+                    const attractionForce = isMobile ? 0.025 : 0.015;
                     const dx = this.target.x * particleCanvas.width - this.x;
                     const dy = this.target.y * particleCanvas.height - this.y;
-                    this.x += dx * 0.015; 
-                    this.y += dy * 0.015;
+                    this.x += dx * attractionForce; 
+                    this.y += dy * attractionForce;
                 } else {
                     this.x += this.speedX;
                     this.y += this.speedY;
@@ -632,7 +634,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
         function pInit() {
             pResizeCanvas();
-            // CAMBIO: Se reduce la cantidad de partículas en móviles para mejorar el rendimiento y la estética
             const isMobile = particleCanvas.width < 768;
             const particleDensity = isMobile ? 20000 : 12000;
             const randomParticleCount = Math.floor(particleCanvas.width * particleCanvas.height / particleDensity);
