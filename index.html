@@ -10,15 +10,15 @@
     <meta name="author" content="Camilo Sanguino">
 
     <!-- Favicon con viewBox cuadrado para mejor visualización -->
-    <link rel="icon" href="data:image/svg+xml,%3csvg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3e%3cdefs%3e%3clinearGradient id='gradCS' x1='0%25' y1='0%25' x2='100%25' y2='0%25'%3e%3cstop offset='0%25' style='stop-color:%2338bdf8;stop-opacity:1'/%3e%3cstop offset='100%25' style='stop-color:%23c084fc;stop-opacity:1'/%3e%3c/linearGradient%3e%3c/defs%3e%3ctext x='50%25' y='55%25' dominant-baseline='middle' text-anchor='middle' font-family='Caveat, cursive' font-size='90' fill='url(%23gradCS)'%3eCS%3c/text%3e%3c/svg%3e">
+    <link rel="icon" href="data:image/svg+xml,%3csvg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3e%3cdefs%3e%3clinearGradient id='gradCS' x1='0%25' y1='0%25' x2='100%25' y2='0%25'%3e%3cstop offset='0%25' style='stop-color:%2338bdf8;stop-opacity:1'/%3e%3cstop offset='100%25' style='stop-color:%23c084fc;stop-opacity:1'/%3e%3c/linearGradient%3e%3c/defs%3e%3ctext x='50%25' y='55%25' dominant-baseline='middle' text-anchor='middle' font-family='Orbitron, sans-serif' font-weight='700' font-size='90' fill='url(%23gradCS)'%3eCS%3c/text%3e%3c/svg%3e">
 
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     
-    <!-- Google Fonts: Inter & Caveat (para la firma) -->
+    <!-- Google Fonts: Inter, Caveat & Orbitron -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Inter:wght@300;400;500;600;700;800;900&family=Orbitron:wght@700&display=swap" rel="stylesheet">
 
     <!-- Font Awesome para iconos -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
@@ -43,6 +43,9 @@
         }
         .font-signature {
             font-family: 'Caveat', cursive;
+        }
+        .font-logo {
+            font-family: 'Orbitron', sans-serif;
         }
         section {
             padding-top: 5rem;
@@ -243,9 +246,10 @@
             transition: opacity 0.5s ease-out, max-height 0.5s ease-out;
             max-height: 0;
             opacity: 0;
+            display: none; /* Inicia oculto */
         }
         #mas-proyectos.visible {
-            max-height: 1000px; /* Suficientemente grande para el contenido */
+            max-height: 1500px; /* Suficientemente grande para el contenido */
             opacity: 1;
         }
     </style>
@@ -264,7 +268,8 @@
                     </linearGradient>
                   </defs>
                   <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle"
-                        font-family="Caveat, cursive"
+                        class="font-logo"
+                        font-weight="700"
                         font-size="100"
                         fill="url(#gradCS)">
                     CS
@@ -299,7 +304,7 @@
                     Música & Datos
                 </h1>
                 <p class="text-lg sm:text-xl md:text-2xl text-zinc-300 mt-6 font-light tracking-wider max-w-3xl mx-auto">
-                    Transformando ideas en sonido e información en conocimiento, producción musical y análisis avanzado en un espacio creativo...
+                    Transformando ideas en sonido e información en conocimiento. Uniendo producción musical y análisis avanzado en un solo espacio creativo.
                 </p>
                 <p class="font-signature text-5xl sm:text-6xl text-zinc-200 mt-16 tracking-wider">
                     Camilo Sanguino
@@ -320,12 +325,12 @@
                     <div class="lg:w-2/3 text-center lg:text-left reveal">
                         <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold gradient-text">La Fusión del Arte y la Lógica</h2>
                         <p class="text-xl font-semibold text-zinc-300 mt-4">Productor Musical & Analista de Datos</p>
-                        <!-- CAMBIO: Se añade "Estudiante de Ingeniería de Sonido" -->
                         <p class="text-lg font-medium text-zinc-400 mt-1">Estudiante de Ingeniería de Sonido</p>
+                        <!-- CAMBIO: Texto de "Sobre Mí" actualizado -->
                         <div class="text-lg text-zinc-400 mt-6 space-y-4">
-                           <!-- CAMBIO: Descripción actualizada -->
-                           <p>Soy un profesional híbrido con dos pasiones: dar vida a historias a través del sonido y descifrar los patrones que se esconden en los datos. Como Máster en Composición para Medios, he creado paisajes sonoros que potencian la emoción y la narrativa. Como analista, domino Python, R y SQL para transformar datos complejos en insights accionables.</p>
-                           <p>Mi propuesta de valor combina el rigor analítico con la sensibilidad artística, creando soluciones que integran creatividad, estrategia y tecnología. Busco proyectos donde pueda conectar la música con la inteligencia de datos para generar experiencias memorables y resultados medibles.</p>
+                           <p>Soy productor musical y compositor con máster en música para medios audiovisuales, apasionado por crear paisajes sonoros que transmitan emociones y den identidad a cada proyecto. Mi enfoque se basa en la combinación de creatividad artística y pensamiento estratégico, ofreciendo soluciones musicales que conectan con las personas y elevan la experiencia audiovisual.</p>
+                           <p>Además, soy especialista en Big Data y Analítica de Datos, lo que me permite integrar la música con la tecnología para entender tendencias, optimizar recursos y aportar valor añadido a cada propuesta.</p>
+                           <p>Me defino como un profesional versátil, con visión innovadora y compromiso en cada trabajo. Mi objetivo es ganarme la confianza de quienes buscan un aliado creativo y confiable, capaz de aportar tanto en el ámbito musical como en el análisis estratégico de proyectos.</p>
                         </div>
                     </div>
                 </div>
@@ -419,9 +424,9 @@
 
                 <div id="data-projects" class="project-card">
                     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                        <div class="bg-black/50 backdrop-blur-sm border border-zinc-800 rounded-2xl p-8 reveal interactive-card flex flex-col"><h3 class="text-2xl font-bold text-white">Análisis de Tendencias en Spotify</h3><p class="text-zinc-400 mt-4 flex-grow">Utilizando la API de Spotify, Python (Pandas, Matplotlib) y SQL, desarrollé un análisis para identificar patrones en la popularidad de géneros musicales, correlacionando características sonoras (valencia, energía) con el éxito en las listas.</p><a href="https://github.com/camilosl12" target="_blank" rel="noopener noreferrer" class="inline-block text-blue-400 font-semibold mt-6 hover:text-blue-300 self-start">Explorar en GitHub &rarr;</a></div>
-                        <div class="bg-black/50 backdrop-blur-sm border border-zinc-800 rounded-2xl p-8 reveal interactive-card flex flex-col"><h3 class="text-2xl font-bold text-white">Dashboard de Ventas de Tickets</h3><p class="text-zinc-400 mt-4 flex-grow">Diseñé un dashboard interactivo en Tableau que visualiza datos de ventas de eventos en tiempo real. Permite a los stakeholders filtrar por artista, venue y demografía, optimizando las estrategias de marketing y pricing.</p><a href="https://public.tableau.com/app/discover" target="_blank" rel="noopener noreferrer" class="inline-block text-blue-400 font-semibold mt-6 hover:text-blue-300 self-start">Ver Dashboard Interactivo &rarr;</a></div>
-                        <div class="bg-black/50 backdrop-blur-sm border border-zinc-800 rounded-2xl p-8 reveal interactive-card flex flex-col"><h3 class="text-2xl font-bold text-white">Modelo Predictivo de Éxito Musical</h3><p class="text-zinc-400 mt-4 flex-grow">Entrené un modelo de machine learning (Regresión Logística con Scikit-learn) para predecir la probabilidad de que una canción entre en el Top 40 de Billboard, basándose en más de 15 variables acústicas y contextuales.</p><a href="https://github.com/camilosl12" target="_blank" rel="noopener noreferrer" class="inline-block text-blue-400 font-semibold mt-6 hover:text-blue-300 self-start">Analizar el Código &rarr;</a></div>
+                        <div class="bg-black/50 backdrop-blur-sm border border-zinc-800 rounded-2xl p-8 reveal interactive-card flex flex-col"><h3 class="text-2xl font-bold text-white">Análisis de Tendencias en Spotify</h3><p class="text-zinc-400 mt-4 flex-grow">¿Qué hace que una canción sea un éxito? Utilicé Python y la API de Spotify para analizar miles de canciones, descubriendo correlaciones clave entre atributos sonoros (energía, bailabilidad) y su popularidad en las listas de éxitos.</p><a href="https://github.com/camilosl12" target="_blank" rel="noopener noreferrer" class="inline-block text-blue-400 font-semibold mt-6 hover:text-blue-300 self-start">Explorar en GitHub &rarr;</a></div>
+                        <div class="bg-black/50 backdrop-blur-sm border border-zinc-800 rounded-2xl p-8 reveal interactive-card flex flex-col"><h3 class="text-2xl font-bold text-white">Dashboard de Ventas de Conciertos</h3><p class="text-zinc-400 mt-4 flex-grow">Creé un dashboard en Tableau para visualizar datos de ventas de eventos. Esta herramienta permite a los organizadores identificar qué campañas de marketing son más efectivas y optimizar la estrategia de precios en tiempo real.</p><a href="https://public.tableau.com/app/discover" target="_blank" rel="noopener noreferrer" class="inline-block text-blue-400 font-semibold mt-6 hover:text-blue-300 self-start">Ver Dashboard Interactivo &rarr;</a></div>
+                        <div class="bg-black/50 backdrop-blur-sm border border-zinc-800 rounded-2xl p-8 reveal interactive-card flex flex-col"><h3 class="text-2xl font-bold text-white">Modelo Predictivo de Éxito Musical</h3><p class="text-zinc-400 mt-4 flex-grow">Desarrollé un modelo de Machine Learning que predice la probabilidad de que una canción llegue al Top 40. El modelo analiza 15 variables, desde la complejidad armónica hasta la popularidad del artista, para anticipar su potencial comercial.</p><a href="https://github.com/camilosl12" target="_blank" rel="noopener noreferrer" class="inline-block text-blue-400 font-semibold mt-6 hover:text-blue-300 self-start">Analizar el Código &rarr;</a></div>
                     </div>
                 </div>
                 <div id="show-more-container" class="text-center mt-16">
@@ -432,27 +437,27 @@
             </div>
         </section>
 
-        <section id="mas-proyectos" class="hidden py-20 md:py-32 bg-dark-bg">
+        <section id="mas-proyectos" class="py-20 md:py-32 bg-dark-bg">
             <div class="container mx-auto px-6 text-center">
                 <div class="reveal">
                     <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold gradient-text">Explora Más</h2>
                     <p class="text-lg text-zinc-400 mt-4">Una colección extendida de trabajos, experimentos y exploraciones personales.</p>
                 </div>
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-16">
-                    <div class="reveal interactive-card bg-zinc-900 rounded-2xl p-8">
-                        <h3 class="text-2xl font-bold text-white">Proyecto Adicional 1</h3>
-                        <p class="text-zinc-400 mt-4">Descripción de este proyecto, destacando las tecnologías y habilidades utilizadas.</p>
-                        <a href="#" class="inline-block text-blue-400 font-semibold mt-6 hover:text-blue-300">Ver más &rarr;</a>
+                    <div class="reveal interactive-card bg-zinc-900 rounded-2xl p-8 flex flex-col">
+                        <h3 class="text-2xl font-bold text-white">Análisis Sentimental de Letras</h3>
+                        <p class="text-zinc-400 mt-4 flex-grow">Un proyecto de NLP en Python que extrae y visualiza las emociones predominantes en las letras de los artistas más populares, buscando patrones entre el sentimiento lírico y el éxito comercial.</p>
+                        <a href="https://github.com/camilosl12" target="_blank" rel="noopener noreferrer" class="inline-block text-blue-400 font-semibold mt-6 hover:text-blue-300 self-start">Ver en GitHub &rarr;</a>
                     </div>
-                    <div class="reveal interactive-card bg-zinc-900 rounded-2xl p-8">
-                        <h3 class="text-2xl font-bold text-white">Proyecto Adicional 2</h3>
-                        <p class="text-zinc-400 mt-4">Descripción de este proyecto, destacando las tecnologías y habilidades utilizadas.</p>
-                        <a href="#" class="inline-block text-blue-400 font-semibold mt-6 hover:text-blue-300">Ver más &rarr;</a>
+                    <div class="reveal interactive-card bg-zinc-900 rounded-2xl p-8 flex flex-col">
+                        <h3 class="text-2xl font-bold text-white">Diseño Sonoro para Videojuego</h3>
+                        <p class="text-zinc-400 mt-4 flex-grow">Creación de todos los activos de audio para un prototipo de videojuego indie, incluyendo efectos de sonido (SFX), ambientes y una banda sonora adaptativa que reacciona a las acciones del jugador.</p>
+                        <a href="#" class="inline-block text-blue-400 font-semibold mt-6 hover:text-blue-300 self-start">Escuchar Demo &rarr;</a>
                     </div>
-                    <div class="reveal interactive-card bg-zinc-900 rounded-2xl p-8">
-                        <h3 class="text-2xl font-bold text-white">Proyecto Adicional 3</h3>
-                        <p class="text-zinc-400 mt-4">Descripción de este proyecto, destacando las tecnologías y habilidades utilizadas.</p>
-                        <a href="#" class="inline-block text-blue-400 font-semibold mt-6 hover:text-blue-300">Ver más &rarr;</a>
+                    <div class="reveal interactive-card bg-zinc-900 rounded-2xl p-8 flex flex-col">
+                        <h3 class="text-2xl font-bold text-white">Simulador de Acústica de Salas</h3>
+                        <p class="text-zinc-400 mt-4 flex-grow">Desarrollo de un script en Python que simula la respuesta acústica de una sala basándose en sus dimensiones y materiales, una herramienta útil para el diseño de estudios de grabación y salas de conciertos.</p>
+                        <a href="https://github.com/camilosl12" target="_blank" rel="noopener noreferrer" class="inline-block text-blue-400 font-semibold mt-6 hover:text-blue-300 self-start">Explorar Simulación &rarr;</a>
                     </div>
                 </div>
                 <div class="text-center mt-16">
@@ -542,16 +547,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
         function pSetShapes(isMobile) {
             if (isMobile) {
+                // CAMBIO: Coordenadas de la animación principal optimizadas para móviles
                 pShapes = {
                     note: [
-                        ...Array.from({length: 25}, (_, i) => ({ x: 0.3 + Math.cos(i/12.5*Math.PI)*0.1, y: 0.25 + Math.sin(i/12.5*Math.PI)*0.12 })),
-                        ...Array.from({length: 15}, (_, i) => ({ x: 0.4, y: 0.25 - i*0.015 })),
-                        ...Array.from({length: 12}, (_, i) => ({ x: 0.4 + Math.sin(i/12*Math.PI*0.8)*0.12, y: 0.01 + (i/12)*0.1})),
+                        ...Array.from({length: 20}, (_, i) => ({ x: 0.25 + Math.cos(i/10*Math.PI)*0.08, y: 0.35 + Math.sin(i/10*Math.PI)*0.1 })),
+                        ...Array.from({length: 12}, (_, i) => ({ x: 0.33, y: 0.35 - i*0.018 })),
+                        ...Array.from({length: 10}, (_, i) => ({ x: 0.33 + Math.sin(i/10*Math.PI*0.8)*0.1, y: 0.12 + (i/10)*0.08})),
                     ],
                     barChart: [
-                        ...Array.from({length: 10}, (_, i) => ({ x: 0.5, y: 0.85 - (i/9)*0.1 })),
-                        ...Array.from({length: 15}, (_, i) => ({ x: 0.6, y: 0.85 - (i/14)*0.2 })),
-                        ...Array.from({length: 12}, (_, i) => ({ x: 0.7, y: 0.85 - (i/11)*0.15 })),
+                        ...Array.from({length: 8}, (_, i) => ({ x: 0.65, y: 0.75 - (i/7)*0.12 })),
+                        ...Array.from({length: 12}, (_, i) => ({ x: 0.72, y: 0.75 - (i/11)*0.22 })),
+                        ...Array.from({length: 10}, (_, i) => ({ x: 0.79, y: 0.75 - (i/9)*0.17 })),
                     ]
                 };
             } else {
@@ -626,7 +632,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
         function pInit() {
             pResizeCanvas();
-            const randomParticleCount = Math.floor(particleCanvas.width * particleCanvas.height / 12000);
+            // CAMBIO: Se reduce la cantidad de partículas en móviles para mejorar el rendimiento y la estética
+            const isMobile = particleCanvas.width < 768;
+            const particleDensity = isMobile ? 20000 : 12000;
+            const randomParticleCount = Math.floor(particleCanvas.width * particleCanvas.height / particleDensity);
             pParticles = [];
             for (let i = 0; i < randomParticleCount; i++) {
                 pParticles.push(new PParticle());
@@ -809,11 +818,11 @@ document.addEventListener('DOMContentLoaded', () => {
     if (showMoreBtn && moreProjectsSection && hideProjectsBtn) {
         showMoreBtn.addEventListener('click', (event) => {
             event.preventDefault();
-            moreProjectsSection.classList.remove('hidden');
+            moreProjectsSection.style.display = 'block';
             setTimeout(() => {
                 moreProjectsSection.classList.add('visible');
             }, 10); 
-            showMoreContainer.classList.add('hidden');
+            showMoreContainer.style.display = 'none';
         });
 
         hideProjectsBtn.addEventListener('click', (event) => {
@@ -821,12 +830,10 @@ document.addEventListener('DOMContentLoaded', () => {
             moreProjectsSection.classList.remove('visible');
             
             moreProjectsSection.addEventListener('transitionend', () => {
-                moreProjectsSection.classList.add('hidden');
+                moreProjectsSection.style.display = 'none';
             }, { once: true });
 
-            showMoreContainer.classList.remove('hidden');
-            // CAMBIO: Se elimina el scroll hacia arriba
-            // projectsSection.scrollIntoView({ behavior: 'smooth' });
+            showMoreContainer.style.display = 'block';
         });
     }
 
