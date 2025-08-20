@@ -252,6 +252,37 @@
             max-height: 1500px; /* Suficientemente grande para el contenido */
             opacity: 1;
         }
+        #image-modal {
+            transition: opacity 0.3s ease-in-out;
+        }
+        #modal-image {
+            transition: transform 0.3s ease-in-out;
+        }
+        /* CAMBIO: Estilos para los botones de idioma */
+        .lang-btn {
+            background-color: transparent;
+            border: 1px solid var(--medium-text);
+            color: var(--medium-text);
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            transition: all 0.2s ease-in-out;
+        }
+        .lang-btn:hover {
+            background-color: var(--primary-color);
+            border-color: var(--primary-color);
+            color: white;
+        }
+        .lang-btn.active {
+            background-color: var(--secondary-color);
+            border-color: var(--secondary-color);
+            color: white;
+        }
+        /* CAMBIO: Clases para ocultar/mostrar contenido por idioma */
+        .lang-es, .lang-en {
+            display: none;
+        }
     </style>
 </head>
 <body class="antialiased">
@@ -277,9 +308,14 @@
                 </svg>
             </a>
             <div class="hidden md:flex items-center space-x-8">
-                <a href="#sobre-mi" class="nav-link text-zinc-300"><i class="fas fa-microphone-alt fa-fw"></i><span>Sobre Mí</span></a>
-                <a href="#proyectos" class="nav-link text-zinc-300"><i class="fas fa-music fa-fw"></i><span>Proyectos</span></a>
-                <a href="#contacto" class="nav-link text-zinc-300"><i class="fas fa-envelope fa-fw"></i><span>Contacto</span></a>
+                <a href="#sobre-mi" class="nav-link text-zinc-300"><i class="fas fa-microphone-alt fa-fw"></i><span class="lang-es">Sobre Mí</span><span class="lang-en">About Me</span></a>
+                <a href="#proyectos" class="nav-link text-zinc-300"><i class="fas fa-music fa-fw"></i><span class="lang-es">Proyectos</span><span class="lang-en">Projects</span></a>
+                <a href="#contacto" class="nav-link text-zinc-300"><i class="fas fa-envelope fa-fw"></i><span class="lang-es">Contacto</span><span class="lang-en">Contact</span></a>
+                <!-- CAMBIO: Botones de idioma -->
+                <div class="flex items-center gap-2">
+                    <button id="lang-es-btn" class="lang-btn">ES</button>
+                    <button id="lang-en-btn" class="lang-btn">EN</button>
+                </div>
             </div>
             <div class="md:hidden">
                 <button id="mobile-menu-button" class="text-white focus:outline-none">
@@ -288,9 +324,14 @@
             </div>
         </nav>
         <div id="mobile-menu" class="hidden md:hidden bg-black/80">
-            <a href="#sobre-mi" class="flex items-center gap-3 py-3 px-6 text-sm text-zinc-300 hover:bg-zinc-800"><i class="fas fa-microphone-alt fa-fw"></i>Sobre Mí</a>
-            <a href="#proyectos" class="flex items-center gap-3 py-3 px-6 text-sm text-zinc-300 hover:bg-zinc-800"><i class="fas fa-music fa-fw"></i>Proyectos</a>
-            <a href="#contacto" class="flex items-center gap-3 py-3 px-6 text-sm text-zinc-300 hover:bg-zinc-800"><i class="fas fa-envelope fa-fw"></i>Contacto</a>
+            <a href="#sobre-mi" class="flex items-center gap-3 py-3 px-6 text-sm text-zinc-300 hover:bg-zinc-800"><i class="fas fa-microphone-alt fa-fw"></i><span class="lang-es">Sobre Mí</span><span class="lang-en">About Me</span></a>
+            <a href="#proyectos" class="flex items-center gap-3 py-3 px-6 text-sm text-zinc-300 hover:bg-zinc-800"><i class="fas fa-music fa-fw"></i><span class="lang-es">Proyectos</span><span class="lang-en">Projects</span></a>
+            <a href="#contacto" class="flex items-center gap-3 py-3 px-6 text-sm text-zinc-300 hover:bg-zinc-800"><i class="fas fa-envelope fa-fw"></i><span class="lang-es">Contacto</span><span class="lang-en">Contact</span></a>
+             <!-- CAMBIO: Botones de idioma en menú móvil -->
+            <div class="flex items-center gap-2 p-4 justify-center">
+                <button id="lang-es-btn-mobile" class="lang-btn">ES</button>
+                <button id="lang-en-btn-mobile" class="lang-btn">EN</button>
+            </div>
         </div>
     </header>
 
@@ -301,10 +342,12 @@
         <section id="inicio" class="hero-section h-screen w-full flex items-center justify-center text-center">
             <div class="relative z-10 p-8 mt-20 md:mt-0">
                 <h1 class="text-5xl sm:text-6xl md:text-8xl font-black text-white leading-tight tracking-tighter gradient-text px-2" style="text-shadow: 0 0 40px rgba(192, 132, 252, 0.4);">
-                    Música & Datos
+                    <span class="lang-es">Música & Datos</span>
+                    <span class="lang-en">Music & Data</span>
                 </h1>
                 <p class="text-lg sm:text-xl md:text-2xl text-zinc-300 mt-6 font-light tracking-wider max-w-3xl mx-auto">
-                    Transformando ideas en sonido e información en conocimiento. Uniendo producción musical y análisis avanzado en un solo espacio creativo.
+                    <span class="lang-es">Transformando ideas en sonido e información en conocimiento. Uniendo producción musical y análisis avanzado en un solo espacio creativo.</span>
+                    <span class="lang-en">Transforming ideas into sound and information into knowledge. Uniting music production and advanced analytics in a single creative space.</span>
                 </p>
                 <p class="font-signature text-5xl sm:text-6xl text-zinc-200 mt-16 tracking-wider">
                     Camilo Sanguino
@@ -317,41 +360,57 @@
             <div class="container mx-auto px-6">
                 <div class="flex flex-col lg:flex-row items-center gap-12 lg:gap-20">
                     <div class="lg:w-1/3 flex-shrink-0 reveal">
-                        <img src="https://camilosl12.github.io/2025-06-17-JUAN-CAMILO-SANGUINO-LEON.jpg" 
+                        <img id="profile-pic" src="https://camilosl12.github.io/2025-06-17-JUAN-CAMILO-SANGUINO-LEON.jpg" 
                              onerror="this.onerror=null;this.src='https://placehold.co/320x320/18181b/E5E7EB?text=Camilo+Sanguino';"
                              alt="Foto de perfil de Camilo Sanguino" 
-                             class="rounded-full w-64 h-64 lg:w-80 lg:h-80 mx-auto object-cover border-4 border-zinc-800 shadow-lg shadow-purple-500/10">
+                             class="rounded-full w-64 h-64 lg:w-80 lg:h-80 mx-auto object-cover border-4 border-zinc-800 shadow-lg shadow-purple-500/10 cursor-pointer transition-transform duration-300 hover:scale-105">
                     </div>
                     <div class="lg:w-2/3 text-center lg:text-left reveal">
-                        <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold gradient-text">La Fusión del Arte y la Lógica</h2>
-                        <p class="text-xl font-semibold text-zinc-300 mt-4">Productor Musical & Analista de Datos</p>
-                        <p class="text-lg font-medium text-zinc-400 mt-1">Estudiante de Ingeniería de Sonido</p>
+                        <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold gradient-text">
+                            <span class="lang-es">La Fusión del Arte y la Lógica</span>
+                            <span class="lang-en">The Fusion of Art and Logic</span>
+                        </h2>
+                        <p class="text-xl font-semibold text-zinc-300 mt-4">
+                            <span class="lang-es">Productor Musical & Analista de Datos</span>
+                            <span class="lang-en">Music Producer & Data Analyst</span>
+                        </p>
+                        <p class="text-lg font-medium text-zinc-400 mt-1">
+                            <span class="lang-es">Estudiante de Ingeniería de Sonido</span>
+                            <span class="lang-en">Sound Engineering Student</span>
+                        </p>
                         <div class="text-lg text-zinc-400 mt-6 space-y-4">
-                           <p>Soy productor musical y compositor con máster en música para medios audiovisuales, apasionado por crear paisajes sonoros que transmitan emociones y den identidad a cada proyecto. Mi enfoque se basa en la combinación de creatividad artística y pensamiento estratégico, ofreciendo soluciones musicales que conectan con las personas y elevan la experiencia audiovisual.</p>
-                           <p>Además, soy especialista en Big Data y Analítica de Datos, lo que me permite integrar la música con la tecnología para entender tendencias, optimizar recursos y aportar valor añadido a cada propuesta.</p>
-                           <p>Me defino como un profesional versátil, con visión innovadora y compromiso en cada trabajo. Mi objetivo es ganarme la confianza de quienes buscan un aliado creativo y confiable, capaz de aportar tanto en el ámbito musical como en el análisis estratégico de proyectos.</p>
+                           <div class="lang-es">
+                               <p>Soy productor musical y compositor con máster en música para medios audiovisuales, apasionado por crear paisajes sonoros que transmitan emociones y den identidad a cada proyecto. Mi enfoque se basa en la combinación de creatividad artística y pensamiento estratégico, ofreciendo soluciones musicales que conectan con las personas y elevan la experiencia audiovisual.</p>
+                               <p>Además, soy especialista en Big Data y Analítica de Datos, lo que me permite integrar la música con la tecnología para entender tendencias, optimizar recursos y aportar valor añadido a cada propuesta.</p>
+                               <p>Me defino como un profesional versátil, con visión innovadora y compromiso en cada trabajo. Mi objetivo es ganarme la confianza de quienes buscan un aliado creativo y confiable, capaz de aportar tanto en el ámbito musical como en el análisis estratégico de proyectos.</p>
+                           </div>
+                           <div class="lang-en">
+                               <p>I am a music producer and composer with a master's degree in music for audiovisual media, passionate about creating soundscapes that convey emotions and give identity to each project. My approach is based on the combination of artistic creativity and strategic thinking, offering musical solutions that connect with people and elevate the audiovisual experience.</p>
+                               <p>Additionally, I am a specialist in Big Data and Data Analytics, which allows me to integrate music with technology to understand trends, optimize resources, and add value to each proposal.</p>
+                               <p>I define myself as a versatile professional with an innovative vision and commitment to every job. My goal is to earn the trust of those looking for a creative and reliable ally, capable of contributing both in the musical field and in the strategic analysis of projects.</p>
+                           </div>
                         </div>
                     </div>
                 </div>
                 <div class="mt-20 reveal">
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
                         <div>
-                            <h3 class="text-2xl font-bold text-white mb-4 flex items-center gap-3"><i class="fas fa-music text-purple-400"></i>Artes Sonoras</h3>
+                            <h3 class="text-2xl font-bold text-white mb-4 flex items-center gap-3"><i class="fas fa-music text-purple-400"></i><span class="lang-es">Artes Sonoras</span><span class="lang-en">Sound Arts</span></h3>
                             <div class="flex flex-wrap gap-3">
-                                <span class="skill-bubble bg-zinc-800 text-zinc-300 text-sm font-medium px-4 py-2 rounded-full" style="--delay: 0.1s;">Producción Musical</span>
-                                <span class="skill-bubble bg-zinc-800 text-zinc-300 text-sm font-medium px-4 py-2 rounded-full" style="--delay: 0.2s;">Diseño Sonoro & Foley</span>
-                                <span class="skill-bubble bg-zinc-800 text-zinc-300 text-sm font-medium px-4 py-2 rounded-full" style="--delay: 0.3s;">Composición para Medios</span>
-                                <span class="skill-bubble bg-zinc-800 text-zinc-300 text-sm font-medium px-4 py-2 rounded-full" style="--delay: 0.4s;">Postproducción de Audio</span>
+                                <span class="skill-bubble bg-zinc-800 text-zinc-300 text-sm font-medium px-4 py-2 rounded-full" style="--delay: 0.1s;"><span class="lang-es">Producción Musical</span><span class="lang-en">Music Production</span></span>
+                                <span class="skill-bubble bg-zinc-800 text-zinc-300 text-sm font-medium px-4 py-2 rounded-full" style="--delay: 0.2s;"><span class="lang-es">Diseño Sonoro & Foley</span><span class="lang-en">Sound Design & Foley</span></span>
+                                <span class="skill-bubble bg-zinc-800 text-zinc-300 text-sm font-medium px-4 py-2 rounded-full" style="--delay: 0.3s;"><span class="lang-es">Composición para Medios</span><span class="lang-en">Media Composition</span></span>
+                                <span class="skill-bubble bg-zinc-800 text-zinc-300 text-sm font-medium px-4 py-2 rounded-full" style="--delay: 0.4s;"><span class="lang-es">Postproducción de Audio</span><span class="lang-en">Audio Post-Production</span></span>
                             </div>
                         </div>
                         <div>
-                            <h3 class="text-2xl font-bold text-white mb-4 flex items-center gap-3"><i class="fas fa-chart-simple text-blue-400"></i>Ciencia de Datos</h3>
+                            <h3 class="text-2xl font-bold text-white mb-4 flex items-center gap-3"><i class="fas fa-chart-simple text-blue-400"></i><span class="lang-es">Ciencia de Datos</span><span class="lang-en">Data Science</span></h3>
                             <div class="flex flex-wrap gap-3">
                                 <span class="skill-bubble bg-zinc-800 text-zinc-300 text-sm font-medium px-4 py-2 rounded-full" style="--delay: 0.5s;">Python & R</span>
                                 <span class="skill-bubble bg-zinc-800 text-zinc-300 text-sm font-medium px-4 py-2 rounded-full" style="--delay: 0.6s;">SQL</span>
                                 <span class="skill-bubble bg-zinc-800 text-zinc-300 text-sm font-medium px-4 py-2 rounded-full" style="--delay: 0.7s;">Power BI & Tableau</span>
                                 <span class="skill-bubble bg-zinc-800 text-zinc-300 text-sm font-medium px-4 py-2 rounded-full" style="--delay: 0.8s;">Machine Learning</span>
-                                <span class="skill-bubble bg-zinc-800 text-zinc-300 text-sm font-medium px-4 py-2 rounded-full" style="--delay: 0.9s;">Estadística Aplicada</span>
+                                <span class="skill-bubble bg-zinc-800 text-zinc-300 text-sm font-medium px-4 py-2 rounded-full" style="--delay: 0.9s;"><span class="lang-es">Estadística Aplicada</span><span class="lang-en">Applied Statistics</span></span>
                             </div>
                         </div>
                     </div>
@@ -365,29 +424,30 @@
             <canvas id="projects-canvas"></canvas>
             <div class="container mx-auto px-6 relative z-10">
                 <div class="text-center mb-12 reveal">
-                    <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold gradient-text">Proyectos Destacados</h2>
-                    <p class="text-lg text-zinc-400 mt-4">Explora mi trabajo en producción musical y análisis de datos.</p>
+                    <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold gradient-text"><span class="lang-es">Proyectos Destacados</span><span class="lang-en">Featured Projects</span></h2>
+                    <p class="text-lg text-zinc-400 mt-4"><span class="lang-es">Explora mi trabajo en producción musical y análisis de datos.</span><span class="lang-en">Explore my work in music production and data analysis.</span></p>
                 </div>
 
                 <div class="flex justify-center gap-8 mb-12 reveal">
                     <button class="tab-button text-xl font-semibold text-zinc-400 pb-2 active" data-tab="music">
-                        <i class="fas fa-music mr-2"></i>Producción Musical
+                        <i class="fas fa-music mr-2"></i><span class="lang-es">Producción Musical</span><span class="lang-en">Music Production</span>
                     </button>
                     <button class="tab-button text-xl font-semibold text-zinc-400 pb-2" data-tab="data">
-                        <i class="fas fa-chart-simple mr-2"></i>Análisis de Datos
+                        <i class="fas fa-chart-simple mr-2"></i><span class="lang-es">Análisis de Datos</span><span class="lang-en">Data Analysis</span>
                     </button>
                 </div>
 
                 <div id="music-projects" class="project-card active">
                     <div class="grid grid-cols-1 lg:grid-cols-5 gap-8 items-center mb-16">
                         <div class="lg:col-span-2 reveal">
-                             <img src="https://camilosl12.github.io/Homenaje-portada.jpeg"
+                             <!-- CAMBIO: ID añadido para la funcionalidad del modal de la imagen del álbum -->
+                             <img id="album-cover" src="https://camilosl12.github.io/Homenaje-portada.jpeg"
                                  onerror="this.onerror=null;this.src='https://placehold.co/600x600/18181b/E5E7EB?text=Homenaje';"
-                                 alt="Portada del álbum Homenaje al vallenato romántico" class="rounded-lg shadow-2xl w-full h-auto interactive-card">
+                                 alt="Portada del álbum Homenaje al vallenato romántico" class="rounded-lg shadow-2xl w-full h-auto interactive-card cursor-pointer">
                         </div>
                         <div class="lg:col-span-3 reveal">
-                            <h3 class="text-2xl md:text-3xl font-bold text-white">Álbum: Homenaje al Vallenato Romántico</h3>
-                            <p class="text-zinc-400 mt-2">Como productor, mi objetivo fue revitalizar clásicos del vallenato, fusionando la instrumentación tradicional con técnicas de mezcla modernas para capturar la nostalgia y atraer a nuevas audiencias.</p>
+                            <h3 class="text-2xl md:text-3xl font-bold text-white"><span class="lang-es">Álbum: Homenaje al Vallenato Romántico</span><span class="lang-en">Album: Tribute to Romantic Vallenato</span></h3>
+                            <p class="text-zinc-400 mt-2"><span class="lang-es">Como productor, mi objetivo fue revitalizar clásicos del vallenato, fusionando la instrumentación tradicional con técnicas de mezcla modernas para capturar la nostalgia y atraer a nuevas audiencias.</span><span class="lang-en">As a producer, my goal was to revitalize vallenato classics, blending traditional instrumentation with modern mixing techniques to capture nostalgia and attract new audiences.</span></p>
                             <div class="mt-6 space-y-6">
                                 <div class="custom-audio-player">
                                     <p class="text-white font-semibold mb-2">1. Mi Primer Amor</p>
@@ -415,22 +475,22 @@
                         </div>
                     </div>
                     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                        <div class="reveal interactive-card bg-black/30 rounded-2xl overflow-hidden p-4"><div class="video-container"><iframe src="https://www.youtube.com/embed/wMMhwn53HZw" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div><div class="p-6"><h3 class="text-xl sm:text-2xl font-bold text-white">Foley Cinemático: Wall·E</h3><p class="text-zinc-400 mt-2">Recreación sonora completa para una escena icónica, demostrando la capacidad de construir un mundo verosímil a través del sonido.</p></div></div>
-                        <div class="reveal interactive-card bg-black/30 rounded-2xl overflow-hidden p-4"><div class="video-container"><iframe src="https://www.youtube.com/embed/REx6xl-CtAg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div><div class="p-6"><h3 class="text-xl sm:text-2xl font-bold text-white">Composición Original: El Guasón</h3><p class="text-zinc-400 mt-2">Una partitura original diseñada para amplificar la tensión psicológica y la transformación del personaje en el trailer.</p></div></div>
-                        <div class="reveal interactive-card bg-black/30 rounded-2xl overflow-hidden p-4"><div class="video-container"><iframe src="https://www.youtube.com/embed/rM4_2ZNB32I" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div><div class="p-6"><h3 class="text-xl sm:text-2xl font-bold text-white">Diseño Sonoro Sintético</h3><p class="text-zinc-400 mt-2">Exploración de paisajes acústicos para un corto animado, utilizando exclusivamente sintetizadores para crear cada sonido.</p></div></div>
+                        <div class="reveal interactive-card bg-black/30 rounded-2xl overflow-hidden p-4"><div class="video-container"><iframe src="https://www.youtube.com/embed/wMMhwn53HZw" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div><div class="p-6"><h3 class="text-xl sm:text-2xl font-bold text-white"><span class="lang-es">Foley Cinemático: Wall·E</span><span class="lang-en">Cinematic Foley: Wall·E</span></h3><p class="text-zinc-400 mt-2"><span class="lang-es">Recreación sonora completa para una escena icónica, demostrando la capacidad de construir un mundo verosímil a través del sonido.</span><span class="lang-en">Complete sound recreation for an iconic scene, demonstrating the ability to build a believable world through sound.</span></p></div></div>
+                        <div class="reveal interactive-card bg-black/30 rounded-2xl overflow-hidden p-4"><div class="video-container"><iframe src="https://www.youtube.com/embed/REx6xl-CtAg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div><div class="p-6"><h3 class="text-xl sm:text-2xl font-bold text-white"><span class="lang-es">Composición Original: El Guasón</span><span class="lang-en">Original Composition: Joker</span></h3><p class="text-zinc-400 mt-2"><span class="lang-es">Una partitura original diseñada para amplificar la tensión psicológica y la transformación del personaje en el trailer.</span><span class="lang-en">An original score designed to amplify the psychological tension and the character's transformation in the trailer.</span></p></div></div>
+                        <div class="reveal interactive-card bg-black/30 rounded-2xl overflow-hidden p-4"><div class="video-container"><iframe src="https://www.youtube.com/embed/rM4_2ZNB32I" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div><div class="p-6"><h3 class="text-xl sm:text-2xl font-bold text-white"><span class="lang-es">Diseño Sonoro Sintético</span><span class="lang-en">Synthetic Sound Design</span></h3><p class="text-zinc-400 mt-2"><span class="lang-es">Exploración de paisajes acústicos para un corto animado, utilizando exclusivamente sintetizadores para crear cada sonido.</span><span class="lang-en">Exploration of acoustic landscapes for an animated short, using exclusively synthesizers to create every sound.</span></p></div></div>
                     </div>
                 </div>
 
                 <div id="data-projects" class="project-card">
                     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                        <div class="bg-black/50 backdrop-blur-sm border border-zinc-800 rounded-2xl p-8 reveal interactive-card flex flex-col"><h3 class="text-2xl font-bold text-white">Análisis de Tendencias en Spotify</h3><p class="text-zinc-400 mt-4 flex-grow">¿Qué hace que una canción sea un éxito? Utilicé Python y la API de Spotify para analizar miles de canciones, descubriendo correlaciones clave entre atributos sonoros (energía, bailabilidad) y su popularidad en las listas de éxitos.</p><a href="https://github.com/camilosl12" target="_blank" rel="noopener noreferrer" class="inline-block text-blue-400 font-semibold mt-6 hover:text-blue-300 self-start">Explorar en GitHub &rarr;</a></div>
-                        <div class="bg-black/50 backdrop-blur-sm border border-zinc-800 rounded-2xl p-8 reveal interactive-card flex flex-col"><h3 class="text-2xl font-bold text-white">Dashboard de Ventas de Conciertos</h3><p class="text-zinc-400 mt-4 flex-grow">Creé un dashboard en Tableau para visualizar datos de ventas de eventos. Esta herramienta permite a los organizadores identificar qué campañas de marketing son más efectivas y optimizar la estrategia de precios en tiempo real.</p><a href="https://public.tableau.com/app/discover" target="_blank" rel="noopener noreferrer" class="inline-block text-blue-400 font-semibold mt-6 hover:text-blue-300 self-start">Ver Dashboard Interactivo &rarr;</a></div>
-                        <div class="bg-black/50 backdrop-blur-sm border border-zinc-800 rounded-2xl p-8 reveal interactive-card flex flex-col"><h3 class="text-2xl font-bold text-white">Modelo Predictivo de Éxito Musical</h3><p class="text-zinc-400 mt-4 flex-grow">Desarrollé un modelo de Machine Learning que predice la probabilidad de que una canción llegue al Top 40. El modelo analiza 15 variables, desde la complejidad armónica hasta la popularidad del artista, para anticipar su potencial comercial.</p><a href="https://github.com/camilosl12" target="_blank" rel="noopener noreferrer" class="inline-block text-blue-400 font-semibold mt-6 hover:text-blue-300 self-start">Analizar el Código &rarr;</a></div>
+                        <div class="bg-black/50 backdrop-blur-sm border border-zinc-800 rounded-2xl p-8 reveal interactive-card flex flex-col"><h3 class="text-2xl font-bold text-white"><span class="lang-es">Análisis de Tendencias en Spotify</span><span class="lang-en">Spotify Trend Analysis</span></h3><p class="text-zinc-400 mt-4 flex-grow"><span class="lang-es">¿Qué hace que una canción sea un éxito? Utilicé Python y la API de Spotify para analizar miles de canciones, descubriendo correlaciones clave entre atributos sonoros (energía, bailabilidad) y su popularidad en las listas de éxitos.</span><span class="lang-en">What makes a song a hit? I used Python and the Spotify API to analyze thousands of songs, discovering key correlations between sonic attributes (energy, danceability) and their popularity on the charts.</span></p><a href="https://github.com/camilosl12" target="_blank" rel="noopener noreferrer" class="inline-block text-blue-400 font-semibold mt-6 hover:text-blue-300 self-start"><span class="lang-es">Explorar en GitHub</span><span class="lang-en">Explore on GitHub</span> &rarr;</a></div>
+                        <div class="bg-black/50 backdrop-blur-sm border border-zinc-800 rounded-2xl p-8 reveal interactive-card flex flex-col"><h3 class="text-2xl font-bold text-white"><span class="lang-es">Dashboard de Ventas de Conciertos</span><span class="lang-en">Concert Sales Dashboard</span></h3><p class="text-zinc-400 mt-4 flex-grow"><span class="lang-es">Creé un dashboard en Tableau para visualizar datos de ventas de eventos. Esta herramienta permite a los organizadores identificar qué campañas de marketing son más efectivas y optimizar la estrategia de precios en tiempo real.</span><span class="lang-en">I created a dashboard in Tableau to visualize event sales data. This tool allows organizers to identify which marketing campaigns are most effective and optimize pricing strategies in real-time.</span></p><a href="https://public.tableau.com/app/discover" target="_blank" rel="noopener noreferrer" class="inline-block text-blue-400 font-semibold mt-6 hover:text-blue-300 self-start"><span class="lang-es">Ver Dashboard Interactivo</span><span class="lang-en">View Interactive Dashboard</span> &rarr;</a></div>
+                        <div class="bg-black/50 backdrop-blur-sm border border-zinc-800 rounded-2xl p-8 reveal interactive-card flex flex-col"><h3 class="text-2xl font-bold text-white"><span class="lang-es">Modelo Predictivo de Éxito Musical</span><span class="lang-en">Musical Success Predictive Model</span></h3><p class="text-zinc-400 mt-4 flex-grow"><span class="lang-es">Desarrollé un modelo de Machine Learning que predice la probabilidad de que una canción llegue al Top 40. El modelo analiza 15 variables, desde la complejidad armónica hasta la popularidad del artista, para anticipar su potencial comercial.</span><span class="lang-en">I developed a Machine Learning model that predicts the probability of a song reaching the Top 40. The model analyzes 15 variables, from harmonic complexity to artist popularity, to anticipate its commercial potential.</span></p><a href="https://github.com/camilosl12" target="_blank" rel="noopener noreferrer" class="inline-block text-blue-400 font-semibold mt-6 hover:text-blue-300 self-start"><span class="lang-es">Analizar el Código</span><span class="lang-en">Analyze the Code</span> &rarr;</a></div>
                     </div>
                 </div>
                 <div id="show-more-container" class="text-center mt-16">
                     <button id="show-more-btn" class="inline-block bg-transparent border-2 border-purple-400 text-purple-300 font-bold text-lg rounded-full px-8 py-4 hover:bg-purple-400/10 hover:text-white transition-all duration-300 transform hover:scale-105 active:scale-95">
-                        Ver Más Proyectos
+                        <span class="lang-es">Ver Más Proyectos</span><span class="lang-en">View More Projects</span>
                     </button>
                 </div>
             </div>
@@ -439,29 +499,29 @@
         <section id="mas-proyectos" class="py-20 md:py-32 bg-dark-bg">
             <div class="container mx-auto px-6 text-center">
                 <div class="reveal">
-                    <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold gradient-text">Explora Más</h2>
-                    <p class="text-lg text-zinc-400 mt-4">Una colección extendida de trabajos, experimentos y exploraciones personales.</p>
+                    <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold gradient-text"><span class="lang-es">Explora Más</span><span class="lang-en">Explore More</span></h2>
+                    <p class="text-lg text-zinc-400 mt-4"><span class="lang-es">Una colección extendida de trabajos, experimentos y exploraciones personales.</span><span class="lang-en">An extended collection of works, experiments, and personal explorations.</span></p>
                 </div>
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-16">
                     <div class="reveal interactive-card bg-zinc-900 rounded-2xl p-8 flex flex-col">
-                        <h3 class="text-2xl font-bold text-white">Análisis Sentimental de Letras</h3>
-                        <p class="text-zinc-400 mt-4 flex-grow">Un proyecto de NLP en Python que extrae y visualiza las emociones predominantes en las letras de los artistas más populares, buscando patrones entre el sentimiento lírico y el éxito comercial.</p>
-                        <a href="https://github.com/camilosl12" target="_blank" rel="noopener noreferrer" class="inline-block text-blue-400 font-semibold mt-6 hover:text-blue-300 self-start">Ver en GitHub &rarr;</a>
+                        <h3 class="text-2xl font-bold text-white"><span class="lang-es">Análisis Sentimental de Letras</span><span class="lang-en">Lyrical Sentiment Analysis</span></h3>
+                        <p class="text-zinc-400 mt-4 flex-grow"><span class="lang-es">Un proyecto de NLP en Python que extrae y visualiza las emociones predominantes en las letras de los artistas más populares, buscando patrones entre el sentimiento lírico y el éxito comercial.</span><span class="lang-en">An NLP project in Python that extracts and visualizes the predominant emotions in the lyrics of the most popular artists, looking for patterns between lyrical sentiment and commercial success.</span></p>
+                        <a href="https://github.com/camilosl12" target="_blank" rel="noopener noreferrer" class="inline-block text-blue-400 font-semibold mt-6 hover:text-blue-300 self-start"><span class="lang-es">Ver en GitHub</span><span class="lang-en">View on GitHub</span> &rarr;</a>
                     </div>
                     <div class="reveal interactive-card bg-zinc-900 rounded-2xl p-8 flex flex-col">
-                        <h3 class="text-2xl font-bold text-white">Diseño Sonoro para Videojuego</h3>
-                        <p class="text-zinc-400 mt-4 flex-grow">Creación de todos los activos de audio para un prototipo de videojuego indie, incluyendo efectos de sonido (SFX), ambientes y una banda sonora adaptativa que reacciona a las acciones del jugador.</p>
-                        <a href="#" class="inline-block text-blue-400 font-semibold mt-6 hover:text-blue-300 self-start">Escuchar Demo &rarr;</a>
+                        <h3 class="text-2xl font-bold text-white"><span class="lang-es">Diseño Sonoro para Videojuego</span><span class="lang-en">Sound Design for Video Game</span></h3>
+                        <p class="text-zinc-400 mt-4 flex-grow"><span class="lang-es">Creación de todos los activos de audio para un prototipo de videojuego indie, incluyendo efectos de sonido (SFX), ambientes y una banda sonora adaptativa que reacciona a las acciones del jugador.</span><span class="lang-en">Creation of all audio assets for an indie video game prototype, including sound effects (SFX), ambiences, and an adaptive soundtrack that reacts to the player's actions.</span></p>
+                        <a href="#" class="inline-block text-blue-400 font-semibold mt-6 hover:text-blue-300 self-start"><span class="lang-es">Escuchar Demo</span><span class="lang-en">Listen to Demo</span> &rarr;</a>
                     </div>
                     <div class="reveal interactive-card bg-zinc-900 rounded-2xl p-8 flex flex-col">
-                        <h3 class="text-2xl font-bold text-white">Simulador de Acústica de Salas</h3>
-                        <p class="text-zinc-400 mt-4 flex-grow">Desarrollo de un script en Python que simula la respuesta acústica de una sala basándose en sus dimensiones y materiales, una herramienta útil para el diseño de estudios de grabación y salas de conciertos.</p>
-                        <a href="https://github.com/camilosl12" target="_blank" rel="noopener noreferrer" class="inline-block text-blue-400 font-semibold mt-6 hover:text-blue-300 self-start">Explorar Simulación &rarr;</a>
+                        <h3 class="text-2xl font-bold text-white"><span class="lang-es">Simulador de Acústica de Salas</span><span class="lang-en">Room Acoustics Simulator</span></h3>
+                        <p class="text-zinc-400 mt-4 flex-grow"><span class="lang-es">Desarrollo de un script en Python que simula la respuesta acústica de una sala basándose en sus dimensiones y materiales, una herramienta útil para el diseño de estudios de grabación y salas de conciertos.</span><span class="lang-en">Development of a Python script that simulates the acoustic response of a room based on its dimensions and materials, a useful tool for designing recording studios and concert halls.</span></p>
+                        <a href="https://github.com/camilosl12" target="_blank" rel="noopener noreferrer" class="inline-block text-blue-400 font-semibold mt-6 hover:text-blue-300 self-start"><span class="lang-es">Explorar Simulación</span><span class="lang-en">Explore Simulation</span> &rarr;</a>
                     </div>
                 </div>
                 <div class="text-center mt-16">
                     <button id="hide-projects-btn" class="inline-block bg-transparent border-2 border-zinc-500 text-zinc-400 font-bold text-lg rounded-full px-8 py-4 hover:bg-zinc-500/10 hover:text-white transition-all duration-300">
-                        Ocultar Proyectos
+                        <span class="lang-es">Ocultar Proyectos</span><span class="lang-en">Hide Projects</span>
                     </button>
                 </div>
             </div>
@@ -471,11 +531,11 @@
         <section id="contacto" class="py-20 md:py-32 bg-dark-bg">
             <canvas id="contact-canvas"></canvas>
             <div class="container mx-auto px-6 text-center reveal relative z-10 max-w-3xl">
-                <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold text-white">Hablemos de tu Próximo Proyecto</h2>
-                <p class="text-xl text-zinc-400 mt-4">Estoy disponible para colaboraciones y oportunidades laborales. Si buscas un perfil que una la creatividad con la estrategia basada en datos, me encantaría conversar.</p>
+                <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold text-white"><span class="lang-es">Hablemos de tu Próximo Proyecto</span><span class="lang-en">Let's Talk About Your Next Project</span></h2>
+                <p class="text-xl text-zinc-400 mt-4"><span class="lang-es">Estoy disponible para colaboraciones y oportunidades laborales. Si buscas un perfil que una la creatividad con la estrategia basada en datos, me encantaría conversar.</span><span class="lang-en">I am available for collaborations and job opportunities. If you're looking for a profile that combines creativity with data-driven strategy, I would love to talk.</span></p>
                 <div class="mt-10">
                     <a href="mailto:camilosl2156@gmail.com" class="inline-block bg-blue-600 text-white font-bold text-lg rounded-full px-8 py-4 hover:bg-blue-500 transition-all duration-300 transform hover:scale-105">
-                        <i class="fas fa-paper-plane mr-2"></i> Enviar un Correo
+                        <i class="fas fa-paper-plane mr-2"></i> <span class="lang-es">Enviar un Correo</span><span class="lang-en">Send an Email</span>
                     </a>
                 </div>
                 <div class="flex justify-center items-center space-x-8 mt-12 text-zinc-400">
@@ -488,10 +548,21 @@
 
         <footer class="border-t border-zinc-800 py-8 bg-dark-bg">
             <div class="container mx-auto px-6 text-center text-zinc-500">
-                <p>&copy; 2025 Camilo Sanguino. Diseñado y desarrollado con pasión.</p>
+                <!-- CAMBIO: Botón de descarga de CV añadido -->
+                <div class="mb-6">
+                    <a id="cv-download-link" href="CV-CamiloSanguino-ES.pdf" download class="inline-block bg-zinc-800 text-zinc-300 font-bold text-sm rounded-full px-6 py-3 hover:bg-zinc-700 hover:text-white transition-all duration-300">
+                        <i class="fas fa-download mr-2"></i> <span class="lang-es">Descargar CV</span><span class="lang-en">Download CV</span>
+                    </a>
+                </div>
+                <p><span class="lang-es">&copy; 2025 Camilo Sanguino. Diseñado y desarrollado con pasión.</span><span class="lang-en">&copy; 2025 Camilo Sanguino. Designed and developed with passion.</span></p>
             </div>
         </footer>
     </main>
+
+    <div id="image-modal" class="fixed top-0 left-0 w-full h-full bg-black/90 z-[100] hidden items-center justify-center p-4">
+        <span id="close-modal-btn" class="absolute top-6 right-8 text-white text-5xl font-bold hover:text-zinc-400 cursor-pointer transition-colors">&times;</span>
+        <img id="modal-image" class="max-w-[90%] max-h-[85vh] object-contain rounded-lg" src="" alt="Imagen ampliada">
+    </div>
 
 <script>
 document.addEventListener('DOMContentLoaded', () => {
@@ -546,7 +617,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
         function pSetShapes(isMobile) {
             if (isMobile) {
-                // CAMBIO: Coordenadas de la animación principal re-optimizadas para móviles para un look más centrado y balanceado.
                 pShapes = {
                     note: [
                         ...Array.from({length: 15}, (_, i) => ({ x: 0.28 + Math.cos(i/7.5*Math.PI)*0.07, y: 0.5 + Math.sin(i/7.5*Math.PI)*0.1 })),
@@ -601,7 +671,6 @@ document.addEventListener('DOMContentLoaded', () => {
             }
             update() {
                 if (this.isShapeParticle) {
-                    // CAMBIO: Se ajusta la velocidad de la animación para que sea más fluida en móviles.
                     const isMobile = particleCanvas.width < 768;
                     const attractionForce = isMobile ? 0.025 : 0.015;
                     const dx = this.target.x * particleCanvas.width - this.x;
@@ -838,6 +907,74 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // --- LÓGICA DEL MODAL DE IMAGEN ---
+    const imageModal = document.getElementById('image-modal');
+    const modalImage = document.getElementById('modal-image');
+    const closeModalBtn = document.getElementById('close-modal-btn');
+    const profilePic = document.getElementById('profile-pic');
+    const albumCover = document.getElementById('album-cover');
+
+    if (imageModal && modalImage && closeModalBtn) {
+        const openModal = (src) => {
+            modalImage.src = src;
+            imageModal.classList.remove('hidden');
+            imageModal.classList.add('flex');
+        };
+
+        const closeModal = () => {
+            imageModal.classList.add('hidden');
+            imageModal.classList.remove('flex');
+        };
+
+        if (profilePic) {
+            profilePic.addEventListener('click', () => openModal(profilePic.src));
+        }
+        if (albumCover) {
+            albumCover.addEventListener('click', () => openModal(albumCover.src));
+        }
+
+        closeModalBtn.addEventListener('click', closeModal);
+        imageModal.addEventListener('click', (event) => {
+            if (event.target === imageModal) {
+                closeModal();
+            }
+        });
+    }
+
+    // --- LÓGICA DE IDIOMAS ---
+    const langEsBtns = [document.getElementById('lang-es-btn'), document.getElementById('lang-es-btn-mobile')];
+    const langEnBtns = [document.getElementById('lang-en-btn'), document.getElementById('lang-en-btn-mobile')];
+    const cvLink = document.getElementById('cv-download-link');
+
+    const cvFiles = {
+        es: 'CV-CamiloSanguino-ES.pdf',
+        en: 'CV-CamiloSanguino-EN.pdf'
+    };
+
+    function setLanguage(lang) {
+        document.querySelectorAll('.lang-es, .lang-en').forEach(el => {
+            el.style.display = 'none';
+        });
+
+        document.querySelectorAll(`.lang-${lang}`).forEach(el => {
+            el.style.display = 'inline'; // o 'block', 'flex', etc., según sea necesario
+        });
+
+        langEsBtns.forEach(btn => btn.classList.toggle('active', lang === 'es'));
+        langEnBtns.forEach(btn => btn.classList.toggle('active', lang === 'en'));
+        
+        if (cvLink) {
+            cvLink.href = cvFiles[lang];
+        }
+        
+        document.documentElement.lang = lang;
+    }
+
+    langEsBtns.forEach(btn => btn.addEventListener('click', () => setLanguage('es')));
+    langEnBtns.forEach(btn => btn.addEventListener('click', () => setLanguage('en')));
+
+    // Establecer idioma por defecto
+    setLanguage('es');
 });
 </script>
 
