@@ -283,6 +283,27 @@
         .lang-es, .lang-en {
             display: none;
         }
+
+        /* ====== NUEVO: engranajes animados y banner ====== */
+        .gear {
+            transform-origin: center;
+            animation: gear-spin 10s linear infinite;
+            filter: drop-shadow(0 0 14px rgba(192,132,252,0.15))
+                    drop-shadow(0 0 6px rgba(56,189,248,0.12));
+        }
+        .gear-sm { animation-duration: 6s; animation-direction: reverse; }
+        .gear-lg { animation-duration: 12s; }
+        @keyframes gear-spin { to { transform: rotate(360deg); } }
+        .update-banner:hover {
+            box-shadow:
+              0 0 40px rgba(192,132,252,0.12),
+              0 0 18px rgba(56,189,248,0.10);
+            border-color: rgba(255,255,255,0.16);
+        }
+        @media (prefers-reduced-motion: reduce) {
+            .gear { animation: none !important; }
+        }
+        /* ====== FIN NUEVO ====== */
     </style>
 </head>
 <body class="antialiased">
@@ -352,6 +373,76 @@
                 <p class="font-signature text-5xl sm:text-6xl text-zinc-200 mt-16 tracking-wider">
                     Camilo Sanguino
                 </p>
+
+                <!-- ====== NUEVO: Banner de actualización con engranajes ====== -->
+                <div class="reveal update-banner relative mx-auto mt-10 max-w-3xl rounded-2xl border border-zinc-800/80 bg-black/40 backdrop-blur-md p-6 md:p-7 shadow-[0_0_30px_rgba(192,132,252,0.08)]">
+                  <div class="flex items-center gap-5 md:gap-6">
+                    <!-- Gears SVG -->
+                    <svg class="h-14 w-14 md:h-16 md:w-16 shrink-0" viewBox="0 0 120 120" aria-hidden="true">
+                      <defs>
+                        <linearGradient id="gradCSLocal" x1="0%" y1="0%" x2="100%" y2="0%">
+                          <stop offset="0%" stop-color="#38bdf8"/>
+                          <stop offset="100%" stop-color="#c084fc"/>
+                        </linearGradient>
+                      </defs>
+
+                      <!-- Engrane grande -->
+                      <g class="gear gear-lg" transform="translate(42,60)">
+                        <circle r="20" fill="none" stroke="url(#gradCSLocal)" stroke-width="6"/>
+                        <!-- dientes -->
+                        <g fill="url(#gradCSLocal)">
+                          <rect x="-3" y="-34" width="6" height="10" rx="2"/>
+                          <rect x="-3" y="24"  width="6" height="10" rx="2"/>
+                          <rect x="24" y="-3"  width="10" height="6" rx="2"/>
+                          <rect x="-34" y="-3" width="10" height="6" rx="2"/>
+
+                          <g transform="rotate(45)">
+                            <rect x="-3" y="-34" width="6" height="10" rx="2"/>
+                            <rect x="-3" y="24"  width="6" height="10" rx="2"/>
+                            <rect x="24" y="-3"  width="10" height="6" rx="2"/>
+                            <rect x="-34" y="-3" width="10" height="6" rx="2"/>
+                          </g>
+                        </g>
+                        <circle r="6" fill="url(#gradCSLocal)"/>
+                      </g>
+
+                      <!-- Engrane pequeño -->
+                      <g class="gear gear-sm" transform="translate(82,78)">
+                        <circle r="12" fill="none" stroke="url(#gradCSLocal)" stroke-width="5"/>
+                        <g fill="url(#gradCSLocal)">
+                          <rect x="-2.5" y="-24" width="5" height="8" rx="2"/>
+                          <rect x="-2.5" y="16"  width="5" height="8" rx="2"/>
+                          <rect x="16" y="-2.5"  width="8" height="5" rx="2"/>
+                          <rect x="-24" y="-2.5" width="8" height="5" rx="2"/>
+
+                          <g transform="rotate(45)">
+                            <rect x="-2.5" y="-24" width="5" height="8" rx="2"/>
+                            <rect x="-2.5" y="16"  width="5" height="8" rx="2"/>
+                            <rect x="16" y="-2.5"  width="8" height="5" rx="2"/>
+                            <rect x="-24" y="-2.5" width="8" height="5" rx="2"/>
+                          </g>
+                        </g>
+                        <circle r="4" fill="url(#gradCSLocal)"/>
+                      </g>
+                    </svg>
+
+                    <div class="text-left">
+                      <p class="text-base md:text-lg text-zinc-300 leading-relaxed">
+                        <span class="lang-es">
+                          <strong class="text-white">Este portafolio</strong> se encuentra en proceso de actualización.
+                          <br class="hidden md:block"/>
+                          Próximamente incluirá <span class="gradient-text font-semibold">nuevos proyectos</span>.
+                        </span>
+                        <span class="lang-en">
+                          <strong class="text-white">This portfolio</strong> is currently being updated.
+                          <br class="hidden md:block"/>
+                          New <span class="gradient-text font-semibold">projects</span> coming soon.
+                        </span>
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                <!-- ====== FIN NUEVO ====== -->
             </div>
         </section>
 
@@ -957,7 +1048,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         document.querySelectorAll(`.lang-${lang}`).forEach(el => {
-            el.style.display = 'inline'; // o 'block', 'flex', etc., según sea necesario
+            el.style.display = 'inline';
         });
 
         langEsBtns.forEach(btn => btn.classList.toggle('active', lang === 'es'));
