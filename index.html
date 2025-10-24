@@ -41,102 +41,50 @@
             color: var(--light-text); 
             overflow-x: hidden;
         }
-        .font-signature {
-            font-family: 'Caveat', cursive;
-        }
-        .font-logo {
-            font-family: 'Orbitron', sans-serif;
-        }
+        .font-signature { font-family: 'Caveat', cursive; }
+        .font-logo { font-family: 'Orbitron', sans-serif; }
         section {
             padding-top: 5rem;
             padding-bottom: 5rem;
             position: relative; 
         }
         @media (min-width: 768px) {
-            section {
-                padding-top: 8rem;
-                padding-bottom: 8rem;
-            }
+            section { padding-top: 8rem; padding-bottom: 8rem; }
         }
         .reveal {
             opacity: 0;
             transform: translateY(30px);
             transition: opacity 1s ease-out, transform 1s ease-out;
         }
-        .reveal.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
+        .reveal.visible { opacity: 1; transform: translateY(0); }
         .video-container {
-            position: relative;
-            padding-bottom: 56.25%;
-            height: 0;
-            overflow: hidden;
-            max-width: 100%;
-            background: #000;
-            border-radius: 1rem;
+            position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;
+            max-width: 100%; background: #000; border-radius: 1rem;
         }
-        .video-container iframe {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-        }
-        .hero-section {
-            position: relative;
-            background-color: transparent;
-            padding-top: 0;
-            margin-top: 0;
-        }
+        .video-container iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
+        .hero-section { position: relative; background-color: transparent; padding-top: 0; margin-top: 0; }
         #particle-canvas {
-            position: fixed; 
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1; 
-            transition: opacity 0.4s ease-out;
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            z-index: -1; transition: opacity 0.4s ease-out;
         }
         .gradient-text {
             background: linear-gradient(90deg, var(--secondary-color), var(--primary-color));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            text-fill-color: transparent;
-            padding-bottom: 0.1em;
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            background-clip: text; text-fill-color: transparent; padding-bottom: 0.1em;
         }
-        .custom-audio-player .play-pause-btn svg {
-            width: 1.25rem;
-            height: 1.25rem;
-        }
+        .custom-audio-player .play-pause-btn svg { width: 1.25rem; height: 1.25rem; }
         .custom-audio-player .progress-bar {
-            -webkit-appearance: none;
-            appearance: none;
-            width: 100%;
-            height: 4px;
-            background: rgba(255, 255, 255, 0.2);
-            outline: none;
-            border-radius: 2px;
-            cursor: pointer;
-            transition: background 0.3s;
+            -webkit-appearance: none; appearance: none; width: 100%; height: 4px;
+            background: rgba(255, 255, 255, 0.2); outline: none; border-radius: 2px;
+            cursor: pointer; transition: background 0.3s;
         }
-        .custom-audio-player .progress-bar:hover {
-            background: rgba(255, 255, 255, 0.3);
-        }
+        .custom-audio-player .progress-bar:hover { background: rgba(255, 255, 255, 0.3); }
         .custom-audio-player .progress-bar::-webkit-slider-thumb {
-            -webkit-appearance: none;
-            appearance: none;
-            width: 14px;
-            height: 14px;
-            background: var(--primary-color);
-            border-radius: 50%;
-            cursor: pointer;
+            -webkit-appearance: none; appearance: none; width: 14px; height: 14px;
+            background: var(--primary-color); border-radius: 50%; cursor: pointer;
             transition: transform 0.2s;
         }
-        .custom-audio-player .progress-bar:hover::-webkit-slider-thumb {
-            transform: scale(1.2);
-        }
+        .custom-audio-player .progress-bar:hover::-webkit-slider-thumb { transform: scale(1.2); }
         .interactive-card {
             transition: transform 0.3s ease, box-shadow 0.3s ease;
             border: 1px solid rgba(255, 255, 255, 0.1);
@@ -146,163 +94,66 @@
             box-shadow: 0 0 25px rgba(192, 132, 252, 0.1), 0 0 15px rgba(56, 189, 248, 0.1);
             border-color: rgba(255, 255, 255, 0.2);
         }
-        .section-transition {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 150px;
-            pointer-events: none;
-        }
-        #contacto, #proyectos, #mas-proyectos {
-            overflow: hidden;
-        }
+        .section-transition { position: absolute; bottom: 0; left: 0; width: 100%; height: 150px; pointer-events: none; }
+        #contacto, #proyectos, #mas-proyectos { overflow: hidden; }
         #contact-canvas, #projects-canvas {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 0;
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 0;
         }
         .nav-link {
-            position: relative;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
+            position: relative; display: inline-flex; align-items: center; gap: 0.5rem;
             transition: color 0.3s ease, transform 0.1s ease-out;
         }
-        .nav-link:active {
-            transform: scale(0.95);
-        }
+        .nav-link:active { transform: scale(0.95); }
         .nav-link::after {
-            content: '';
-            position: absolute;
-            width: 100%;
-            transform: scaleX(0);
-            height: 2px;
-            bottom: -4px;
-            left: 0;
-            background-color: var(--primary-color);
-            transform-origin: bottom right;
-            transition: transform 0.25s ease-out;
+            content: ''; position: absolute; width: 100%; transform: scaleX(0); height: 2px; bottom: -4px; left: 0;
+            background-color: var(--primary-color); transform-origin: bottom right; transition: transform 0.25s ease-out;
         }
-        .nav-link:hover {
-            color: white;
-        }
-        .nav-link:hover::after {
-            transform: scaleX(1);
-            transform-origin: bottom left;
-        }
-        @keyframes fade-in-up {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        @keyframes shine-effect {
-            0% { transform: translateX(-150%) skewX(-25deg); }
-            100% { transform: translateX(250%) skewX(-25deg); }
-        }
-        .skill-bubble {
-            opacity: 0;
-            position: relative;
-            overflow: hidden;
-            cursor: pointer;
-        }
-        .reveal.visible .skill-bubble {
-            animation: fade-in-up 0.5s ease-out forwards;
-            animation-delay: var(--delay);
-        }
+        .nav-link:hover { color: white; }
+        .nav-link:hover::after { transform: scaleX(1); transform-origin: bottom left; }
+        @keyframes fade-in-up { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes shine-effect { 0% { transform: translateX(-150%) skewX(-25deg); } 100% { transform: translateX(250%) skewX(-25deg); } }
+        .skill-bubble { opacity: 0; position: relative; overflow: hidden; cursor: pointer; }
+        .reveal.visible .skill-bubble { animation: fade-in-up 0.5s ease-out forwards; animation-delay: var(--delay); }
         .skill-bubble::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 40%;
-            height: 100%;
+            content: ''; position: absolute; top: 0; left: 0; width: 40%; height: 100%;
             background: linear-gradient(to right, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.1) 50%, rgba(255, 255, 255, 0) 100%);
-            transform: skewX(-25deg);
-            opacity: 0;
+            transform: skewX(-25deg); opacity: 0;
         }
-        .skill-bubble.is-shining::after {
-            opacity: 1;
-            animation: shine-effect 1.5s ease-in-out;
-        }
-        .tab-button {
-            transition: all 0.3s ease;
-            border-bottom: 2px solid transparent;
-        }
-        .tab-button.active {
-            color: white;
-            border-bottom-color: var(--primary-color);
-        }
-        .project-card {
-            display: none;
-        }
-        .project-card.active {
-            display: block;
-            animation: fade-in-up 0.6s ease-out;
-        }
-        #mas-proyectos {
-            transition: opacity 0.5s ease-out, max-height 0.5s ease-out;
-            max-height: 0;
-            opacity: 0;
-            display: none; /* Inicia oculto */
-        }
-        #mas-proyectos.visible {
-            max-height: 1500px; /* Suficientemente grande para el contenido */
-            opacity: 1;
-        }
-        #image-modal {
-            transition: opacity 0.3s ease-in-out;
-        }
-        #modal-image {
-            transition: transform 0.3s ease-in-out;
-        }
-        /* CAMBIO: Estilos para los botones de idioma */
+        .skill-bubble.is-shining::after { opacity: 1; animation: shine-effect 1.5s ease-in-out; }
+        .tab-button { transition: all 0.3s ease; border-bottom: 2px solid transparent; }
+        .tab-button.active { color: white; border-bottom-color: var(--primary-color); }
+        .project-card { display: none; }
+        .project-card.active { display: block; animation: fade-in-up 0.6s ease-out; }
+        #mas-proyectos { transition: opacity 0.5s ease-out, max-height 0.5s ease-out; max-height: 0; opacity: 0; display: none; }
+        #mas-proyectos.visible { max-height: 1500px; opacity: 1; }
+        #image-modal { transition: opacity 0.3s ease-in-out; }
+        #modal-image { transition: transform 0.3s ease-in-out; }
         .lang-btn {
-            background-color: transparent;
-            border: 1px solid var(--medium-text);
-            color: var(--medium-text);
-            padding: 0.25rem 0.75rem;
-            border-radius: 9999px;
-            font-size: 0.875rem;
-            font-weight: 600;
+            background-color: transparent; border: 1px solid var(--medium-text); color: var(--medium-text);
+            padding: 0.25rem 0.75rem; border-radius: 9999px; font-size: 0.875rem; font-weight: 600;
             transition: all 0.2s ease-in-out;
         }
-        .lang-btn:hover {
-            background-color: var(--primary-color);
-            border-color: var(--primary-color);
-            color: white;
-        }
-        .lang-btn.active {
-            background-color: var(--secondary-color);
-            border-color: var(--secondary-color);
-            color: white;
-        }
-        /* CAMBIO: Clases para ocultar/mostrar contenido por idioma */
-        .lang-es, .lang-en {
-            display: none;
-        }
+        .lang-btn:hover { background-color: var(--primary-color); border-color: var(--primary-color); color: white; }
+        .lang-btn.active { background-color: var(--secondary-color); border-color: var(--secondary-color); color: white; }
+        .lang-es, .lang-en { display: none; }
 
-        /* ====== NUEVO: engranajes animados y banner ====== */
+        /* ====== NUEVO: Engranajes que engranan (rotación con sentido 2:1) ====== */
         .gear {
             transform-origin: center;
-            animation: gear-spin 10s linear infinite;
-            filter: drop-shadow(0 0 14px rgba(192,132,252,0.15))
-                    drop-shadow(0 0 6px rgba(56,189,248,0.12));
+            transform-box: fill-box;          /* asegura eje en el centro del grupo */
+            animation: gear-spin var(--period, 12s) linear infinite;
+            will-change: transform;
+            filter: drop-shadow(0 0 14px rgba(192,132,252,0.15)) drop-shadow(0 0 6px rgba(56,189,248,0.12));
         }
-        .gear-sm { animation-duration: 6s; animation-direction: reverse; }
-        .gear-lg { animation-duration: 12s; }
+        .gear--large { --period: 12s; animation-direction: normal; }
+        .gear--small { --period: 6s;  animation-direction: reverse; } /* 2:1 (pequeño más rápido y al revés) */
         @keyframes gear-spin { to { transform: rotate(360deg); } }
+
         .update-banner:hover {
-            box-shadow:
-              0 0 40px rgba(192,132,252,0.12),
-              0 0 18px rgba(56,189,248,0.10);
+            box-shadow: 0 0 40px rgba(192,132,252,0.12), 0 0 18px rgba(56,189,248,0.10);
             border-color: rgba(255,255,255,0.16);
         }
-        @media (prefers-reduced-motion: reduce) {
-            .gear { animation: none !important; }
-        }
+        @media (prefers-reduced-motion: reduce) { .gear { animation: none !important; } }
         /* ====== FIN NUEVO ====== */
     </style>
 </head>
@@ -320,10 +171,7 @@
                     </linearGradient>
                   </defs>
                   <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle"
-                        class="font-logo"
-                        font-weight="700"
-                        font-size="100"
-                        fill="url(#gradCS)">
+                        class="font-logo" font-weight="700" font-size="100" fill="url(#gradCS)">
                     CS
                   </text>
                 </svg>
@@ -332,7 +180,6 @@
                 <a href="#sobre-mi" class="nav-link text-zinc-300"><i class="fas fa-microphone-alt fa-fw"></i><span class="lang-es">Sobre Mí</span><span class="lang-en">About Me</span></a>
                 <a href="#proyectos" class="nav-link text-zinc-300"><i class="fas fa-music fa-fw"></i><span class="lang-es">Proyectos</span><span class="lang-en">Projects</span></a>
                 <a href="#contacto" class="nav-link text-zinc-300"><i class="fas fa-envelope fa-fw"></i><span class="lang-es">Contacto</span><span class="lang-en">Contact</span></a>
-                <!-- CAMBIO: Botones de idioma -->
                 <div class="flex items-center gap-2">
                     <button id="lang-es-btn" class="lang-btn">ES</button>
                     <button id="lang-en-btn" class="lang-btn">EN</button>
@@ -348,7 +195,6 @@
             <a href="#sobre-mi" class="flex items-center gap-3 py-3 px-6 text-sm text-zinc-300 hover:bg-zinc-800"><i class="fas fa-microphone-alt fa-fw"></i><span class="lang-es">Sobre Mí</span><span class="lang-en">About Me</span></a>
             <a href="#proyectos" class="flex items-center gap-3 py-3 px-6 text-sm text-zinc-300 hover:bg-zinc-800"><i class="fas fa-music fa-fw"></i><span class="lang-es">Proyectos</span><span class="lang-en">Projects</span></a>
             <a href="#contacto" class="flex items-center gap-3 py-3 px-6 text-sm text-zinc-300 hover:bg-zinc-800"><i class="fas fa-envelope fa-fw"></i><span class="lang-es">Contacto</span><span class="lang-en">Contact</span></a>
-             <!-- CAMBIO: Botones de idioma en menú móvil -->
             <div class="flex items-center gap-2 p-4 justify-center">
                 <button id="lang-es-btn-mobile" class="lang-btn">ES</button>
                 <button id="lang-en-btn-mobile" class="lang-btn">EN</button>
@@ -374,11 +220,11 @@
                     Camilo Sanguino
                 </p>
 
-                <!-- ====== NUEVO: Banner de actualización con engranajes ====== -->
+                <!-- ====== NUEVO: Banner de actualización con engranajes que engranan 2:1 ====== -->
                 <div class="reveal update-banner relative mx-auto mt-10 max-w-3xl rounded-2xl border border-zinc-800/80 bg-black/40 backdrop-blur-md p-6 md:p-7 shadow-[0_0_30px_rgba(192,132,252,0.08)]">
                   <div class="flex items-center gap-5 md:gap-6">
-                    <!-- Gears SVG -->
-                    <svg class="h-14 w-14 md:h-16 md:w-16 shrink-0" viewBox="0 0 120 120" aria-hidden="true">
+                    <!-- SVG con dos engranajes que se tocan y giran en sentidos opuestos -->
+                    <svg class="h-16 w-28 md:h-20 md:w-36 shrink-0" viewBox="0 0 220 120" aria-hidden="true">
                       <defs>
                         <linearGradient id="gradCSLocal" x1="0%" y1="0%" x2="100%" y2="0%">
                           <stop offset="0%" stop-color="#38bdf8"/>
@@ -386,43 +232,52 @@
                         </linearGradient>
                       </defs>
 
-                      <!-- Engrane grande -->
-                      <g class="gear gear-lg" transform="translate(42,60)">
-                        <circle r="20" fill="none" stroke="url(#gradCSLocal)" stroke-width="6"/>
-                        <!-- dientes -->
+                      <!-- Engranaje grande (r≈30 anillo, dientes sobresalen a ~44). Centro (70,60) -->
+                      <g class="gear gear--large" transform="translate(70,60)">
+                        <circle r="30" fill="none" stroke="url(#gradCSLocal)" stroke-width="6"/>
                         <g fill="url(#gradCSLocal)">
-                          <rect x="-3" y="-34" width="6" height="10" rx="2"/>
-                          <rect x="-3" y="24"  width="6" height="10" rx="2"/>
-                          <rect x="24" y="-3"  width="10" height="6" rx="2"/>
-                          <rect x="-34" y="-3" width="10" height="6" rx="2"/>
-
+                          <rect x="-3" y="-44" width="6" height="12" rx="2"/>
+                          <rect x="-3" y="32"  width="6" height="12" rx="2"/>
+                          <rect x="32"  y="-3"  width="12" height="6" rx="2"/>
+                          <rect x="-44" y="-3"  width="12" height="6" rx="2"/>
+                          <g transform="rotate(22.5)">
+                            <rect x="-3" y="-44" width="6" height="12" rx="2"/>
+                            <rect x="-3" y="32"  width="6" height="12" rx="2"/>
+                            <rect x="32"  y="-3"  width="12" height="6" rx="2"/>
+                            <rect x="-44" y="-3"  width="12" height="6" rx="2"/>
+                          </g>
                           <g transform="rotate(45)">
-                            <rect x="-3" y="-34" width="6" height="10" rx="2"/>
-                            <rect x="-3" y="24"  width="6" height="10" rx="2"/>
-                            <rect x="24" y="-3"  width="10" height="6" rx="2"/>
-                            <rect x="-34" y="-3" width="10" height="6" rx="2"/>
+                            <rect x="-3" y="-44" width="6" height="12" rx="2"/>
+                            <rect x="-3" y="32"  width="6" height="12" rx="2"/>
+                            <rect x="32"  y="-3"  width="12" height="6" rx="2"/>
+                            <rect x="-44" y="-3"  width="12" height="6" rx="2"/>
+                          </g>
+                          <g transform="rotate(67.5)">
+                            <rect x="-3" y="-44" width="6" height="12" rx="2"/>
+                            <rect x="-3" y="32"  width="6" height="12" rx="2"/>
+                            <rect x="32"  y="-3"  width="12" height="6" rx="2"/>
+                            <rect x="-44" y="-3"  width="12" height="6" rx="2"/>
                           </g>
                         </g>
                         <circle r="6" fill="url(#gradCSLocal)"/>
                       </g>
 
-                      <!-- Engrane pequeño -->
-                      <g class="gear gear-sm" transform="translate(82,78)">
-                        <circle r="12" fill="none" stroke="url(#gradCSLocal)" stroke-width="5"/>
+                      <!-- Engranaje pequeño (r≈19 anillo, dientes hasta ~31). Centro (121,60) => distancia ≈ 51 (≈ 44 + 31) -->
+                      <g class="gear gear--small" transform="translate(121,60)">
+                        <circle r="19" fill="none" stroke="url(#gradCSLocal)" stroke-width="5"/>
                         <g fill="url(#gradCSLocal)">
-                          <rect x="-2.5" y="-24" width="5" height="8" rx="2"/>
-                          <rect x="-2.5" y="16"  width="5" height="8" rx="2"/>
-                          <rect x="16" y="-2.5"  width="8" height="5" rx="2"/>
-                          <rect x="-24" y="-2.5" width="8" height="5" rx="2"/>
-
-                          <g transform="rotate(45)">
-                            <rect x="-2.5" y="-24" width="5" height="8" rx="2"/>
-                            <rect x="-2.5" y="16"  width="5" height="8" rx="2"/>
-                            <rect x="16" y="-2.5"  width="8" height="5" rx="2"/>
-                            <rect x="-24" y="-2.5" width="8" height="5" rx="2"/>
+                          <rect x="-2.5" y="-31" width="5" height="8" rx="2"/>
+                          <rect x="-2.5" y="23"  width="5" height="8" rx="2"/>
+                          <rect x="23"   y="-2.5" width="8" height="5" rx="2"/>
+                          <rect x="-31"  y="-2.5" width="8" height="5" rx="2"/>
+                          <g transform="rotate(22.5)">
+                            <rect x="-2.5" y="-31" width="5" height="8" rx="2"/>
+                            <rect x="-2.5" y="23"  width="5" height="8" rx="2"/>
+                            <rect x="23"   y="-2.5" width="8" height="5" rx="2"/>
+                            <rect x="-31"  y="-2.5" width="8" height="5" rx="2"/>
                           </g>
                         </g>
-                        <circle r="4" fill="url(#gradCSLocal)"/>
+                        <circle r="4.5" fill="url(#gradCSLocal)"/>
                       </g>
                     </svg>
 
@@ -531,7 +386,6 @@
                 <div id="music-projects" class="project-card active">
                     <div class="grid grid-cols-1 lg:grid-cols-5 gap-8 items-center mb-16">
                         <div class="lg:col-span-2 reveal">
-                             <!-- CAMBIO: ID añadido para la funcionalidad del modal de la imagen del álbum -->
                              <img id="album-cover" src="https://camilosl12.github.io/Homenaje-portada.jpeg"
                                  onerror="this.onerror=null;this.src='https://placehold.co/600x600/18181b/E5E7EB?text=Homenaje';"
                                  alt="Portada del álbum Homenaje al vallenato romántico" class="rounded-lg shadow-2xl w-full h-auto interactive-card cursor-pointer">
@@ -639,7 +493,6 @@
 
         <footer class="border-t border-zinc-800 py-8 bg-dark-bg">
             <div class="container mx-auto px-6 text-center text-zinc-500">
-                <!-- CAMBIO: Botón de descarga de CV añadido -->
                 <div class="mb-6">
                     <a id="cv-download-link" href="CV-CamiloSanguino-ES.pdf" download class="inline-block bg-zinc-800 text-zinc-300 font-bold text-sm rounded-full px-6 py-3 hover:bg-zinc-700 hover:text-white transition-all duration-300">
                         <i class="fas fa-download mr-2"></i> <span class="lang-es">Descargar CV</span><span class="lang-en">Download CV</span>
@@ -678,7 +531,6 @@ document.addEventListener('DOMContentLoaded', () => {
         window.addEventListener('scroll', () => {
             const heroHeight = inicioSection.offsetHeight;
             const fadeStartScroll = heroHeight * 0.7;
-            
             if (window.scrollY > fadeStartScroll) {
                 const opacity = Math.max(0, 1 - (window.scrollY - fadeStartScroll) / (heroHeight * 0.3));
                 particleCanvas.style.opacity = opacity;
@@ -692,9 +544,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const revealElements = document.querySelectorAll('.reveal');
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('visible');
-            }
+            if (entry.isIntersecting) entry.target.classList.add('visible');
         });
     }, { threshold: 0.1 });
     revealElements.forEach(element => observer.observe(element));
@@ -712,12 +562,12 @@ document.addEventListener('DOMContentLoaded', () => {
                     note: [
                         ...Array.from({length: 15}, (_, i) => ({ x: 0.28 + Math.cos(i/7.5*Math.PI)*0.07, y: 0.5 + Math.sin(i/7.5*Math.PI)*0.1 })),
                         ...Array.from({length: 10}, (_, i) => ({ x: 0.35, y: 0.5 - i*0.022 })),
-                        ...Array.from({length: 8}, (_, i) => ({ x: 0.35 + Math.sin(i/8*Math.PI*0.8)*0.08, y: 0.28 + (i/8)*0.07})),
+                        ...Array.from({length: 8},  (_, i) => ({ x: 0.35 + Math.sin(i/8*Math.PI*0.8)*0.08, y: 0.28 + (i/8)*0.07}))
                     ],
                     barChart: [
                         ...Array.from({length: 7}, (_, i) => ({ x: 0.65, y: 0.6 - (i/6)*0.15 })),
                         ...Array.from({length: 9}, (_, i) => ({ x: 0.72, y: 0.6 - (i/8)*0.25 })),
-                        ...Array.from({length: 8}, (_, i) => ({ x: 0.78, y: 0.6 - (i/7)*0.20 })),
+                        ...Array.from({length: 8}, (_, i) => ({ x: 0.78, y: 0.6 - (i/7)*0.20 }))
                     ]
                 };
             } else {
@@ -725,14 +575,14 @@ document.addEventListener('DOMContentLoaded', () => {
                     note: [
                         ...Array.from({length: 30}, (_, i) => ({ x: 0.25 + Math.cos(i/15*Math.PI)*0.03, y: 0.6 + Math.sin(i/15*Math.PI)*0.05 })),
                         ...Array.from({length: 20}, (_, i) => ({ x: 0.28, y: 0.6 - i*0.018 })),
-                        ...Array.from({length: 15}, (_, i) => ({ x: 0.28 + Math.sin(i/15*Math.PI*0.8)*0.06, y: 0.27 + (i/15)*0.1})),
+                        ...Array.from({length: 15}, (_, i) => ({ x: 0.28 + Math.sin(i/15*Math.PI*0.8)*0.06, y: 0.27 + (i/15)*0.1}))
                     ],
                     barChart: [
                         ...Array.from({length: 10}, (_, i) => ({ x: 0.68, y: 0.6 - (i/9)*0.15 })),
                         ...Array.from({length: 15}, (_, i) => ({ x: 0.72, y: 0.6 - (i/14)*0.25 })),
                         ...Array.from({length: 20}, (_, i) => ({ x: 0.76, y: 0.6 - (i/19)*0.4 })),
                         ...Array.from({length: 18}, (_, i) => ({ x: 0.80, y: 0.6 - (i/17)*0.3 })),
-                        ...Array.from({length: 12}, (_, i) => ({ x: 0.84, y: 0.6 - (i/11)*0.2 })),
+                        ...Array.from({length: 12}, (_, i) => ({ x: 0.84, y: 0.6 - (i/11)*0.2 }))
                     ]
                 };
             }
@@ -754,11 +604,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 this.speedX = (Math.random() - 0.5) * 0.4;
                 this.speedY = (Math.random() - 0.5) * 0.4;
                 this.size = Math.random() * 1.5 + 1;
-                if (this.isShapeParticle) {
-                    this.color = Math.random() > 0.2 ? 'rgba(192, 132, 252, 0.35)' : 'rgba(56, 189, 248, 0.35)';
-                } else {
-                    this.color = Math.random() > 0.2 ? 'rgba(192, 132, 252, 0.5)' : 'rgba(56, 189, 248, 0.5)';
-                }
+                this.color = this.isShapeParticle
+                    ? (Math.random() > 0.2 ? 'rgba(192, 132, 252, 0.35)' : 'rgba(56, 189, 248, 0.35)')
+                    : (Math.random() > 0.2 ? 'rgba(192, 132, 252, 0.5)' : 'rgba(56, 189, 248, 0.5)');
             }
             update() {
                 if (this.isShapeParticle) {
@@ -786,9 +634,7 @@ document.addEventListener('DOMContentLoaded', () => {
         function pCreateShapeParticles() {
             pShapeParticles = [];
             Object.values(pShapes).forEach(shapePoints => {
-                shapePoints.forEach(point => {
-                    pShapeParticles.push(new PParticle(point));
-                });
+                shapePoints.forEach(point => { pShapeParticles.push(new PParticle(point)); });
             });
         }
 
@@ -798,9 +644,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const particleDensity = isMobile ? 20000 : 12000;
             const randomParticleCount = Math.floor(particleCanvas.width * particleCanvas.height / particleDensity);
             pParticles = [];
-            for (let i = 0; i < randomParticleCount; i++) {
-                pParticles.push(new PParticle());
-            }
+            for (let i = 0; i < randomParticleCount; i++) pParticles.push(new PParticle());
         }
         
         function pConnectParticles() {
@@ -855,9 +699,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         playPauseBtn.addEventListener('click', () => {
             if (audio.paused) {
-                document.querySelectorAll('.audio-element').forEach(otherAudio => {
-                    if (otherAudio !== audio) otherAudio.pause();
-                });
+                document.querySelectorAll('.audio-element').forEach(otherAudio => { if (otherAudio !== audio) otherAudio.pause(); });
                 audio.play();
             } else {
                 audio.pause();
@@ -875,9 +717,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
         
         audio.addEventListener('loadedmetadata', () => {
-             if (audio.duration) {
-                timeDisplay.textContent = `0:00 / ${formatTime(audio.duration)}`;
-             }
+             if (audio.duration) { timeDisplay.textContent = `0:00 / ${formatTime(audio.duration)}`; }
         });
 
         progressBar.addEventListener('input', () => {
@@ -891,10 +731,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!canvas) return;
         const ctx = canvas.getContext('2d');
         let particles = [];
-        function resizeCanvas() {
-            canvas.width = canvas.offsetWidth;
-            canvas.height = canvas.offsetHeight;
-        }
+        function resizeCanvas() { canvas.width = canvas.offsetWidth; canvas.height = canvas.offsetHeight; }
         class Particle {
             constructor() {
                 this.x = Math.random() * canvas.width;
@@ -905,10 +742,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
             update() {
                 this.y += this.speedY;
-                if (this.y < -10) {
-                    this.y = canvas.height + 10;
-                    this.x = Math.random() * canvas.width;
-                }
+                if (this.y < -10) { this.y = canvas.height + 10; this.x = Math.random() * canvas.width; }
             }
             draw() {
                 ctx.fillStyle = this.color;
@@ -921,9 +755,7 @@ document.addEventListener('DOMContentLoaded', () => {
             resizeCanvas();
             particles = [];
             const particleCount = 150;
-            for (let i = 0; i < particleCount; i++) {
-                particles.push(new Particle());
-            }
+            for (let i = 0; i < particleCount; i++) particles.push(new Particle());
         }
         function animate() {
             if(!canvas.isConnected) return;
@@ -931,12 +763,10 @@ document.addEventListener('DOMContentLoaded', () => {
             particles.forEach(p => { p.update(); p.draw(); });
             requestAnimationFrame(animate);
         }
-        init();
-        animate();
-        window.addEventListener('resize', init);
+        init(); animate(); window.addEventListener('resize', init);
     }
     createSectionBackgroundAnimation('projects-canvas', '192, 132, 252'); // Púrpura
-    createSectionBackgroundAnimation('contact-canvas', '59, 130, 246'); // Azul
+    createSectionBackgroundAnimation('contact-canvas', '59, 130, 246');   // Azul
 
     // --- LÓGICA DE PESTAÑAS DE PROYECTOS ---
     const tabButtons = document.querySelectorAll('.tab-button');
@@ -947,11 +777,8 @@ document.addEventListener('DOMContentLoaded', () => {
             button.classList.add('active');
             const tab = button.getAttribute('data-tab');
             projectCards.forEach(card => {
-                if (card.id === `${tab}-projects`) {
-                    card.classList.add('active');
-                } else {
-                    card.classList.remove('active');
-                }
+                if (card.id === `${tab}-projects`) card.classList.add('active');
+                else card.classList.remove('active');
             });
         });
     });
@@ -959,15 +786,9 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- ANIMACIÓN DE HABILIDADES ---
     document.querySelectorAll('.skill-bubble').forEach(bubble => {
         bubble.addEventListener('mouseenter', () => {
-            if (bubble.classList.contains('is-shining')) {
-                return;
-            }
-            bubble.classList.add('is-shining');
+            if (!bubble.classList.contains('is-shining')) bubble.classList.add('is-shining');
         });
-
-        bubble.addEventListener('animationend', () => {
-            bubble.classList.remove('is-shining');
-        });
+        bubble.addEventListener('animationend', () => { bubble.classList.remove('is-shining'); });
     });
 
     // --- LÓGICA PARA MOSTRAR/OCULTAR MÁS PROYECTOS ---
@@ -980,20 +801,16 @@ document.addEventListener('DOMContentLoaded', () => {
         showMoreBtn.addEventListener('click', (event) => {
             event.preventDefault();
             moreProjectsSection.style.display = 'block';
-            setTimeout(() => {
-                moreProjectsSection.classList.add('visible');
-            }, 10); 
+            setTimeout(() => { moreProjectsSection.classList.add('visible'); }, 10);
             showMoreContainer.style.display = 'none';
         });
 
         hideProjectsBtn.addEventListener('click', (event) => {
             event.preventDefault();
             moreProjectsSection.classList.remove('visible');
-            
             moreProjectsSection.addEventListener('transitionend', () => {
                 moreProjectsSection.style.display = 'none';
             }, { once: true });
-
             showMoreContainer.style.display = 'block';
         });
     }
@@ -1006,30 +823,12 @@ document.addEventListener('DOMContentLoaded', () => {
     const albumCover = document.getElementById('album-cover');
 
     if (imageModal && modalImage && closeModalBtn) {
-        const openModal = (src) => {
-            modalImage.src = src;
-            imageModal.classList.remove('hidden');
-            imageModal.classList.add('flex');
-        };
-
-        const closeModal = () => {
-            imageModal.classList.add('hidden');
-            imageModal.classList.remove('flex');
-        };
-
-        if (profilePic) {
-            profilePic.addEventListener('click', () => openModal(profilePic.src));
-        }
-        if (albumCover) {
-            albumCover.addEventListener('click', () => openModal(albumCover.src));
-        }
-
+        const openModal = (src) => { modalImage.src = src; imageModal.classList.remove('hidden'); imageModal.classList.add('flex'); };
+        const closeModal = () => { imageModal.classList.add('hidden'); imageModal.classList.remove('flex'); };
+        if (profilePic) profilePic.addEventListener('click', () => openModal(profilePic.src));
+        if (albumCover) albumCover.addEventListener('click', () => openModal(albumCover.src));
         closeModalBtn.addEventListener('click', closeModal);
-        imageModal.addEventListener('click', (event) => {
-            if (event.target === imageModal) {
-                closeModal();
-            }
-        });
+        imageModal.addEventListener('click', (event) => { if (event.target === imageModal) closeModal(); });
     }
 
     // --- LÓGICA DE IDIOMAS ---
@@ -1037,35 +836,20 @@ document.addEventListener('DOMContentLoaded', () => {
     const langEnBtns = [document.getElementById('lang-en-btn'), document.getElementById('lang-en-btn-mobile')];
     const cvLink = document.getElementById('cv-download-link');
 
-    const cvFiles = {
-        es: 'CV-CamiloSanguino-ES.pdf',
-        en: 'CV-CamiloSanguino-EN.pdf'
-    };
+    const cvFiles = { es: 'CV-CamiloSanguino-ES.pdf', en: 'CV-CamiloSanguino-EN.pdf' };
 
     function setLanguage(lang) {
-        document.querySelectorAll('.lang-es, .lang-en').forEach(el => {
-            el.style.display = 'none';
-        });
-
-        document.querySelectorAll(`.lang-${lang}`).forEach(el => {
-            el.style.display = 'inline';
-        });
-
-        langEsBtns.forEach(btn => btn.classList.toggle('active', lang === 'es'));
-        langEnBtns.forEach(btn => btn.classList.toggle('active', lang === 'en'));
-        
-        if (cvLink) {
-            cvLink.href = cvFiles[lang];
-        }
-        
+        document.querySelectorAll('.lang-es, .lang-en').forEach(el => { el.style.display = 'none'; });
+        document.querySelectorAll(`.lang-${lang}`).forEach(el => { el.style.display = 'inline'; });
+        langEsBtns.forEach(btn => btn?.classList.toggle('active', lang === 'es'));
+        langEnBtns.forEach(btn => btn?.classList.toggle('active', lang === 'en'));
+        if (cvLink) cvLink.href = cvFiles[lang];
         document.documentElement.lang = lang;
     }
 
-    langEsBtns.forEach(btn => btn.addEventListener('click', () => setLanguage('es')));
-    langEnBtns.forEach(btn => btn.addEventListener('click', () => setLanguage('en')));
-
-    // Establecer idioma por defecto
-    setLanguage('es');
+    langEsBtns.forEach(btn => btn?.addEventListener('click', () => setLanguage('es')));
+    langEnBtns.forEach(btn => btn?.addEventListener('click', () => setLanguage('en')));
+    setLanguage('es'); // idioma por defecto
 });
 </script>
 
