@@ -137,23 +137,31 @@
         .lang-btn.active { background-color: var(--secondary-color); border-color: var(--secondary-color); color: white; }
         .lang-es, .lang-en { display: none; }
 
-        /* ====== NUEVO: Engranajes que engranan (rotación con sentido 2:1) ====== */
-        .gear {
-            transform-origin: center;
-            transform-box: fill-box;          /* asegura eje en el centro del grupo */
-            animation: gear-spin var(--period, 12s) linear infinite;
-            will-change: transform;
-            filter: drop-shadow(0 0 14px rgba(192,132,252,0.15)) drop-shadow(0 0 6px rgba(56,189,248,0.12));
+        /* ====== NUEVO: Animación de engranajes con rotación simple ====== */
+        @keyframes spin-clockwise {
+            to { transform: rotate(360deg); }
         }
-        .gear--large { --period: 12s; animation-direction: normal; }
-        .gear--small { --period: 6s;  animation-direction: reverse; } /* 2:1 (pequeño más rápido y al revés) */
-        @keyframes gear-spin { to { transform: rotate(360deg); } }
+        @keyframes spin-counter-clockwise {
+            to { transform: rotate(-360deg); }
+        }
+
+        .gear-1 {
+            animation: spin-clockwise 12s linear infinite;
+            filter: drop-shadow(0 0 14px rgba(192,132,252,0.15)); /* Sombra púrpura */
+        }
+        
+        .gear-2 {
+            animation: spin-counter-clockwise 8s linear infinite; /* Rota al revés */
+            filter: drop-shadow(0 0 14px rgba(56,189,248,0.12)); /* Sombra azul */
+        }
 
         .update-banner:hover {
             box-shadow: 0 0 40px rgba(192,132,252,0.12), 0 0 18px rgba(56,189,248,0.10);
             border-color: rgba(255,255,255,0.16);
         }
-        @media (prefers-reduced-motion: reduce) { .gear { animation: none !important; } }
+        @media (prefers-reduced-motion: reduce) { 
+            .gear-1, .gear-2 { animation: none !important; } 
+        }
         /* ====== FIN NUEVO ====== */
     </style>
 </head>
@@ -164,16 +172,16 @@
         <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
             <a href="#inicio" class="block">
                 <svg viewBox="0 0 300 150" xmlns="http://www.w3.org/2000/svg" class="h-10 w-auto">
-                  <defs>
-                    <linearGradient id="gradCS" x1="0%" y1="0%" x2="100%" y2="0%">
-                      <stop offset="0%" style="stop-color:#38bdf8; stop-opacity:1"/>
-                      <stop offset="100%" style="stop-color:#c084fc; stop-opacity:1"/>
-                    </linearGradient>
-                  </defs>
-                  <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle"
-                        class="font-logo" font-weight="700" font-size="100" fill="url(#gradCS)">
-                    CS
-                  </text>
+                    <defs>
+                        <linearGradient id="gradCS" x1="0%" y1="0%" x2="100%" y2="0%">
+                            <stop offset="0%" style="stop-color:#38bdf8; stop-opacity:1"/>
+                            <stop offset="100%" style="stop-color:#c084fc; stop-opacity:1"/>
+                        </linearGradient>
+                    </defs>
+                    <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle"
+                            class="font-logo" font-weight="700" font-size="100" fill="url(#gradCS)">
+                        CS
+                    </text>
                 </svg>
             </a>
             <div class="hidden md:flex items-center space-x-8">
@@ -222,80 +230,30 @@
 
                 <!-- ====== NUEVO: Banner de actualización con engranajes que engranan 2:1 ====== -->
                 <div class="reveal update-banner relative mx-auto mt-10 max-w-3xl rounded-2xl border border-zinc-800/80 bg-black/40 backdrop-blur-md p-6 md:p-7 shadow-[0_0_30px_rgba(192,132,252,0.08)]">
-                  <div class="flex items-center gap-5 md:gap-6">
-                    <!-- SVG con dos engranajes que se tocan y giran en sentidos opuestos -->
-                    <svg class="h-16 w-28 md:h-20 md:w-36 shrink-0" viewBox="0 0 220 120" aria-hidden="true">
-                      <defs>
-                        <linearGradient id="gradCSLocal" x1="0%" y1="0%" x2="100%" y2="0%">
-                          <stop offset="0%" stop-color="#38bdf8"/>
-                          <stop offset="100%" stop-color="#c084fc"/>
-                        </linearGradient>
-                      </defs>
+                    <div class="flex items-center gap-5 md:gap-6">
+                        
+                        <!-- SVG de engranajes reemplazado por iconos de Font Awesome -->
+                        <div class="h-16 w-28 md:h-20 md:w-36 shrink-0 flex items-center justify-center gap-0" aria-hidden="true">
+                            <i class="fas fa-gear text-5xl md:text-6xl gradient-text gear-1"></i>
+                            <i class="fas fa-gear text-3xl md:text-4xl gradient-text gear-2" style="margin-left: -0.75rem; margin-top: 1rem;"></i>
+                        </div>
+                        <!-- FIN del reemplazo de SVG -->
 
-                      <!-- Engranaje grande (r≈30 anillo, dientes sobresalen a ~44). Centro (70,60) -->
-                      <g class="gear gear--large" transform="translate(70,60)">
-                        <circle r="30" fill="none" stroke="url(#gradCSLocal)" stroke-width="6"/>
-                        <g fill="url(#gradCSLocal)">
-                          <rect x="-3" y="-44" width="6" height="12" rx="2"/>
-                          <rect x="-3" y="32"  width="6" height="12" rx="2"/>
-                          <rect x="32"  y="-3"  width="12" height="6" rx="2"/>
-                          <rect x="-44" y="-3"  width="12" height="6" rx="2"/>
-                          <g transform="rotate(22.5)">
-                            <rect x="-3" y="-44" width="6" height="12" rx="2"/>
-                            <rect x="-3" y="32"  width="6" height="12" rx="2"/>
-                            <rect x="32"  y="-3"  width="12" height="6" rx="2"/>
-                            <rect x="-44" y="-3"  width="12" height="6" rx="2"/>
-                          </g>
-                          <g transform="rotate(45)">
-                            <rect x="-3" y="-44" width="6" height="12" rx="2"/>
-                            <rect x="-3" y="32"  width="6" height="12" rx="2"/>
-                            <rect x="32"  y="-3"  width="12" height="6" rx="2"/>
-                            <rect x="-44" y="-3"  width="12" height="6" rx="2"/>
-                          </g>
-                          <g transform="rotate(67.5)">
-                            <rect x="-3" y="-44" width="6" height="12" rx="2"/>
-                            <rect x="-3" y="32"  width="6" height="12" rx="2"/>
-                            <rect x="32"  y="-3"  width="12" height="6" rx="2"/>
-                            <rect x="-44" y="-3"  width="12" height="6" rx="2"/>
-                          </g>
-                        </g>
-                        <circle r="6" fill="url(#gradCSLocal)"/>
-                      </g>
-
-                      <!-- Engranaje pequeño (r≈19 anillo, dientes hasta ~31). Centro (121,60) => distancia ≈ 51 (≈ 44 + 31) -->
-                      <g class="gear gear--small" transform="translate(121,60)">
-                        <circle r="19" fill="none" stroke="url(#gradCSLocal)" stroke-width="5"/>
-                        <g fill="url(#gradCSLocal)">
-                          <rect x="-2.5" y="-31" width="5" height="8" rx="2"/>
-                          <rect x="-2.5" y="23"  width="5" height="8" rx="2"/>
-                          <rect x="23"   y="-2.5" width="8" height="5" rx="2"/>
-                          <rect x="-31"  y="-2.5" width="8" height="5" rx="2"/>
-                          <g transform="rotate(22.5)">
-                            <rect x="-2.5" y="-31" width="5" height="8" rx="2"/>
-                            <rect x="-2.5" y="23"  width="5" height="8" rx="2"/>
-                            <rect x="23"   y="-2.5" width="8" height="5" rx="2"/>
-                            <rect x="-31"  y="-2.5" width="8" height="5" rx="2"/>
-                          </g>
-                        </g>
-                        <circle r="4.5" fill="url(#gradCSLocal)"/>
-                      </g>
-                    </svg>
-
-                    <div class="text-left">
-                      <p class="text-base md:text-lg text-zinc-300 leading-relaxed">
-                        <span class="lang-es">
-                          <strong class="text-white">Este portafolio</strong> se encuentra en proceso de actualización.
-                          <br class="hidden md:block"/>
-                          Próximamente incluirá <span class="gradient-text font-semibold">nuevos proyectos</span>.
-                        </span>
-                        <span class="lang-en">
-                          <strong class="text-white">This portfolio</strong> is currently being updated.
-                          <br class="hidden md:block"/>
-                          New <span class="gradient-text font-semibold">projects</span> coming soon.
-                        </span>
-                      </p>
+                        <div class="text-left">
+                            <p class="text-base md:text-lg text-zinc-300 leading-relaxed">
+                                <span class="lang-es">
+                                    <strong class="text-white">Este portafolio</strong> se encuentra en proceso de actualización.
+                                    <br class="hidden md:block"/>
+                                    Próximamente incluirá <span class="gradient-text font-semibold">nuevos proyectos</span>.
+                                </span>
+                                <span class="lang-en">
+                                    <strong class="text-white">This portfolio</strong> is currently being updated.
+                                    <br class="hidden md:block"/>
+                                    New <span class="gradient-text font-semibold">projects</span> coming soon.
+                                </span>
+                            </p>
+                        </div>
                     </div>
-                  </div>
                 </div>
                 <!-- ====== FIN NUEVO ====== -->
             </div>
@@ -326,14 +284,14 @@
                         </p>
                         <div class="text-lg text-zinc-400 mt-6 space-y-4">
                            <div class="lang-es">
-                               <p>Soy productor musical y compositor con máster en música para medios audiovisuales, apasionado por crear paisajes sonoros que transmitan emociones y den identidad a cada proyecto. Mi enfoque se basa en la combinación de creatividad artística y pensamiento estratégico, ofreciendo soluciones musicales que conectan con las personas y elevan la experiencia audiovisual.</p>
-                               <p>Además, soy especialista en Big Data y Analítica de Datos, lo que me permite integrar la música con la tecnología para entender tendencias, optimizar recursos y aportar valor añadido a cada propuesta.</p>
-                               <p>Me defino como un profesional versátil, con visión innovadora y compromiso en cada trabajo. Mi objetivo es ganarme la confianza de quienes buscan un aliado creativo y confiable, capaz de aportar tanto en el ámbito musical como en el análisis estratégico de proyectos.</p>
+                                <p>Soy productor musical y compositor con máster en música para medios audiovisuales, apasionado por crear paisajes sonoros que transmitan emociones y den identidad a cada proyecto. Mi enfoque se basa en la combinación de creatividad artística y pensamiento estratégico, ofreciendo soluciones musicales que conectan con las personas y elevan la experiencia audiovisual.</p>
+                                <p>Además, soy especialista en Big Data y Analítica de Datos, lo que me permite integrar la música con la tecnología para entender tendencias, optimizar recursos y aportar valor añadido a cada propuesta.</p>
+                                <p>Me defino como un profesional versátil, con visión innovadora y compromiso en cada trabajo. Mi objetivo es ganarme la confianza de quienes buscan un aliado creativo y confiable, capaz de aportar tanto en el ámbito musical como en el análisis estratégico de proyectos.</p>
                            </div>
                            <div class="lang-en">
-                               <p>I am a music producer and composer with a master's degree in music for audiovisual media, passionate about creating soundscapes that convey emotions and give identity to each project. My approach is based on the combination of artistic creativity and strategic thinking, offering musical solutions that connect with people and elevate the audiovisual experience.</p>
-                               <p>Additionally, I am a specialist in Big Data and Data Analytics, which allows me to integrate music with technology to understand trends, optimize resources, and add value to each proposal.</p>
-                               <p>I define myself as a versatile professional with an innovative vision and commitment to every job. My goal is to earn the trust of those looking for a creative and reliable ally, capable of contributing both in the musical field and in the strategic analysis of projects.</p>
+                                <p>I am a music producer and composer with a master's degree in music for audiovisual media, passionate about creating soundscapes that convey emotions and give identity to each project. My approach is based on the combination of artistic creativity and strategic thinking, offering musical solutions that connect with people and elevate the audiovisual experience.</p>
+                                <p>Additionally, I am a specialist in Big Data and Data Analytics, which allows me to integrate music with technology to understand trends, optimize resources, and add value to each proposal.</p>
+                                <p>I define myself as a versatile professional with an innovative vision and commitment to every job. My goal is to earn the trust of those looking for a creative and reliable ally, capable of contributing both in the musical field and in the strategic analysis of projects.</p>
                            </div>
                         </div>
                     </div>
@@ -387,8 +345,8 @@
                     <div class="grid grid-cols-1 lg:grid-cols-5 gap-8 items-center mb-16">
                         <div class="lg:col-span-2 reveal">
                              <img id="album-cover" src="https://camilosl12.github.io/Homenaje-portada.jpeg"
-                                 onerror="this.onerror=null;this.src='https://placehold.co/600x600/18181b/E5E7EB?text=Homenaje';"
-                                 alt="Portada del álbum Homenaje al vallenato romántico" class="rounded-lg shadow-2xl w-full h-auto interactive-card cursor-pointer">
+                                  onerror="this.onerror=null;this.src='https://placehold.co/600x600/18181b/E5E7EB?text=Homenaje';"
+                                  alt="Portada del álbum Homenaje al vallenato romántico" class="rounded-lg shadow-2xl w-full h-auto interactive-card cursor-pointer">
                         </div>
                         <div class="lg:col-span-3 reveal">
                             <h3 class="text-2xl md:text-3xl font-bold text-white"><span class="lang-es">Álbum: Homenaje al Vallenato Romántico</span><span class="lang-en">Album: Tribute to Romantic Vallenato</span></h3>
