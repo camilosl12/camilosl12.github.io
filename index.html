@@ -216,7 +216,8 @@
         <!-- ========== 1. INICIO ========== -->
         <section id="inicio" class="hero-section h-screen w-full flex items-center justify-center text-center">
             <div class="relative z-10 p-8 mt-20 md:mt-0">
-                <h1 class="text-5xl sm:text-6xl md:text-8xl font-black text-white leading-tight tracking-tighter gradient-text px-2" style="text-shadow: 0 0 40px rgba(192, 132, 252, 0.4);">
+                <!-- AJUSTE MOBILE: Texto reducido en móvil (text-4xl) para evitar que ocupe toda la pantalla -->
+                <h1 class="text-4xl sm:text-6xl md:text-8xl font-black text-white leading-tight tracking-tighter gradient-text px-2" style="text-shadow: 0 0 40px rgba(192, 132, 252, 0.4);">
                     <span class="lang-es">Música & Datos</span>
                     <span class="lang-en">Music & Data</span>
                 </h1>
@@ -229,17 +230,20 @@
                 </p>
 
                 <!-- ====== NUEVO: Banner de actualización con engranajes que engranan 2:1 ====== -->
+                <!-- AJUSTE MOBILE: flex-col para apilar en móvil, sm:flex-row para lado a lado en desktop -->
                 <div class="reveal update-banner relative mx-auto mt-10 max-w-3xl rounded-2xl border border-zinc-800/80 bg-black/40 backdrop-blur-md p-6 md:p-7 shadow-[0_0_30px_rgba(192,132,252,0.08)]">
-                    <div class="flex items-center gap-5 md:gap-6">
+                    <div class="flex flex-col sm:flex-row items-center gap-5 md:gap-6">
                         
                         <!-- SVG de engranajes reemplazado por iconos de Font Awesome -->
-                        <div class="h-16 w-28 md:h-20 md:w-36 shrink-0 flex items-center justify-center gap-0" aria-hidden="true">
+                        <!-- AJUSTE MOBILE: Margen inferior en móvil (mb-4) para separar del texto -->
+                        <div class="h-16 w-28 md:h-20 md:w-36 shrink-0 flex items-center justify-center gap-0 mb-2 sm:mb-0" aria-hidden="true">
                             <i class="fas fa-gear text-5xl md:text-6xl gradient-text gear-1"></i>
                             <i class="fas fa-gear text-3xl md:text-4xl gradient-text gear-2" style="margin-left: -0.75rem; margin-top: 1rem;"></i>
                         </div>
                         <!-- FIN del reemplazo de SVG -->
 
-                        <div class="text-left">
+                        <!-- AJUSTE MOBILE: text-center en móvil, text-left en desktop -->
+                        <div class="text-center sm:text-left">
                             <p class="text-base md:text-lg text-zinc-300 leading-relaxed">
                                 <span class="lang-es">
                                     <strong class="text-white">Este portafolio</strong> se encuentra en proceso de actualización.
@@ -516,19 +520,23 @@ document.addEventListener('DOMContentLoaded', () => {
 
         function pSetShapes(isMobile) {
             if (isMobile) {
+                // AJUSTE MOBILE: Partículas reorganizadas verticalmente para pantallas estrechas
                 pShapes = {
                     note: [
-                        ...Array.from({length: 15}, (_, i) => ({ x: 0.28 + Math.cos(i/7.5*Math.PI)*0.07, y: 0.5 + Math.sin(i/7.5*Math.PI)*0.1 })),
-                        ...Array.from({length: 10}, (_, i) => ({ x: 0.35, y: 0.5 - i*0.022 })),
-                        ...Array.from({length: 8},  (_, i) => ({ x: 0.35 + Math.sin(i/8*Math.PI*0.8)*0.08, y: 0.28 + (i/8)*0.07}))
+                        // Nota musical centrada arriba (y ~ 0.25)
+                        ...Array.from({length: 15}, (_, i) => ({ x: 0.5 + Math.cos(i/7.5*Math.PI)*0.07, y: 0.25 + Math.sin(i/7.5*Math.PI)*0.1 })),
+                        ...Array.from({length: 10}, (_, i) => ({ x: 0.57, y: 0.25 - i*0.022 })),
+                        ...Array.from({length: 8},  (_, i) => ({ x: 0.57 + Math.sin(i/8*Math.PI*0.8)*0.08, y: 0.03 + (i/8)*0.07}))
                     ],
                     barChart: [
-                        ...Array.from({length: 7}, (_, i) => ({ x: 0.65, y: 0.6 - (i/6)*0.15 })),
-                        ...Array.from({length: 9}, (_, i) => ({ x: 0.72, y: 0.6 - (i/8)*0.25 })),
-                        ...Array.from({length: 8}, (_, i) => ({ x: 0.78, y: 0.6 - (i/7)*0.20 }))
+                        // Gráfica de barras centrada abajo (y ~ 0.65)
+                        ...Array.from({length: 7}, (_, i) => ({ x: 0.40, y: 0.75 - (i/6)*0.15 })),
+                        ...Array.from({length: 9}, (_, i) => ({ x: 0.50, y: 0.75 - (i/8)*0.25 })),
+                        ...Array.from({length: 8}, (_, i) => ({ x: 0.60, y: 0.75 - (i/7)*0.20 }))
                     ]
                 };
             } else {
+                // DESKTOP: Distribución horizontal original
                 pShapes = {
                     note: [
                         ...Array.from({length: 30}, (_, i) => ({ x: 0.25 + Math.cos(i/15*Math.PI)*0.03, y: 0.6 + Math.sin(i/15*Math.PI)*0.05 })),
