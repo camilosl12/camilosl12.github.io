@@ -9,8 +9,8 @@
     <meta name="keywords" content="Camilo Sanguino, productor musical, analista de datos, ingeniería de sonido, composición, foley, diseño sonoro, python, R, SQL, Tableau, Power BI">
     <meta name="author" content="Camilo Sanguino">
 
-    <!-- Favicon con viewBox cuadrado para mejor visualización -->
-    <link rel="icon" href="data:image/svg+xml,%3csvg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3e%3cdefs%3e%3clinearGradient id='gradCS' x1='0%25' y1='0%25' x2='100%25' y2='0%25'%3e%3cstop offset='0%25' style='stop-color:%2338bdf8;stop-opacity:1'/%3e%3cstop offset='100%25' style='stop-color:%23c084fc;stop-opacity:1'/%3e%3c/linearGradient%3e%3c/defs%3e%3ctext x='50%25' y='55%25' dominant-baseline='middle' text-anchor='middle' font-family='Orbitron, sans-serif' font-weight='700' font-size='90' fill='url(%23gradCS)'%3eCS%3c/text%3e%3c/svg%3e">
+    <!-- Favicon CORREGIDO: Tamaño de fuente reducido de 90 a 75 para evitar recortes -->
+    <link rel="icon" href="data:image/svg+xml,%3csvg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3e%3cdefs%3e%3clinearGradient id='gradCS' x1='0%25' y1='0%25' x2='100%25' y2='0%25'%3e%3cstop offset='0%25' style='stop-color:%2338bdf8;stop-opacity:1'/%3e%3cstop offset='100%25' style='stop-color:%23c084fc;stop-opacity:1'/%3e%3c/linearGradient%3e%3c/defs%3e%3ctext x='50%25' y='55%25' dominant-baseline='middle' text-anchor='middle' font-family='Orbitron, sans-serif' font-weight='700' font-size='75' fill='url(%23gradCS)'%3eCS%3c/text%3e%3c/svg%3e">
 
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -520,21 +520,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
         function pSetShapes(isMobile) {
             if (isMobile) {
-                // AJUSTE MOBILE: Partículas reorganizadas verticalmente para pantallas estrechas
-                pShapes = {
-                    note: [
-                        // Nota musical centrada arriba (y ~ 0.25)
-                        ...Array.from({length: 15}, (_, i) => ({ x: 0.5 + Math.cos(i/7.5*Math.PI)*0.07, y: 0.25 + Math.sin(i/7.5*Math.PI)*0.1 })),
-                        ...Array.from({length: 10}, (_, i) => ({ x: 0.57, y: 0.25 - i*0.022 })),
-                        ...Array.from({length: 8},  (_, i) => ({ x: 0.57 + Math.sin(i/8*Math.PI*0.8)*0.08, y: 0.03 + (i/8)*0.07}))
-                    ],
-                    barChart: [
-                        // Gráfica de barras centrada abajo (y ~ 0.65)
-                        ...Array.from({length: 7}, (_, i) => ({ x: 0.40, y: 0.75 - (i/6)*0.15 })),
-                        ...Array.from({length: 9}, (_, i) => ({ x: 0.50, y: 0.75 - (i/8)*0.25 })),
-                        ...Array.from({length: 8}, (_, i) => ({ x: 0.60, y: 0.75 - (i/7)*0.20 }))
-                    ]
-                };
+                // CORRECCIÓN: Eliminar formas en móvil, solo constelaciones
+                pShapes = {};
             } else {
                 // DESKTOP: Distribución horizontal original
                 pShapes = {
