@@ -425,15 +425,6 @@
         img {
             background-color: rgba(255, 255, 255, 0.05);
         }
-        
-        img[loading="lazy"] {
-            opacity: 0;
-            transition: opacity 0.3s;
-        }
-        
-        img[loading="lazy"].loaded {
-            opacity: 1;
-        }
     </style>
 </head>
 <body class="antialiased">
@@ -976,9 +967,7 @@
                     <span class="lang-en">I am available for collaborations and job opportunities. If you're looking for a profile that combines creativity with data-driven strategy, I would love to talk.</span>
                 </p>
                 <div class="mt-10">
-                    <a href="mailto:camilosl2156@gmail.com" 
-                       class="inline-block bg-blue-600 text-white font-bold text-lg rounded-full px-8 py-4 hover:bg-blue-500 transition-all duration-300 transform hover:scale-105"
-                       aria-label="Enviar correo electrónico a Camilo Sanguino">
+                    <a href="/cdn-cgi/l/email-protection#f093919d999c9f839cc2c1c5c6b0979d91999cde939f9d" class="inline-block bg-blue-600 text-white font-bold text-lg rounded-full px-8 py-4 hover:bg-blue-500 transition-all duration-300 transform hover:scale-105" aria-label="Enviar correo electrónico a Camilo Sanguino">
                         <i class="fas fa-paper-plane mr-2" aria-hidden="true"></i> 
                         <span class="lang-es">Enviar un Correo</span>
                         <span class="lang-en">Send an Email</span>
@@ -1050,7 +1039,7 @@
     </div>
 
     <!-- JavaScript optimizado -->
-    <script>
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
     (function() {
         'use strict';
         
@@ -1618,27 +1607,6 @@
             }
         }
         
-        // ==================== LAZY LOADING DE IMÁGENES ====================
-        function initLazyLoading() {
-            const images = $$('img[loading="lazy"]');
-            
-            if ('IntersectionObserver' in window) {
-                const imageObserver = new IntersectionObserver((entries) => {
-                    entries.forEach(entry => {
-                        if (entry.isIntersecting) {
-                            const img = entry.target;
-                            img.addEventListener('load', () => {
-                                img.classList.add('loaded');
-                            });
-                            imageObserver.unobserve(img);
-                        }
-                    });
-                });
-                
-                images.forEach(img => imageObserver.observe(img));
-            }
-        }
-        
         // ==================== INICIALIZACIÓN ====================
         function init() {
             // Inicializar todos los módulos
@@ -1653,18 +1621,10 @@
             initMoreProjects();
             initImageModal();
             initLanguageSystem();
-            initLazyLoading();
             
             console.log('✓ Portfolio inicializado correctamente');
         }
         
         // Ejecutar cuando el DOM esté listo
         if (document.readyState === 'loading') {
-            document.addEventListener('DOMContentLoaded', init);
-        } else {
-            init();
-        }
-    })();
-    </script>
-</body>
-</html>
+            document.addEventListener('DOMCont
